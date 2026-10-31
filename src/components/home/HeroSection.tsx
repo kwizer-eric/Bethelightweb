@@ -5,17 +5,17 @@ export function HeroSection() {
   return (
     <section className="w-full bg-warm-white">
       <div className="site-container grid grid-cols-1 gap-10 pb-16 pt-24 sm:gap-12 sm:pb-20 sm:pt-28 lg:grid-cols-2 lg:items-end lg:gap-20 lg:pb-24 lg:pt-32 xl:gap-24 xl:pb-28 xl:pt-36 2xl:pb-32 2xl:pt-40">
-        <h1 className="max-w-xl text-4xl font-medium leading-[1.05] tracking-tight text-ink sm:max-w-2xl sm:text-5xl lg:text-6xl xl:max-w-3xl xl:text-7xl 2xl:text-8xl">
-          Community support and lasting hope.
+        <h1 className="max-w-xl text-4xl font-medium leading-[1.05] tracking-tight text-primary sm:max-w-2xl sm:text-5xl lg:text-6xl xl:max-w-3xl xl:text-7xl 2xl:text-8xl">
+          For Them.
+          <br />
+          For Their Future.
         </h1>
-        <p className="max-w-md text-base leading-relaxed text-ink/80 sm:text-lg lg:justify-self-end xl:max-w-lg xl:text-xl">
-          Kubwabo Foundation works with communities, partners, and volunteers to
-          deliver food relief, education, health, and housing where need is
-          greatest.
+        <p className="max-w-md text-base leading-relaxed text-primary sm:text-lg lg:justify-self-end xl:max-w-lg xl:text-xl">
+          Kubwabo Foundation works alongside communities to ensure children and families receive the care, support, and opportunities they need to overcome challenges and thrive.
         </p>
       </div>
 
-      <div className="relative min-h-[70vh] w-full overflow-hidden sm:min-h-[75vh] xl:min-h-[80vh]">
+      <div className="relative h-dvh min-h-dvh w-full overflow-hidden">
         <img
           src={HERO_UNSPLASH}
           alt="Group of children laughing together"

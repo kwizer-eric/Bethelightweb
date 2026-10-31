@@ -10,7 +10,7 @@ const volunteerCard = {
     </>
   ),
   description:
-    'Join 340+ volunteers making a difference in food relief, education, health, and community outreach. Every hour you give helps families build a stronger future.',
+    'Your time and compassion can make a lasting difference. Join our volunteers in supporting families, empowering children, and bringing essential services to communities in need.',
   image:
     'https://images.unsplash.com/flagged/photo-1555251255-e9a095d6eb9d?auto=format&fit=crop&w=1400&q=85',
 } as const
@@ -24,7 +24,7 @@ const supportCard = {
     </>
   ),
   description:
-    'Fund direct support across food relief, education, healthcare, and housing programs. Your donation reaches communities quickly and transparently.',
+    'Every donation helps connect families with essential resources, support, and life-changing opportunities.',
   image:
     'https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=1400&q=85',
 } as const
