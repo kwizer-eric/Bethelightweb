@@ -1,5 +1,6 @@
 import { useEffect, useId, useRef, useState, type FormEvent, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
+import { siteImages } from '../../assets/siteImages'
 
 const volunteerCard = {
   title: (
@@ -11,8 +12,8 @@ const volunteerCard = {
   ),
   description:
     'Your time and compassion can make a lasting difference. Join our volunteers in supporting families, empowering children, and bringing essential services to communities in need.',
-  image:
-    'https://images.unsplash.com/flagged/photo-1555251255-e9a095d6eb9d?auto=format&fit=crop&w=1400&q=85',
+  image: siteImages.homeVolunteer,
+  imageClassName: 'object-[40%_center]',
 } as const
 
 const supportCard = {
@@ -25,8 +26,8 @@ const supportCard = {
   ),
   description:
     'Every donation helps connect families with essential resources, support, and life-changing opportunities.',
-  image:
-    'https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=1400&q=85',
+  image: siteImages.homeSupport,
+  imageClassName: 'object-[18%_center]',
 } as const
 
 const cardClass =
@@ -39,10 +40,12 @@ function CardVisual({
   image,
   title,
   description,
+  imageClassName,
 }: {
   image: string
   title: ReactNode
   description: string
+  imageClassName?: string
 }) {
   return (
     <>
@@ -50,7 +53,7 @@ function CardVisual({
         src={image}
         alt=""
         referrerPolicy="no-referrer"
-        className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+        className={`absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03] ${imageClassName ?? 'object-center'}`}
       />
       <div className="absolute inset-0 bg-ink/45 transition-opacity duration-300 group-hover:opacity-0" />
       <div className="absolute inset-0 bg-primary opacity-0 transition-opacity duration-300 group-hover:opacity-100" />

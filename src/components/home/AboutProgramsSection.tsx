@@ -1,8 +1,6 @@
 import { Link } from 'react-router-dom'
+import { siteImages } from '../../assets/siteImages'
 import { site } from '../../data/site'
-
-const STORY_IMAGE =
-  'https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=1920&q=85'
 
 export function AboutProgramsSection() {
   return (
@@ -42,7 +40,7 @@ export function AboutProgramsSection() {
 
         <div className="relative z-10 min-h-[18rem] sm:min-h-[22rem] lg:min-h-0">
           <img
-            src={STORY_IMAGE}
+            src={siteImages.homeOurStory}
             alt="Boy wearing a beige and yellow striped polo shirt"
             referrerPolicy="no-referrer"
             className="absolute inset-0 h-full w-full object-cover object-center"

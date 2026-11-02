@@ -3,14 +3,12 @@ import { createPortal } from 'react-dom'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
+import { siteImages } from '../assets/siteImages'
 import { HomeCtaSection } from '../components/home/HomeCtaSection'
 import { useCms } from '../cms/CmsContext'
 import type { ProgramChild } from '../cms/types'
 
 gsap.registerPlugin(ScrollTrigger)
-
-const PROGRAM_HERO_IMAGE =
-  'https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=1920&q=85'
 
 const PROGRAM_PILLARS = [
   {
@@ -216,10 +214,11 @@ export function EveryKidPage() {
         >
           <img
             ref={parallaxImgRef}
-            src={PROGRAM_HERO_IMAGE}
+            src={siteImages.everyKidHero}
             alt="Children in the program smiling together"
             referrerPolicy="no-referrer"
             className="absolute inset-x-0 top-0 h-[130%] w-full object-cover will-change-transform"
+            style={{ objectPosition: 'center 54%' }}
           />
           <div
             className="pointer-events-none absolute inset-0 bg-gradient-to-t from-primary/30 via-primary/5 to-transparent"
