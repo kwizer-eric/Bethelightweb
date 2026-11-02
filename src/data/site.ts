@@ -1,15 +1,14 @@
 export const site = {
   name: 'Kubwabo Foundation',
   tagline: 'Change the world one act of kindness at a time.',
-  email: 'hello@kubwabofoundation.org',
+  email: 'kubwabofoundation@gmail.com',
   phone: '+1 (555) 123-4567',
   address: '184 Main Collins Street, Victoria 8007',
   whatsappCommunity: 'https://chat.whatsapp.com/',
   social: {
-    facebook: '#',
-    instagram: '#',
-    twitter: '#',
-    linkedin: '#',
+    instagram: 'https://www.instagram.com/kubwabo_foundation',
+    tiktok: 'https://www.tiktok.com/@kubwabo_foundation',
+    linkedin: 'https://www.linkedin.com/company/kubwabo_foundation',
   },
 } as const
 

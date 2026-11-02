@@ -1,3 +1,4 @@
+import { FadeImage } from '../FadeImage'
 import { siteImages } from '../../assets/siteImages'
 
 export function HeroSection() {
@@ -15,7 +16,8 @@ export function HeroSection() {
       </div>
 
       <div className="relative h-dvh min-h-dvh w-full overflow-hidden">
-        <img
+        <FadeImage
+          priority
           src={siteImages.homeHero}
           alt="Group of children laughing together"
           referrerPolicy="no-referrer"

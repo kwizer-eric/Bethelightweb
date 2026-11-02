@@ -1,4 +1,5 @@
 import { Link, Navigate, useParams } from 'react-router-dom'
+import { FadeImage } from '../components/FadeImage'
 import { getStoryGallery, type StoryBlock } from '../data/site'
 import { useCms } from '../cms/CmsContext'
 
@@ -62,12 +63,11 @@ function StoryGallery({ images }: { images: readonly string[] }) {
       <div className="mt-6 grid grid-cols-2 gap-2 sm:gap-3 md:grid-cols-3">
         {images.map((src) => (
           <div key={src} className="aspect-[4/3] overflow-hidden bg-primary/5">
-            <img
+            <FadeImage
               src={src}
               alt=""
               referrerPolicy="no-referrer"
               className="h-full w-full object-cover"
-              loading="lazy"
             />
           </div>
         ))}
@@ -118,7 +118,7 @@ export function StoryDetailPage() {
           </div>
 
           <div className="mx-auto mt-10 max-w-4xl overflow-hidden lg:mt-12">
-            <img
+            <FadeImage
               src={story.image}
               alt=""
               referrerPolicy="no-referrer"
@@ -160,7 +160,7 @@ export function StoryDetailPage() {
                   to={`/news/${item.slug}`}
                   className="block aspect-[4/3] overflow-hidden"
                 >
-                  <img
+                  <FadeImage
                     src={item.image}
                     alt=""
                     referrerPolicy="no-referrer"

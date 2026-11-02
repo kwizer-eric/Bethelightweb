@@ -3,6 +3,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 import { siteImages } from '../assets/siteImages'
+import { FadeImage } from '../components/FadeImage'
 import { HomeCtaSection } from '../components/home/HomeCtaSection'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -112,7 +113,7 @@ export function ForTheParentsPage() {
         </div>
 
         <div ref={parallaxWrapRef} className="relative h-dvh overflow-hidden">
-          <img
+          <FadeImage
             ref={parallaxImgRef}
             src={siteImages.forTheirFamilyHero}
             alt="Family members together outdoors"

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { FadeImage } from '../FadeImage'
 import { useCms } from '../../cms/CmsContext'
 
 function formatStoryDate(iso: string) {
@@ -37,7 +38,7 @@ export function HomeNewsSection() {
               }`}
             >
               <div className="aspect-[4/3] w-full overflow-hidden">
-                <img
+                <FadeImage
                   src={story.image}
                   alt=""
                   referrerPolicy="no-referrer"

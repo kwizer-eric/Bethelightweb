@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { FadeImage } from '../FadeImage'
 import { siteImages } from '../../assets/siteImages'
 import { site } from '../../data/site'
 
@@ -39,7 +40,7 @@ export function AboutProgramsSection() {
         </div>
 
         <div className="relative z-10 min-h-[18rem] sm:min-h-[22rem] lg:min-h-0">
-          <img
+          <FadeImage
             src={siteImages.homeOurStory}
             alt="Boy wearing a beige and yellow striped polo shirt"
             referrerPolicy="no-referrer"

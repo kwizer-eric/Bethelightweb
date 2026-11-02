@@ -4,6 +4,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 import { siteImages } from '../assets/siteImages'
+import { FadeImage } from '../components/FadeImage'
 import { HomeCtaSection } from '../components/home/HomeCtaSection'
 import { useCms } from '../cms/CmsContext'
 import type { ProgramChild } from '../cms/types'
@@ -77,7 +78,7 @@ function ChildProfileModal({
         className="relative z-10 grid max-h-[92vh] w-full max-w-4xl overflow-hidden bg-warm-white shadow-2xl md:grid-cols-2"
       >
         <div className="relative min-h-[16rem] bg-ink/5 md:min-h-full">
-          <img
+          <FadeImage
             src={child.image}
             alt={child.name}
             referrerPolicy="no-referrer"
@@ -212,7 +213,7 @@ export function EveryKidPage() {
           ref={parallaxWrapRef}
           className="relative h-dvh overflow-hidden"
         >
-          <img
+          <FadeImage
             ref={parallaxImgRef}
             src={siteImages.everyKidHero}
             alt="Children in the program smiling together"
@@ -300,7 +301,7 @@ export function EveryKidPage() {
                 } ${index > 0 ? 'lg:border-l' : ''}`}
               >
                 <div className="aspect-[4/3] w-full overflow-hidden bg-white/5">
-                  <img
+                  <FadeImage
                     src={child.image}
                     alt={child.name}
                     referrerPolicy="no-referrer"

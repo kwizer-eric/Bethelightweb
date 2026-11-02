@@ -4,6 +4,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 import { siteImages } from '../assets/siteImages'
+import { FadeImage } from '../components/FadeImage'
 import { useCms } from '../cms/CmsContext'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -62,7 +63,7 @@ export function AboutPage() {
           ref={parallaxWrapRef}
           className="relative h-dvh overflow-hidden"
         >
-          <img
+          <FadeImage
             ref={parallaxImgRef}
             src={siteImages.aboutFoundation}
             alt="Community members gathering together"
@@ -181,7 +182,7 @@ export function AboutPage() {
 
           {/* 2nd: Image only */}
           <div className="relative min-h-[24rem] w-full overflow-hidden sm:min-h-[30rem] lg:min-h-[40rem]">
-            <img
+            <FadeImage
               src={siteImages.aboutCommunity}
               alt="Children smiling together"
               referrerPolicy="no-referrer"
@@ -226,7 +227,7 @@ export function AboutPage() {
             {team.map((member) => (
               <article key={member.id}>
                 <div className="overflow-hidden bg-primary/5">
-                  <img
+                  <FadeImage
                     src={member.image}
                     alt=""
                     referrerPolicy="no-referrer"

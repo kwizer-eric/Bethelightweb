@@ -25,18 +25,33 @@ export function Footer() {
             <ColumnHeading>Contact</ColumnHeading>
             <ul className="space-y-2 text-sm text-warm-white/90 sm:text-base">
               <li>
-                <a href={site.social.instagram} className="transition-colors hover:text-primary">
+                <a
+                  href={site.social.instagram}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="transition-colors hover:text-primary"
+                >
                   Instagram
                 </a>
               </li>
               <li>
-                <a href={site.social.linkedin} className="transition-colors hover:text-primary">
-                  Linkedin
+                <a
+                  href={site.social.tiktok}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="transition-colors hover:text-primary"
+                >
+                  TikTok
                 </a>
               </li>
               <li>
-                <a href={site.social.facebook} className="transition-colors hover:text-primary">
-                  Facebook
+                <a
+                  href={site.social.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="transition-colors hover:text-primary"
+                >
+                  LinkedIn
                 </a>
               </li>
               <li>

@@ -1,5 +1,6 @@
 import { useEffect, useId, useRef, useState, type FormEvent, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
+import { FadeImage } from '../FadeImage'
 import { siteImages } from '../../assets/siteImages'
 
 const volunteerCard = {
@@ -49,7 +50,7 @@ function CardVisual({
 }) {
   return (
     <>
-      <img
+      <FadeImage
         src={image}
         alt=""
         referrerPolicy="no-referrer"
