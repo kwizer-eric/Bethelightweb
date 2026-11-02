@@ -35,10 +35,13 @@ export function DashboardChildren() {
   const [editingId, setEditingId] = useState<string | null>(null)
   const [form, setForm] = useState<ChildForm>(empty)
   const [open, setOpen] = useState(false)
+  const [saving, setSaving] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   function startCreate() {
     setEditingId(null)
     setForm(empty)
+    setError(null)
     setOpen(true)
   }
 
@@ -57,13 +60,15 @@ export function DashboardChildren() {
       fundedPercent: String(child.fundedPercent),
       urgent: Boolean(child.urgent),
     })
+    setError(null)
     setOpen(true)
   }
 
-  function onSubmit(e: FormEvent) {
+  async function onSubmit(e: FormEvent) {
     e.preventDefault()
     if (!form.name.trim()) return
-    upsertChild({
+    setSaving(true)
+    const message = await upsertChild({
       id: editingId ?? undefined,
       name: form.name,
       age: Number(form.age) || 0,
@@ -77,9 +82,21 @@ export function DashboardChildren() {
       fundedPercent: Math.min(100, Math.max(0, Number(form.fundedPercent) || 0)),
       urgent: form.urgent || undefined,
     })
+    setSaving(false)
+    if (message) {
+      setError(message)
+      return
+    }
     setOpen(false)
     setForm(empty)
     setEditingId(null)
+    setError(null)
+  }
+
+  async function onDelete(child: ProgramChild) {
+    if (!confirm(`Delete ${child.name}?`)) return
+    const message = await removeChild(child.id)
+    setError(message)
   }
 
   return (
@@ -98,6 +115,10 @@ export function DashboardChildren() {
           Add child
         </button>
       </div>
+
+      {error && !open ? (
+        <p className="mt-4 text-sm text-red-600">{error}</p>
+      ) : null}
 
       <div className="mt-8 divide-y divide-ink/6 overflow-hidden rounded-2xl border border-ink/6 bg-white shadow-sm">
         {children.map((child) => (
@@ -137,9 +158,7 @@ export function DashboardChildren() {
               </button>
               <button
                 type="button"
-                onClick={() => {
-                  if (confirm(`Delete ${child.name}?`)) removeChild(child.id)
-                }}
+                onClick={() => onDelete(child)}
                 className="border border-red-600 px-3 py-1.5 text-xs font-medium text-red-600"
               >
                 Delete
@@ -213,6 +232,7 @@ export function DashboardChildren() {
                 />
               </label>
             </div>
+            {error ? <p className="mt-4 text-sm text-red-600">{error}</p> : null}
             <div className="mt-6 flex justify-end gap-2">
               <button
                 type="button"
@@ -223,9 +243,10 @@ export function DashboardChildren() {
               </button>
               <button
                 type="submit"
-                className="bg-primary px-4 py-2 text-sm font-medium text-warm-white"
+                disabled={saving}
+                className="bg-primary px-4 py-2 text-sm font-medium text-warm-white disabled:opacity-60"
               >
-                Save
+                {saving ? 'Saving…' : 'Save'}
               </button>
             </div>
           </form>

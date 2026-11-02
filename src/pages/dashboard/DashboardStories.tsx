@@ -30,10 +30,13 @@ export function DashboardStories() {
   const [editingId, setEditingId] = useState<string | null>(null)
   const [form, setForm] = useState<StoryForm>(empty)
   const [open, setOpen] = useState(false)
+  const [saving, setSaving] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   function startCreate() {
     setEditingId(null)
     setForm(empty)
+    setError(null)
     setOpen(true)
   }
 
@@ -48,13 +51,15 @@ export function DashboardStories() {
       image: story.image,
       bodyText: bodyToText(story.body),
     })
+    setError(null)
     setOpen(true)
   }
 
-  function onSubmit(e: FormEvent) {
+  async function onSubmit(e: FormEvent) {
     e.preventDefault()
     if (!form.title.trim()) return
-    upsertStory({
+    setSaving(true)
+    const message = await upsertStory({
       id: editingId ?? undefined,
       title: form.title,
       slug: form.slug || slugify(form.title),
@@ -64,9 +69,21 @@ export function DashboardStories() {
       image: form.image,
       body: textToBody(form.bodyText),
     })
+    setSaving(false)
+    if (message) {
+      setError(message)
+      return
+    }
     setOpen(false)
     setForm(empty)
     setEditingId(null)
+    setError(null)
+  }
+
+  async function onDelete(story: CmsStory) {
+    if (!confirm(`Delete “${story.title}”?`)) return
+    const message = await removeStory(story.id)
+    setError(message)
   }
 
   return (
@@ -85,6 +102,10 @@ export function DashboardStories() {
           Add story
         </button>
       </div>
+
+      {error && !open ? (
+        <p className="mt-4 text-sm text-red-600">{error}</p>
+      ) : null}
 
       <div className="mt-8 divide-y divide-ink/6 overflow-hidden rounded-2xl border border-ink/6 bg-white shadow-sm">
         {stories.map((story) => (
@@ -120,9 +141,7 @@ export function DashboardStories() {
               </button>
               <button
                 type="button"
-                onClick={() => {
-                  if (confirm(`Delete “${story.title}”?`)) removeStory(story.id)
-                }}
+                onClick={() => onDelete(story)}
                 className="border border-red-600 px-3 py-1.5 text-xs font-medium text-red-600"
               >
                 Delete
@@ -236,6 +255,7 @@ export function DashboardStories() {
                 />
               </label>
             </div>
+            {error ? <p className="mt-4 text-sm text-red-600">{error}</p> : null}
             <div className="mt-6 flex justify-end gap-2">
               <button
                 type="button"
@@ -246,9 +266,10 @@ export function DashboardStories() {
               </button>
               <button
                 type="submit"
-                className="bg-primary px-4 py-2 text-sm font-medium text-warm-white"
+                disabled={saving}
+                className="bg-primary px-4 py-2 text-sm font-medium text-warm-white disabled:opacity-60"
               >
-                Save
+                {saving ? 'Saving…' : 'Save'}
               </button>
             </div>
           </form>

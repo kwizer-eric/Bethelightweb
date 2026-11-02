@@ -5,8 +5,6 @@ import type { TeamMember } from '../../cms/types'
 const empty: Omit<TeamMember, 'id'> = {
   name: '',
   role: '',
-  bio: '',
-  detail: '',
   image: '',
 }
 
@@ -15,10 +13,13 @@ export function DashboardTeam() {
   const [editingId, setEditingId] = useState<string | null>(null)
   const [form, setForm] = useState(empty)
   const [open, setOpen] = useState(false)
+  const [saving, setSaving] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   function startCreate() {
     setEditingId(null)
     setForm(empty)
+    setError(null)
     setOpen(true)
   }
 
@@ -27,20 +28,32 @@ export function DashboardTeam() {
     setForm({
       name: member.name,
       role: member.role,
-      bio: member.bio,
-      detail: member.detail,
       image: member.image,
     })
+    setError(null)
     setOpen(true)
   }
 
-  function onSubmit(e: FormEvent) {
+  async function onSubmit(e: FormEvent) {
     e.preventDefault()
     if (!form.name.trim() || !form.role.trim()) return
-    upsertTeam(editingId ? { ...form, id: editingId } : form)
+    setSaving(true)
+    const message = await upsertTeam(editingId ? { ...form, id: editingId } : form)
+    setSaving(false)
+    if (message) {
+      setError(message)
+      return
+    }
     setOpen(false)
     setForm(empty)
     setEditingId(null)
+    setError(null)
+  }
+
+  async function onDelete(member: TeamMember) {
+    if (!confirm(`Delete ${member.name}?`)) return
+    const message = await removeTeam(member.id)
+    setError(message)
   }
 
   return (
@@ -59,6 +72,10 @@ export function DashboardTeam() {
           Add member
         </button>
       </div>
+
+      {error && !open ? (
+        <p className="mt-4 text-sm text-red-600">{error}</p>
+      ) : null}
 
       <div className="mt-8 divide-y divide-ink/6 overflow-hidden rounded-2xl border border-ink/6 bg-white shadow-sm">
         {team.map((member) => (
@@ -86,9 +103,7 @@ export function DashboardTeam() {
               </button>
               <button
                 type="button"
-                onClick={() => {
-                  if (confirm(`Delete ${member.name}?`)) removeTeam(member.id)
-                }}
+                onClick={() => onDelete(member)}
                 className="border border-red-600 px-3 py-1.5 text-xs font-medium text-red-600"
               >
                 Delete
@@ -133,29 +148,8 @@ export function DashboardTeam() {
                   />
                 </label>
               ))}
-              <label className="block text-sm">
-                <span className="text-ink/70">Bio</span>
-                <textarea
-                  value={form.bio}
-                  onChange={(e) =>
-                    setForm((prev) => ({ ...prev, bio: e.target.value }))
-                  }
-                  rows={3}
-                  className="mt-1 w-full border border-ink/15 bg-white px-3 py-2 text-sm outline-none focus:border-primary"
-                />
-              </label>
-              <label className="block text-sm">
-                <span className="text-ink/70">Detail</span>
-                <textarea
-                  value={form.detail}
-                  onChange={(e) =>
-                    setForm((prev) => ({ ...prev, detail: e.target.value }))
-                  }
-                  rows={3}
-                  className="mt-1 w-full border border-ink/15 bg-white px-3 py-2 text-sm outline-none focus:border-primary"
-                />
-              </label>
             </div>
+            {error ? <p className="mt-4 text-sm text-red-600">{error}</p> : null}
             <div className="mt-6 flex justify-end gap-2">
               <button
                 type="button"
@@ -166,9 +160,10 @@ export function DashboardTeam() {
               </button>
               <button
                 type="submit"
-                className="bg-primary px-4 py-2 text-sm font-medium text-warm-white"
+                disabled={saving}
+                className="bg-primary px-4 py-2 text-sm font-medium text-warm-white disabled:opacity-60"
               >
-                Save
+                {saving ? 'Saving…' : 'Save'}
               </button>
             </div>
           </form>

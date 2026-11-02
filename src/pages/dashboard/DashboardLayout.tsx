@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import { Link, NavLink, Outlet } from 'react-router-dom'
+import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom'
 import { useCms } from '../../cms/CmsContext'
+import { supabase } from '../../lib/supabase'
 
 const nav: {
   to: string
@@ -73,8 +74,14 @@ function NavIcon({ name }: { name: (typeof nav)[number]['icon'] }) {
 }
 
 export function DashboardLayout() {
-  const { ready } = useCms()
+  const { ready, error } = useCms()
+  const navigate = useNavigate()
   const [mobileOpen, setMobileOpen] = useState(false)
+
+  async function signOut() {
+    await supabase?.auth.signOut()
+    navigate('/login', { replace: true })
+  }
 
   return (
     <div className="min-h-screen bg-[#f4f5f7] text-ink">
@@ -117,10 +124,20 @@ export function DashboardLayout() {
           ))}
         </nav>
 
+        <div className="px-3 pb-2">
+          <button
+            type="button"
+            onClick={signOut}
+            className="w-full rounded-xl px-3 py-2.5 text-left text-sm font-medium text-ink/55 hover:bg-ink/5 hover:text-ink"
+          >
+            Sign out
+          </button>
+        </div>
+
         <div className="m-3 rounded-2xl bg-ink p-4 text-warm-white">
           <p className="text-sm font-semibold">Live site</p>
           <p className="mt-1 text-xs leading-relaxed text-warm-white/60">
-            Changes save in this browser and show on the public site right away.
+            Changes save to the shared database and show on the public site.
           </p>
           <Link
             to="/"
@@ -162,6 +179,7 @@ export function DashboardLayout() {
         </header>
 
         <main className="flex-1 px-4 py-6 sm:px-6 lg:px-8">
+          {error ? <p className="mb-4 text-sm text-red-600">{error}</p> : null}
           {!ready ? (
             <p className="text-sm text-ink/55">Loading CMS…</p>
           ) : (

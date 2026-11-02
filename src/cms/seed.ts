@@ -6,9 +6,6 @@ export const seedTeam: TeamMember[] = [
     id: 'sarah-mitchell',
     name: 'Sarah Mitchell',
     role: 'Executive Director',
-    bio: 'Sarah built Kubwabo Foundation from a weekend food drive into a multi-program NGO. She focuses on partner trust, transparent operations, and making sure every program starts with what communities actually ask for.',
-    detail:
-      'Before Kubwabo, Sarah spent a decade in community organizing and nonprofit operations across East and Southern Africa. She believes aid without dignity is incomplete — and that lasting change is designed with local leaders, not delivered to them.',
     image:
       'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80',
   },
@@ -16,9 +13,6 @@ export const seedTeam: TeamMember[] = [
     id: 'david-chen',
     name: 'David Chen',
     role: 'Programs Director',
-    bio: 'David designs and runs food, education, health, and shelter programs across 28 communities. His work turns field feedback into clearer priorities and measurable outcomes.',
-    detail:
-      'A former public-health program manager, David obsesses over logistics that protect dignity: timing, follow-up, and listening after the distribution ends. He mentors field leads so excellence scales without becoming cold or bureaucratic.',
     image:
       'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80',
   },
@@ -26,9 +20,6 @@ export const seedTeam: TeamMember[] = [
     id: 'amara-osei',
     name: 'Amara Osei',
     role: 'Community Outreach Lead',
-    bio: 'Amara connects families, volunteers, and partner organizations. She is the reason our programs feel personal — and why new volunteers stay.',
-    detail:
-      'Raised in one of the first communities Kubwabo served, Amara brings lived context to every outreach plan. She leads caregiver circles, school partnerships, and the volunteer onboarding path that turns first-timers into steady contributors.',
     image:
       'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=800&q=80',
   },
@@ -36,9 +27,6 @@ export const seedTeam: TeamMember[] = [
     id: 'lucas-ferreira',
     name: 'Lucas Ferreira',
     role: 'Finance & Operations',
-    bio: 'Lucas keeps books clean, reports open, and operations sharp. Donors and partners know where every dollar goes because he makes transparency a daily habit.',
-    detail:
-      'With a background in audit and social enterprise finance, Lucas built Kubwabo’s reporting cadence: monthly program tallies, annual impact reports, and partner-verifiable spending. He is happiest when a spreadsheet tells a human story clearly.',
     image:
       'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=800&q=80',
   },

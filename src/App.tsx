@@ -14,6 +14,8 @@ import { DashboardHome } from './pages/dashboard/DashboardHome'
 import { DashboardTeam } from './pages/dashboard/DashboardTeam'
 import { DashboardStories } from './pages/dashboard/DashboardStories'
 import { DashboardChildren } from './pages/dashboard/DashboardChildren'
+import { LoginPage } from './pages/LoginPage'
+import { RequireAuth } from './components/RequireAuth'
 
 export default function App() {
   return (
@@ -42,11 +44,15 @@ export default function App() {
           <Route path="events" element={<Navigate to="/news" replace />} />
         </Route>
 
-        <Route path="/dashboard" element={<DashboardLayout />}>
-          <Route index element={<DashboardHome />} />
-          <Route path="team" element={<DashboardTeam />} />
-          <Route path="stories" element={<DashboardStories />} />
-          <Route path="children" element={<DashboardChildren />} />
+        <Route path="/login" element={<LoginPage />} />
+
+        <Route element={<RequireAuth />}>
+          <Route path="/dashboard" element={<DashboardLayout />}>
+            <Route index element={<DashboardHome />} />
+            <Route path="team" element={<DashboardTeam />} />
+            <Route path="stories" element={<DashboardStories />} />
+            <Route path="children" element={<DashboardChildren />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>
