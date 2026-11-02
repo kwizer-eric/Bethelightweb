@@ -2,12 +2,10 @@ import { useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
+import { siteImages } from '../assets/siteImages'
 import { HomeCtaSection } from '../components/home/HomeCtaSection'
 
 gsap.registerPlugin(ScrollTrigger)
-
-const PROGRAM_HERO_IMAGE =
-  'https://images.unsplash.com/photo-1609220136736-443140cffec6?auto=format&fit=crop&w=1920&q=85'
 
 const SUPPORT_PILLARS = [
   {
@@ -116,10 +114,11 @@ export function ForTheParentsPage() {
         <div ref={parallaxWrapRef} className="relative h-dvh overflow-hidden">
           <img
             ref={parallaxImgRef}
-            src={PROGRAM_HERO_IMAGE}
+            src={siteImages.forTheirFamilyHero}
             alt="Family members together outdoors"
             referrerPolicy="no-referrer"
             className="absolute inset-x-0 top-0 h-[130%] w-full object-cover will-change-transform"
+            style={{ objectPosition: 'center 54%' }}
           />
           <div
             className="pointer-events-none absolute inset-0 bg-gradient-to-t from-primary/30 via-primary/5 to-transparent"

@@ -3,12 +3,10 @@ import { Link } from 'react-router-dom'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
+import { siteImages } from '../assets/siteImages'
 import { useCms } from '../cms/CmsContext'
 
 gsap.registerPlugin(ScrollTrigger)
-
-const FOUNDATION_IMAGE =
-  'https://images.unsplash.com/photo-1694286080811-e5e416f4fdb1?auto=format&fit=crop&w=2000&q=85'
 
 export function AboutPage() {
   const { team } = useCms()
@@ -66,10 +64,11 @@ export function AboutPage() {
         >
           <img
             ref={parallaxImgRef}
-            src={FOUNDATION_IMAGE}
+            src={siteImages.aboutFoundation}
             alt="Community members gathering together"
             referrerPolicy="no-referrer"
             className="absolute inset-x-0 top-0 h-[130%] w-full object-cover will-change-transform"
+            style={{ objectPosition: 'center 54%' }}
           />
         </div>
 
@@ -183,10 +182,11 @@ export function AboutPage() {
           {/* 2nd: Image only */}
           <div className="relative min-h-[24rem] w-full overflow-hidden sm:min-h-[30rem] lg:min-h-[40rem]">
             <img
-              src="https://images.unsplash.com/flagged/photo-1555251255-e9a095d6eb9d?auto=format&fit=crop&w=1400&q=85"
+              src={siteImages.aboutCommunity}
               alt="Children smiling together"
               referrerPolicy="no-referrer"
               className="absolute inset-0 h-full w-full object-cover"
+              style={{ objectPosition: '43% center' }}
             />
           </div>
 

@@ -1,5 +1,4 @@
-const HERO_UNSPLASH =
-  'https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=1920&q=85'
+import { siteImages } from '../../assets/siteImages'
 
 export function HeroSection() {
   return (
@@ -17,7 +16,7 @@ export function HeroSection() {
 
       <div className="relative h-dvh min-h-dvh w-full overflow-hidden">
         <img
-          src={HERO_UNSPLASH}
+          src={siteImages.homeHero}
           alt="Group of children laughing together"
           referrerPolicy="no-referrer"
           className="absolute inset-0 h-full w-full object-cover object-center"
