@@ -4,6 +4,7 @@ import { useCms } from '../../cms/CmsContext'
 import { bodyToText, textToBody } from '../../cms/storyBody'
 import { slugify } from '../../cms/storage'
 import type { CmsStory } from '../../cms/types'
+import { ImageSourceField } from '../../components/dashboard/ImageSourceField'
 
 type StoryForm = {
   title: string
@@ -12,6 +13,7 @@ type StoryForm = {
   date: string
   category: string
   image: string
+  gallery: string[]
   bodyText: string
 }
 
@@ -22,6 +24,7 @@ const empty: StoryForm = {
   date: new Date().toISOString().slice(0, 10),
   category: 'Impact',
   image: '',
+  gallery: [],
   bodyText: '',
 }
 
@@ -31,6 +34,7 @@ export function DashboardStories() {
   const [form, setForm] = useState<StoryForm>(empty)
   const [open, setOpen] = useState(false)
   const [saving, setSaving] = useState(false)
+  const [uploadBusy, setUploadBusy] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
   function startCreate() {
@@ -49,6 +53,7 @@ export function DashboardStories() {
       date: story.date,
       category: story.category,
       image: story.image,
+      gallery: [...story.gallery],
       bodyText: bodyToText(story.body),
     })
     setError(null)
@@ -67,6 +72,7 @@ export function DashboardStories() {
       date: form.date,
       category: form.category,
       image: form.image,
+      gallery: form.gallery,
       body: textToBody(form.bodyText),
     })
     setSaving(false)
@@ -217,16 +223,77 @@ export function DashboardStories() {
                   className="mt-1 w-full border border-ink/15 bg-white px-3 py-2 text-sm outline-none focus:border-primary"
                 />
               </label>
-              <label className="block text-sm">
-                <span className="text-ink/70">Image URL</span>
-                <input
+              <div className="sm:col-span-2">
+                <ImageSourceField
+                  label="Cover image"
                   value={form.image}
-                  onChange={(e) =>
-                    setForm((prev) => ({ ...prev, image: e.target.value }))
-                  }
-                  className="mt-1 w-full border border-ink/15 bg-white px-3 py-2 text-sm outline-none focus:border-primary"
+                  onChange={(image) => setForm((prev) => ({ ...prev, image }))}
+                  onBusy={setUploadBusy}
                 />
-              </label>
+              </div>
+              <div className="sm:col-span-2">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <span className="text-sm text-ink/70">More images (gallery)</span>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setForm((prev) => ({
+                        ...prev,
+                        gallery: [...prev.gallery, ''],
+                      }))
+                    }
+                    className="border border-ink/20 px-3 py-1 text-xs font-medium text-ink/70 hover:border-primary hover:text-primary"
+                  >
+                    Add image
+                  </button>
+                </div>
+                {form.gallery.length === 0 ? (
+                  <p className="mt-2 text-xs text-ink/50">
+                    Optional. Each row can use a link or an upload (compressed
+                    automatically).
+                  </p>
+                ) : (
+                  <div className="mt-3 space-y-4">
+                    {form.gallery.map((url, index) => (
+                      <div
+                        key={index}
+                        className="rounded border border-ink/10 bg-white/80 p-3"
+                      >
+                        <div className="mb-2 flex items-center justify-between gap-2">
+                          <span className="text-xs font-medium text-ink/55">
+                            Image {index + 1}
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setForm((prev) => ({
+                                ...prev,
+                                gallery: prev.gallery.filter((_, i) => i !== index),
+                              }))
+                            }
+                            className="text-xs text-red-600 hover:underline"
+                          >
+                            Remove
+                          </button>
+                        </div>
+                        <ImageSourceField
+                          label=""
+                          value={url}
+                          onChange={(value) =>
+                            setForm((prev) => ({
+                              ...prev,
+                              gallery: prev.gallery.map((item, i) =>
+                                i === index ? value : item,
+                              ),
+                            }))
+                          }
+                          onBusy={setUploadBusy}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
               <label className="block text-sm sm:col-span-2">
                 <span className="text-ink/70">Excerpt</span>
                 <textarea
@@ -266,7 +333,7 @@ export function DashboardStories() {
               </button>
               <button
                 type="submit"
-                disabled={saving}
+                disabled={saving || uploadBusy}
                 className="bg-primary px-4 py-2 text-sm font-medium text-warm-white disabled:opacity-60"
               >
                 {saving ? 'Saving…' : 'Save'}

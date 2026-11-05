@@ -40,6 +40,7 @@ export const seedStories: CmsStory[] = siteStories.map((story) => ({
   date: story.date,
   category: story.category,
   image: story.image,
+  gallery: [],
   body: [...story.body],
 }))
 

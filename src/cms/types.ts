@@ -15,6 +15,7 @@ export type CmsStory = {
   date: string
   category: string
   image: string
+  gallery: string[]
   body: StoryBlock[]
 }
 

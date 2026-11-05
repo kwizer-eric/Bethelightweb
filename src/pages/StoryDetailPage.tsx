@@ -94,7 +94,8 @@ export function StoryDetailPage() {
   }
 
   const related = stories.filter((s) => s.id !== story.id).slice(0, 3)
-  const gallery = getStoryGallery(story.slug)
+  const gallery =
+    story.gallery.length > 0 ? story.gallery : getStoryGallery(story.slug)
 
   return (
     <>

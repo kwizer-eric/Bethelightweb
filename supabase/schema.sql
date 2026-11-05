@@ -37,6 +37,7 @@ create table if not exists public.stories (
   date date not null,
   category text not null default 'Impact',
   image text not null default '',
+  gallery jsonb not null default '[]'::jsonb,
   body jsonb not null default '[]'::jsonb,
   created_at timestamptz not null default now()
 );
@@ -149,3 +150,27 @@ where not exists (select 1 from public.stories);
 
 alter table public.children add column if not exists gallery jsonb not null default '[]'::jsonb;
 alter table public.children add column if not exists video text;
+alter table public.stories add column if not exists gallery jsonb not null default '[]'::jsonb;
+
+insert into storage.buckets (id, name, public)
+values ('cms-images', 'cms-images', true)
+on conflict (id) do update set public = true;
+
+drop policy if exists cms_images_read on storage.objects;
+drop policy if exists cms_images_insert on storage.objects;
+drop policy if exists cms_images_update on storage.objects;
+drop policy if exists cms_images_delete on storage.objects;
+
+create policy cms_images_read on storage.objects
+  for select to anon, authenticated
+  using (bucket_id = 'cms-images');
+create policy cms_images_insert on storage.objects
+  for insert to authenticated
+  with check (bucket_id = 'cms-images' and auth.role() = 'authenticated');
+create policy cms_images_update on storage.objects
+  for update to authenticated
+  using (bucket_id = 'cms-images' and auth.role() = 'authenticated')
+  with check (bucket_id = 'cms-images' and auth.role() = 'authenticated');
+create policy cms_images_delete on storage.objects
+  for delete to authenticated
+  using (bucket_id = 'cms-images' and auth.role() = 'authenticated');

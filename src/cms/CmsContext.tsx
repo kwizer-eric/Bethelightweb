@@ -28,6 +28,7 @@ type StoryRow = {
   date: string
   category: string
   image: string
+  gallery?: string[] | null
   body: StoryBlock[] | null
 }
 
@@ -83,6 +84,9 @@ function toStory(row: StoryRow): CmsStory {
     date: String(row.date).slice(0, 10),
     category: row.category,
     image: row.image ?? '',
+    gallery: Array.isArray(row.gallery)
+      ? row.gallery.filter((item): item is string => typeof item === 'string')
+      : [],
     body: Array.isArray(row.body) ? row.body : [],
   }
 }
@@ -233,6 +237,7 @@ export function CmsProvider({ children }: { children: ReactNode }) {
         date: story.date,
         category: story.category,
         image: story.image.trim(),
+        gallery: (story.gallery ?? []).map((item) => item.trim()).filter(Boolean),
         body: story.body,
       }
 
