@@ -5,13 +5,18 @@ import { createClient } from '@supabase/supabase-js'
 const publicUrl = 'https://pybipnjrunilojzsinba.supabase.co'
 const publicKey = 'sb_publishable_i2gnB0Uk8eS25t9Bvb8WuQ_Dhks1Won'
 
+function clientKey(value: string | undefined) {
+  if (!value || value.startsWith('sb_secret_')) return undefined
+  return value
+}
+
 const url =
-  import.meta.env.VITE_SUPABASE_URL ||
-  import.meta.env.NEXT_PUBLIC_SUPABASE_URL ||
+  clientKey(import.meta.env.VITE_SUPABASE_URL) ||
+  clientKey(import.meta.env.NEXT_PUBLIC_SUPABASE_URL) ||
   publicUrl
 const key =
-  import.meta.env.VITE_SUPABASE_ANON_KEY ||
-  import.meta.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+  clientKey(import.meta.env.VITE_SUPABASE_ANON_KEY) ||
+  clientKey(import.meta.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) ||
   publicKey
 
 export const supabase = createClient(url, key)
