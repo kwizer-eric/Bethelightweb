@@ -22,7 +22,7 @@ export function HomeNewsSection() {
           </h2>
           <Link
             to="/news"
-            className="inline-flex min-w-[7.5rem] items-center justify-center self-start border border-primary bg-transparent px-6 py-2 text-sm font-medium leading-normal text-primary transition-colors hover:bg-primary hover:text-warm-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-warm-white sm:self-auto"
+            className="hidden min-w-[7.5rem] items-center justify-center border border-primary bg-transparent px-6 py-2 text-sm font-medium leading-normal text-primary transition-colors hover:bg-primary hover:text-warm-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-warm-white sm:inline-flex"
           >
             View All
           </Link>
@@ -61,7 +61,7 @@ export function HomeNewsSection() {
                 <div className="mt-auto pt-8">
                   <Link
                     to={`/news/${story.slug}`}
-                    className="inline-flex min-w-[7.5rem] items-center justify-center border border-primary px-6 py-2 text-sm font-medium leading-normal text-primary transition-colors hover:bg-primary hover:text-warm-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-warm-white"
+                    className="inline-flex min-w-[7.5rem] items-center justify-center border border-primary bg-primary px-6 py-2 text-sm font-medium leading-normal text-warm-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-warm-white sm:bg-transparent sm:text-primary sm:transition-colors sm:hover:bg-primary sm:hover:text-warm-white"
                   >
                     Read more
                   </Link>
@@ -69,6 +69,15 @@ export function HomeNewsSection() {
               </div>
             </article>
           ))}
+        </div>
+
+        <div className="mt-10 pb-4 sm:hidden">
+          <Link
+            to="/news"
+            className="inline-flex min-w-[7.5rem] w-full items-center justify-center border border-primary bg-primary px-6 py-2 text-sm font-medium leading-normal text-warm-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-warm-white"
+          >
+            View All
+          </Link>
         </div>
       </div>
     </section>

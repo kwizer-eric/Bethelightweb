@@ -1,5 +1,6 @@
 import { useEffect, useId, useRef, useState, type FormEvent, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
+import { Link } from 'react-router-dom'
 import { siteImages } from '../../assets/siteImages'
 
 const volunteerCard = {
@@ -31,7 +32,7 @@ const supportCard = {
 } as const
 
 const cardClass =
-  'group relative flex min-h-[36rem] w-full flex-col justify-between overflow-hidden p-8 text-left sm:min-h-[42rem] sm:p-10'
+  'group relative flex min-h-[22rem] w-full flex-col justify-between overflow-hidden p-6 text-left sm:min-h-[28rem] sm:p-8 lg:min-h-[36rem] lg:p-10'
 
 const fieldClass =
   'w-full border border-ink/15 bg-warm-white px-4 py-2.5 text-sm text-ink placeholder:text-ink/45 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20'
@@ -41,11 +42,14 @@ function CardVisual({
   title,
   description,
   imageClassName,
+  activeOnMobile,
 }: {
   image: string
   title: ReactNode
   description: string
   imageClassName?: string
+  /** Always show blue overlay + copy on mobile (no hover needed) */
+  activeOnMobile?: boolean
 }) {
   return (
     <>
@@ -55,19 +59,35 @@ function CardVisual({
         referrerPolicy="no-referrer"
         className={`absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03] ${imageClassName ?? 'object-center'}`}
       />
-      <div className="absolute inset-0 bg-ink/45 transition-opacity duration-300 group-hover:opacity-0" />
-      <div className="absolute inset-0 bg-primary opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+      <div
+        className={`absolute inset-0 bg-ink/45 transition-opacity duration-300 group-hover:opacity-0 ${
+          activeOnMobile ? 'opacity-0 sm:opacity-100' : ''
+        }`}
+      />
+      <div
+        className={`absolute inset-0 bg-primary transition-opacity duration-300 group-hover:opacity-100 ${
+          activeOnMobile ? 'opacity-100 sm:opacity-0' : 'opacity-0'
+        }`}
+      />
 
       <h2 className="relative z-10 max-w-[15rem] text-3xl leading-tight text-warm-white sm:text-5xl">
         {title}
       </h2>
-      <p className="relative z-10 mb-14 max-w-md translate-y-4 text-sm leading-relaxed text-warm-white/90 opacity-0 transition duration-300 group-hover:translate-y-0 group-hover:opacity-100 sm:mb-16 sm:text-base">
+      <p
+        className={`relative z-10 mb-14 max-w-md text-sm leading-relaxed text-warm-white/90 transition duration-300 group-hover:translate-y-0 group-hover:opacity-100 sm:mb-16 sm:text-base ${
+          activeOnMobile
+            ? 'translate-y-0 opacity-100 sm:translate-y-4 sm:opacity-0'
+            : 'translate-y-4 opacity-0'
+        }`}
+      >
         {description}
       </p>
 
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-[60px] bg-[length:300px_60px] bg-repeat-x bg-bottom opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        className={`pointer-events-none absolute inset-x-0 bottom-0 z-10 h-[60px] bg-[length:300px_60px] bg-repeat-x bg-bottom transition-opacity duration-300 group-hover:opacity-100 ${
+          activeOnMobile ? 'opacity-100 sm:opacity-0' : 'opacity-0'
+        }`}
         style={{ backgroundImage: 'url(/pattern1.svg)' }}
       />
     </>
@@ -249,14 +269,14 @@ export function HomeCtaSection() {
           <CardVisual {...volunteerCard} />
         </button>
 
-        <div
+        <Link
           id="support"
+          to="/donate"
           className={cardClass}
-          role="group"
           aria-label="Support the Mission"
         >
-          <CardVisual {...supportCard} />
-        </div>
+          <CardVisual {...supportCard} activeOnMobile />
+        </Link>
       </div>
 
       <VolunteerModal open={volunteerOpen} onClose={() => setVolunteerOpen(false)} />

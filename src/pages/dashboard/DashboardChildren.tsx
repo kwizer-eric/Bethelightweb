@@ -10,6 +10,8 @@ type ChildForm = {
   dream: string
   location: string
   image: string
+  gallery: string
+  video: string
   story: string
   monthlyNeed: string
   fundedPercent: string
@@ -24,10 +26,19 @@ const empty: ChildForm = {
   dream: '',
   location: '',
   image: '',
+  gallery: '',
+  video: '',
   story: '',
   monthlyNeed: '35',
   fundedPercent: '0',
   urgent: false,
+}
+
+function parseGallery(value: string) {
+  return value
+    .split(/[\n,]+/)
+    .map((s) => s.trim())
+    .filter(Boolean)
 }
 
 export function DashboardChildren() {
@@ -52,6 +63,8 @@ export function DashboardChildren() {
       dream: child.dream,
       location: child.location,
       image: child.image,
+      gallery: (child.gallery ?? []).join('\n'),
+      video: child.video ?? '',
       story: child.story,
       monthlyNeed: String(child.monthlyNeed),
       fundedPercent: String(child.fundedPercent),
@@ -72,6 +85,8 @@ export function DashboardChildren() {
       dream: form.dream,
       location: form.location,
       image: form.image,
+      gallery: parseGallery(form.gallery),
+      video: form.video.trim() || undefined,
       story: form.story,
       monthlyNeed: Number(form.monthlyNeed) || 0,
       fundedPercent: Math.min(100, Math.max(0, Number(form.fundedPercent) || 0)),
@@ -200,6 +215,32 @@ export function DashboardChildren() {
                   }
                 />
                 <span className="text-ink/70">Mark as urgent</span>
+              </label>
+              <label className="block text-sm sm:col-span-2">
+                <span className="text-ink/70">
+                  Gallery image URLs (one per line or comma-separated)
+                </span>
+                <textarea
+                  value={form.gallery}
+                  onChange={(e) =>
+                    setForm((prev) => ({ ...prev, gallery: e.target.value }))
+                  }
+                  rows={3}
+                  placeholder="https://…"
+                  className="mt-1 w-full border border-ink/15 bg-white px-3 py-2 text-sm outline-none focus:border-primary"
+                />
+              </label>
+              <label className="block text-sm sm:col-span-2">
+                <span className="text-ink/70">Video URL (YouTube / Vimeo / mp4)</span>
+                <input
+                  type="text"
+                  value={form.video}
+                  onChange={(e) =>
+                    setForm((prev) => ({ ...prev, video: e.target.value }))
+                  }
+                  placeholder="https://…"
+                  className="mt-1 w-full border border-ink/15 bg-white px-3 py-2 text-sm outline-none focus:border-primary"
+                />
               </label>
               <label className="block text-sm sm:col-span-2">
                 <span className="text-ink/70">Story</span>

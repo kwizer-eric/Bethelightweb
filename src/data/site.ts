@@ -11,6 +11,15 @@ export const site = {
     twitter: '#',
     linkedin: '#',
   },
+  donation: {
+    bankName: 'Bank of Kigali',
+    accountName: 'Kubwabo Foundation',
+    accountNumber: '000XXXXXXXXX',
+    momoLabel: 'MTN MoMo',
+    momoCode: '*182*8*1*XXXXXX#',
+    momoPhone: '+250 7XX XXX XXX',
+    note: 'Include your name in the transfer reference. If sponsoring a child, add their name too.',
+  },
 } as const
 
 export const navLinks = [

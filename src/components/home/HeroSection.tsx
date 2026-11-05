@@ -14,7 +14,7 @@ export function HeroSection() {
         </p>
       </div>
 
-      <div className="relative h-dvh min-h-dvh w-full overflow-hidden">
+      <div className="relative h-[22rem] w-full overflow-hidden sm:h-[32rem] lg:h-dvh lg:min-h-dvh">
         <img
           src={siteImages.homeHero}
           alt="Group of children laughing together"

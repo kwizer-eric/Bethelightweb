@@ -14,7 +14,10 @@ export function loadCmsState(): CmsState {
         ? parsed.stories
         : structuredClone(cmsSeed.stories),
       children: Array.isArray(parsed.children)
-        ? parsed.children
+        ? parsed.children.map((child) => ({
+            ...child,
+            gallery: Array.isArray(child.gallery) ? child.gallery : [],
+          }))
         : structuredClone(cmsSeed.children),
     }
   } catch {
