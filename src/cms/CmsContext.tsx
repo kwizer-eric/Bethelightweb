@@ -41,6 +41,8 @@ type ChildRow = {
   location: string
   image: string
   story: string
+  gallery?: string[] | null
+  video?: string | null
   monthly_need: number | string
   funded_percent: number
   urgent: boolean
@@ -95,6 +97,8 @@ function toChild(row: ChildRow): ProgramChild {
     dream: row.dream ?? '',
     location: row.location ?? '',
     image: row.image ?? '',
+    gallery: Array.isArray(row.gallery) ? row.gallery : [],
+    video: row.video || undefined,
     story: row.story ?? '',
     monthlyNeed: Number(row.monthly_need) || 0,
     fundedPercent: Number(row.funded_percent) || 0,
@@ -288,6 +292,8 @@ export function CmsProvider({ children }: { children: ReactNode }) {
         dream: child.dream,
         location: child.location,
         image: child.image.trim(),
+        gallery: child.gallery ?? [],
+        video: child.video?.trim() || null,
         story: child.story,
         monthly_need: Number(child.monthlyNeed) || 0,
         funded_percent: Math.min(100, Math.max(0, Number(child.fundedPercent) || 0)),

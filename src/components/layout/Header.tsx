@@ -5,7 +5,7 @@ import { Logo } from '../ui/Logo'
 
 const mainLinks = navLinks.filter((link) => link.href !== '/contact')
 
-const supportClass = 'bg-accent text-primary font-medium hover:bg-accent'
+const supportClass = 'bg-accent text-primary hover:bg-accent'
 
 export function Header() {
   const [open, setOpen] = useState(false)
@@ -133,7 +133,7 @@ export function Header() {
 
         <div className="flex items-center justify-self-end gap-2">
           <Link
-            to="/#support"
+            to="/donate"
             className={`hidden min-w-[7.5rem] justify-center px-6 py-2 text-sm font-medium leading-normal transition-colors sm:inline-flex ${supportClass}`}
             onClick={() => setOpen(false)}
           >
@@ -219,8 +219,8 @@ export function Header() {
             )}
             <li>
               <Link
-                to="/#support"
-                className={`mt-1 block px-4 py-3 text-center font-medium ${supportClass}`}
+                to="/donate"
+                className={`mt-1 block px-4 py-3 text-center font-semibold ${supportClass}`}
                 onClick={() => setOpen(false)}
               >
                 Donate

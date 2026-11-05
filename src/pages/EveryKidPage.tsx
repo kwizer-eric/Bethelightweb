@@ -1,11 +1,13 @@
 import { useEffect, useId, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
+import { useNavigate } from 'react-router-dom'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 import { siteImages } from '../assets/siteImages'
 import { FadeImage } from '../components/FadeImage'
 import { HomeCtaSection } from '../components/home/HomeCtaSection'
+import { MobileReadMore } from '../components/ui/MobileReadMore'
 import { useCms } from '../cms/CmsContext'
 import type { ProgramChild } from '../cms/types'
 
@@ -39,6 +41,7 @@ function ChildProfileModal({
   child: ProgramChild | null
   onClose: () => void
 }) {
+  const navigate = useNavigate()
   const titleId = useId()
   const closeRef = useRef<HTMLButtonElement>(null)
 
@@ -141,7 +144,10 @@ function ChildProfileModal({
 
           <button
             type="button"
-            onClick={onClose}
+            onClick={() => {
+              onClose()
+              navigate(`/programs/every-kid-deserves-it/children/${child.id}`)
+            }}
             className="mt-8 inline-flex w-full items-center justify-center bg-primary px-6 py-3 text-sm font-semibold tracking-wide text-warm-white uppercase transition-colors hover:bg-ink"
           >
             Sponsor
@@ -199,19 +205,23 @@ export function EveryKidPage() {
             </div>
 
             <div className="w-full space-y-6">
-              <p className="text-base leading-relaxed text-primary sm:text-lg">
-                Every Child Deserves It is a program of Kubwabo Foundation dedicated to walking alongside children from vulnerable families, helping them access opportunities, discover their potential, and work toward their dreams.
-              </p>
-              <p className="text-base leading-relaxed text-primary/80 sm:text-lg">
-                Just as many of us have been supported by our parents and others who believed in us, we believe every child deserves someone who cares, encourages them, and helps them move forward. Through educational support, mentorship, guidance, and continued encouragement, we aim to help children overcome barriers and build a brighter future.
-              </p>
+              <MobileReadMore
+                buttonClassName="inline-flex w-fit border border-primary bg-primary px-6 py-2 text-sm font-medium text-warm-white"
+              >
+                <p className="text-base leading-relaxed text-primary sm:text-lg">
+                  Every Child Deserves It is a program of Kubwabo Foundation dedicated to walking alongside children from vulnerable families, helping them access opportunities, discover their potential, and work toward their dreams.
+                </p>
+                <p className="text-base leading-relaxed text-primary/80 sm:text-lg">
+                  Just as many of us have been supported by our parents and others who believed in us, we believe every child deserves someone who cares, encourages them, and helps them move forward. Through educational support, mentorship, guidance, and continued encouragement, we aim to help children overcome barriers and build a brighter future.
+                </p>
+              </MobileReadMore>
             </div>
           </div>
         </div>
 
         <div
           ref={parallaxWrapRef}
-          className="relative h-dvh overflow-hidden"
+          className="relative h-[22rem] overflow-hidden sm:h-[32rem] lg:h-dvh"
         >
           <FadeImage
             ref={parallaxImgRef}
@@ -331,7 +341,7 @@ export function EveryKidPage() {
                   </p>
 
                   <div className="mt-auto pt-8">
-                    <span className="inline-flex min-w-[7.5rem] items-center justify-center border border-warm-white px-6 py-2 text-sm font-medium leading-normal text-warm-white transition-colors hover:border-accent hover:bg-accent hover:text-ink">
+                    <span className="inline-flex min-w-[7.5rem] items-center justify-center border border-accent bg-accent px-6 py-2 text-sm font-medium leading-normal text-ink sm:border-warm-white sm:bg-transparent sm:text-warm-white sm:transition-colors sm:hover:border-accent sm:hover:bg-accent sm:hover:text-ink">
                       Read more
                     </span>
                   </div>

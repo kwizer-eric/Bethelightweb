@@ -12,7 +12,7 @@ function ColumnHeading({ children }: { children: ReactNode }) {
 }
 
 const columnClass =
-  'flex min-h-[20rem] flex-col items-start justify-start gap-8 py-14 sm:min-h-[22rem] sm:gap-10 sm:py-20 lg:min-h-[26rem] lg:py-24'
+  'flex flex-col items-start justify-start gap-4 py-8 sm:min-h-[22rem] sm:gap-10 sm:py-20 lg:min-h-[26rem] lg:py-24'
 
 export function Footer() {
   return (

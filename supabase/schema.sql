@@ -24,6 +24,8 @@ create table if not exists public.children (
   monthly_need numeric not null default 0,
   funded_percent int not null default 0 check (funded_percent between 0 and 100),
   urgent boolean not null default false,
+  gallery jsonb not null default '[]'::jsonb,
+  video text,
   created_at timestamptz not null default now()
 );
 
@@ -144,3 +146,6 @@ from (
   ($slug$partners-on-the-ground$slug$, $title$Partners on the ground$title$, $ex$A look at how local leaders shape every program we run together.$ex$, $dt$2025-11-12$dt$::date, $cat$Partners$cat$, $img$https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=1600&q=80$img$, $body$[{"type":"p","text":"A look at how local leaders shape every program we run together. Kubwabo Foundation does not arrive with a fixed script — we arrive ready to listen."},{"type":"p","text":"From site selection to volunteer schedules, community partners guide decisions. That approach keeps aid practical, trusted, and rooted in what people actually need."},{"type":"h2","text":"How partnership works"},{"type":"ul","items":["Co-designed program priorities each quarter","Transparent budgets shared with local leads","Joint monitoring visits after every major distribution","Feedback loops that change how we operate"]},{"type":"p","text":"Lasting change is built with, not for, local people. Our partners make that principle real every week."}]$body$::jsonb)
 ) as seed(slug, title, excerpt, date, category, image, body)
 where not exists (select 1 from public.stories);
+
+alter table public.children add column if not exists gallery jsonb not null default '[]'::jsonb;
+alter table public.children add column if not exists video text;

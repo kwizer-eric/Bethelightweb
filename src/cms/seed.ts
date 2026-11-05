@@ -54,6 +54,10 @@ export const seedChildren: ProgramChild[] = [
     location: 'Kigali, Rwanda',
     image:
       'https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=800&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=800&q=80',
+    ],
     story:
       'Keza is passionate about reading and spends every afternoon reading stories to younger children in her neighborhood. Her mother sells produce at a local market, and fluctuating income often made regular school fees uncertain. Support covers her full tuition, books, and daily hot lunch.',
     monthlyNeed: 35,
@@ -70,6 +74,10 @@ export const seedChildren: ProgramChild[] = [
     location: 'Bugesera, Rwanda',
     image:
       'https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&w=800&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?auto=format&fit=crop&w=800&q=80',
+    ],
     story:
       'Samuel has an inventive mind, building miniature wire toy cars and windmills from recycled scraps. With guidance through our program, he received his first complete mathematics and science kit, shoes, and guaranteed daily meals at school.',
     monthlyNeed: 35,
@@ -86,6 +94,10 @@ export const seedChildren: ProgramChild[] = [
     location: 'Rwamagana, Rwanda',
     image:
       'https://images.unsplash.com/photo-1547496613-4e19af6736dc?auto=format&fit=crop&w=800&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=800&q=80',
+    ],
     story:
       'Full of vibrant curiosity, Divine is at the top of her primary class. She is cared for by her elderly grandmother on a subsistence garden. Sponsorship ensures Divine never misses school due to lack of uniforms, shoes, or school supplies.',
     monthlyNeed: 35,
@@ -101,6 +113,10 @@ export const seedChildren: ProgramChild[] = [
     location: 'Musanze, Rwanda',
     image:
       'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1466692476866-aef1dfb1e735?auto=format&fit=crop&w=800&q=80',
+    ],
     story:
       'Eric loves nature and dreams of introducing modern sustainable farming techniques to his community. Last year, unpaid registration fees nearly forced him to drop out. Sponsorship keeps his exam fees and classroom resources secured.',
     monthlyNeed: 35,
@@ -117,6 +133,10 @@ export const seedChildren: ProgramChild[] = [
     location: 'Kayonza, Rwanda',
     image:
       'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?auto=format&fit=crop&w=800&q=80',
+    ],
     story:
       'Aline is gentle, compassionate, and loves helping in community clean-up days. Her family was displaced after severe seasonal rains. Through this program, her school supplies, tuition, and uniforms are fully provided so her learning stays uninterrupted.',
     monthlyNeed: 35,
@@ -132,6 +152,10 @@ export const seedChildren: ProgramChild[] = [
     location: 'Kigali, Rwanda',
     image:
       'https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&w=800&q=80',
+    gallery: [
+      'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=800&q=80',
+    ],
     story:
       'Patrick is preparing for his national primary leaving exams. He is fascinated by technology and attends our weekly digital literacy weekend workshops. Sponsorship covers his revision workbooks, exam fees, and nutritious lunches.',
     monthlyNeed: 35,

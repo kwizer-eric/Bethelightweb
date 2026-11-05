@@ -5,6 +5,7 @@ import { useGSAP } from '@gsap/react'
 import { siteImages } from '../assets/siteImages'
 import { FadeImage } from '../components/FadeImage'
 import { HomeCtaSection } from '../components/home/HomeCtaSection'
+import { MobileReadMore } from '../components/ui/MobileReadMore'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -86,33 +87,37 @@ export function ForTheParentsPage() {
             </div>
 
             <div className="w-full space-y-6 text-primary">
-              <p className="text-base leading-relaxed sm:text-lg">
-                For Their Family is a Kubwabo Foundation program dedicated to
-                walking alongside vulnerable families, supporting them through
-                everyday challenges, strengthening their livelihoods, and
-                helping them build a more secure future for their children.
-              </p>
-              <p className="text-base leading-relaxed sm:text-lg">
-                We believe every child deserves the opportunity to grow, learn,
-                and pursue their dreams. But behind every child is a family
-                whose well-being shapes the opportunities they have and the
-                future they can build.
-              </p>
-              <p className="text-base leading-relaxed sm:text-lg">
-                When families struggle to access nutritious food, healthcare,
-                stable income, and other basic needs, creating a safe and
-                supportive environment for children becomes more difficult.
-              </p>
-              <p className="text-base leading-relaxed sm:text-lg">
-                That is why we believe investing in children also means
-                empowering the families raising them, because stronger families
-                create stronger foundations for children to thrive.
-              </p>
+              <MobileReadMore
+                buttonClassName="inline-flex w-fit border border-primary bg-primary px-6 py-2 text-sm font-medium text-warm-white"
+              >
+                <p className="text-base leading-relaxed sm:text-lg">
+                  For Their Family is a Kubwabo Foundation program dedicated to
+                  walking alongside vulnerable families, supporting them through
+                  everyday challenges, strengthening their livelihoods, and
+                  helping them build a more secure future for their children.
+                </p>
+                <p className="text-base leading-relaxed sm:text-lg">
+                  We believe every child deserves the opportunity to grow, learn,
+                  and pursue their dreams. But behind every child is a family
+                  whose well-being shapes the opportunities they have and the
+                  future they can build.
+                </p>
+                <p className="text-base leading-relaxed sm:text-lg">
+                  When families struggle to access nutritious food, healthcare,
+                  stable income, and other basic needs, creating a safe and
+                  supportive environment for children becomes more difficult.
+                </p>
+                <p className="text-base leading-relaxed sm:text-lg">
+                  That is why we believe investing in children also means
+                  empowering the families raising them, because stronger families
+                  create stronger foundations for children to thrive.
+                </p>
+              </MobileReadMore>
             </div>
           </div>
         </div>
 
-        <div ref={parallaxWrapRef} className="relative h-dvh overflow-hidden">
+        <div ref={parallaxWrapRef} className="relative h-[22rem] overflow-hidden sm:h-[32rem] lg:h-dvh">
           <FadeImage
             ref={parallaxImgRef}
             src={siteImages.forTheirFamilyHero}
@@ -169,16 +174,16 @@ export function ForTheParentsPage() {
       </section>
 
       {/* Why this matters */}
-      <section className="border-b border-white/10 bg-black pt-20 sm:pt-24 lg:pt-28">
+      <section className="border-b border-white/10 bg-black pt-12 sm:pt-24 lg:pt-28">
         <div className="site-container">
-          <div className="max-w-3xl pb-14 sm:pb-16 lg:pb-20">
+          <div className="max-w-3xl pb-8 sm:pb-16 lg:pb-20">
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
               Why This Matters
             </p>
             <h2 className="mt-2 text-3xl font-medium tracking-tight text-warm-white sm:text-4xl lg:text-5xl">
               A Stronger Foundation for Every Child
             </h2>
-            <p className="mt-6 text-base leading-relaxed text-warm-white sm:text-lg">
+            <p className="mt-4 text-base leading-relaxed text-warm-white sm:mt-6 sm:text-lg">
               When families become stronger, children gain better opportunities
               to grow, learn, and pursue their dreams.
             </p>
@@ -189,17 +194,17 @@ export function ForTheParentsPage() {
           {WHY_POINTS.map((point, index) => (
             <article
               key={point.title}
-              className={`flex min-h-[22rem] flex-col px-6 py-12 text-warm-white sm:min-h-[24rem] sm:px-8 sm:py-14 lg:min-h-[26rem] lg:px-10 lg:py-16 lg:pb-28 ${
+              className={`flex flex-col px-6 py-8 text-warm-white sm:min-h-[24rem] sm:px-8 sm:py-14 lg:min-h-[26rem] lg:px-10 lg:py-16 lg:pb-28 ${
                 index > 0 ? 'border-t border-white/15 lg:border-t-0 lg:border-l' : ''
               }`}
             >
               <p className="text-xs font-medium tracking-[0.12em] text-warm-white uppercase">
                 {String(index + 1).padStart(2, '0')}
               </p>
-              <h3 className="mt-6 text-xl font-medium tracking-tight sm:text-2xl">
+              <h3 className="mt-4 text-xl font-medium tracking-tight sm:mt-6 sm:text-2xl">
                 {point.title}
               </h3>
-              <p className="mt-3 text-sm leading-relaxed sm:text-base">
+              <p className="mt-2 text-sm leading-relaxed sm:mt-3 sm:text-base">
                 {point.body}
               </p>
             </article>

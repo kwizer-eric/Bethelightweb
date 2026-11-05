@@ -67,7 +67,7 @@ export function StoriesPage() {
                   >
                     <Link
                       to={`/news/${story.slug}`}
-                      className="inline-flex min-w-[7.5rem] items-center justify-center border border-primary px-6 py-2 text-sm font-medium leading-normal text-primary transition-colors hover:bg-primary hover:text-warm-white"
+                      className="inline-flex min-w-[7.5rem] items-center justify-center border border-primary bg-primary px-6 py-2 text-sm font-medium leading-normal text-warm-white sm:bg-transparent sm:text-primary sm:transition-colors sm:hover:bg-primary sm:hover:text-warm-white"
                     >
                       Read more
                     </Link>

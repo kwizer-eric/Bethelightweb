@@ -27,6 +27,10 @@ export type ProgramChild = {
   dream: string
   location: string
   image: string
+  /** Extra photos for the child detail page (cover stays `image`) */
+  gallery: string[]
+  /** Optional YouTube/Vimeo URL or direct .mp4 */
+  video?: string
   story: string
   monthlyNeed: number
   fundedPercent: number

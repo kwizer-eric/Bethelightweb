@@ -5,6 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 import { siteImages } from '../assets/siteImages'
 import { FadeImage } from '../components/FadeImage'
+import { MobileReadMore } from '../components/ui/MobileReadMore'
 import { useCms } from '../cms/CmsContext'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -41,7 +42,7 @@ export function AboutPage() {
 
   return (
     <div className="bg-warm-white text-ink">
-      <section className="flex flex-col justify-between gap-28 bg-warm-white pt-28 pb-28 sm:gap-32 sm:pt-32 sm:pb-32 lg:gap-40 lg:pb-40">
+      <section className="flex flex-col justify-between gap-14 bg-warm-white pt-16 pb-16 sm:gap-32 sm:pt-32 sm:pb-32 lg:gap-40 lg:pb-40">
         <div className="site-container">
           <h1 className="max-w-xl text-4xl font-medium leading-[1.05] tracking-tight text-primary sm:max-w-2xl sm:text-5xl lg:text-6xl xl:max-w-3xl xl:text-7xl 2xl:text-8xl">
             For Every Child.
@@ -61,7 +62,7 @@ export function AboutPage() {
       <section id="our-story" className="bg-warm-white">
         <div
           ref={parallaxWrapRef}
-          className="relative h-dvh overflow-hidden"
+          className="relative h-[22rem] overflow-hidden sm:h-[32rem] lg:h-dvh"
         >
           <FadeImage
             ref={parallaxImgRef}
@@ -74,8 +75,8 @@ export function AboutPage() {
         </div>
 
         <div className="bg-primary text-warm-white">
-          <div className="site-container py-20 sm:py-24 lg:py-32">
-            <div className="grid gap-12 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] lg:gap-20">
+          <div className="site-container py-12 sm:py-24 lg:py-32">
+            <div className="grid gap-8 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] lg:gap-20">
               <div>
                 <p className="text-[11px] font-medium tracking-[0.16em] text-warm-white/55 uppercase">
                   Est. 2025
@@ -86,30 +87,34 @@ export function AboutPage() {
               </div>
 
               <div className="max-w-2xl space-y-6">
-                <p className="text-xl font-medium leading-snug tracking-tight sm:text-2xl lg:text-3xl lg:leading-snug">
-                  Kubwabo Foundation was born from a simple but powerful belief:{' '}
-                  <span className="italic text-accent">
-                    no child should have to face life&apos;s challenges alone.
-                  </span>
-                </p>
-
-                <p className="text-base leading-relaxed text-warm-white/80 sm:text-lg">
-                  Our journey began late one night when our founder encountered a young child in a vulnerable situation and chose to step forward. What began as a single act of care became a lasting reminder that even when we cannot solve every problem, we can make an immediate, meaningful difference in someone&apos;s life.
-                </p>
-
-                <p className="text-base leading-relaxed text-warm-white/80 sm:text-lg">
-                  That experience sparked a commitment to move beyond sympathy into consistent, personal action. What started with a small group of young people sharing that common desire has steadily grown into a community united by shared responsibility.
-                </p>
-
-                <p className="text-base leading-relaxed text-warm-white/80 sm:text-lg">
-                  As our work continues to grow, our core posture remains unchanged: to show up, listen closely, and act with quiet dignity wherever need is greatest.
-                </p>
-
-                <div className="border-t border-warm-white/20 pt-6">
-                  <p className="text-base italic leading-relaxed text-accent sm:text-lg">
-                    Kubwabo means &ldquo;for them.&rdquo; That single principle guides every step we take, keeping our focus centered on the people we serve and ensuring no child or family is forgotten.
+                <MobileReadMore
+                  buttonClassName="inline-flex w-fit border border-warm-white bg-warm-white px-6 py-2 text-sm font-medium text-ink"
+                >
+                  <p className="text-xl font-medium leading-snug tracking-tight sm:text-2xl lg:text-3xl lg:leading-snug">
+                    Kubwabo Foundation was born from a simple but powerful belief:{' '}
+                    <span className="italic text-accent">
+                      no child should have to face life&apos;s challenges alone.
+                    </span>
                   </p>
-                </div>
+
+                  <p className="text-base leading-relaxed text-warm-white/80 sm:text-lg">
+                    Our journey began late one night when our founder encountered a young child in a vulnerable situation and chose to step forward. What began as a single act of care became a lasting reminder that even when we cannot solve every problem, we can make an immediate, meaningful difference in someone&apos;s life.
+                  </p>
+
+                  <p className="text-base leading-relaxed text-warm-white/80 sm:text-lg">
+                    That experience sparked a commitment to move beyond sympathy into consistent, personal action. What started with a small group of young people sharing that common desire has steadily grown into a community united by shared responsibility.
+                  </p>
+
+                  <p className="text-base leading-relaxed text-warm-white/80 sm:text-lg">
+                    As our work continues to grow, our core posture remains unchanged: to show up, listen closely, and act with quiet dignity wherever need is greatest.
+                  </p>
+
+                  <div className="border-t border-warm-white/20 pt-6">
+                    <p className="text-base italic leading-relaxed text-accent sm:text-lg">
+                      Kubwabo means &ldquo;for them.&rdquo; That single principle guides every step we take, keeping our focus centered on the people we serve and ensuring no child or family is forgotten.
+                    </p>
+                  </div>
+                </MobileReadMore>
               </div>
             </div>
           </div>
@@ -118,11 +123,10 @@ export function AboutPage() {
 
       {/* 02 — who we are */}
       <section className="border-t border-primary/15 bg-warm-white text-primary">
-        <div className="site-container py-20 sm:py-24 lg:py-32">
-          <div className="grid gap-12 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] lg:gap-20">
+        <div className="site-container py-12 sm:py-24 lg:py-32">
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] lg:gap-20">
             <div>
-
-              <h2 className="mt-4 text-3xl font-medium tracking-tight text-primary sm:text-4xl lg:text-5xl">
+              <h2 className="text-3xl font-medium tracking-tight text-primary sm:mt-4 sm:text-4xl lg:text-5xl">
                 Who We Are
               </h2>
             </div>
@@ -163,17 +167,17 @@ export function AboutPage() {
       </section>
 
       {/* Mission & Vision */}
-      <section className="bg-warm-white py-16 lg:py-20">
-        <div className="site-container grid grid-cols-1 gap-6 lg:grid-cols-3 lg:gap-8">
+      <section className="bg-warm-white py-10 sm:py-16 lg:py-20">
+        <div className="site-container grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8">
           {/* 1st: Our Mission (no background) */}
-          <div className="relative flex min-h-[32rem] w-full flex-col justify-between p-8 text-left text-primary sm:min-h-[36rem] sm:p-10 lg:min-h-[40rem]">
+          <div className="relative flex w-full flex-col justify-start gap-8 p-8 text-left text-primary sm:min-h-[36rem] sm:justify-between sm:gap-0 sm:p-10 lg:min-h-[40rem]">
             <h3 className="text-3xl leading-tight text-primary sm:text-4xl lg:text-5xl">
               Our
               <br />
               <span className="font-normal italic">Mission</span>
             </h3>
 
-            <div className="mb-14 max-w-md sm:mb-16">
+            <div className="max-w-md sm:mb-16">
               <p className="text-sm leading-relaxed text-primary/80 sm:text-base">
                 To improve the well-being and future opportunities of vulnerable children and families through practical support, education, mentorship, community engagement, and family strengthening.
               </p>
@@ -192,14 +196,14 @@ export function AboutPage() {
           </div>
 
           {/* 3rd: Our Vision (as it is with blue background) */}
-          <div className="relative flex min-h-[32rem] w-full flex-col justify-between overflow-hidden bg-primary p-8 text-left text-warm-white sm:min-h-[36rem] sm:p-10 lg:min-h-[40rem]">
+          <div className="relative flex w-full flex-col justify-start gap-8 overflow-hidden bg-primary p-8 pb-20 text-left text-warm-white sm:min-h-[36rem] sm:justify-between sm:gap-0 sm:p-10 sm:pb-10 lg:min-h-[40rem]">
             <h3 className="relative z-10 max-w-[15rem] text-3xl leading-tight text-warm-white sm:text-4xl lg:text-5xl">
               Our
               <br />
               <span className="font-normal italic">Vision</span>
             </h3>
 
-            <div className="relative z-10 mb-14 max-w-md sm:mb-16">
+            <div className="relative z-10 max-w-md sm:mb-16">
               <p className="text-sm leading-relaxed text-warm-white/95 sm:text-base">
                 A future where every child has the opportunity to thrive, every family has the support to build a better life, and every community plays an active role in creating lasting positive change.
               </p>
@@ -216,14 +220,14 @@ export function AboutPage() {
 
       {/* 03 — the team */}
       <section className="bg-warm-white text-primary">
-        <div className="site-container py-20 sm:py-24 lg:py-32">
+        <div className="site-container py-12 sm:py-24 lg:py-32">
           <div>
-            <h2 className="mt-4 text-3xl font-medium tracking-tight text-primary sm:text-4xl lg:text-5xl">
+            <h2 className="text-3xl font-medium tracking-tight text-primary sm:mt-4 sm:text-4xl lg:text-5xl">
               The Team
             </h2>
           </div>
 
-          <div className="mt-14 grid gap-x-6 gap-y-12 sm:mt-16 sm:grid-cols-2 lg:mt-20 lg:grid-cols-4">
+          <div className="mt-8 grid gap-x-6 gap-y-8 sm:mt-16 sm:grid-cols-2 sm:gap-y-12 lg:mt-20 lg:grid-cols-4">
             {team.map((member) => (
               <article key={member.id}>
                 <div className="overflow-hidden bg-primary/5">
@@ -231,7 +235,7 @@ export function AboutPage() {
                     src={member.image}
                     alt=""
                     referrerPolicy="no-referrer"
-                    className="aspect-[3/4] w-full object-cover grayscale transition-[filter] duration-500 ease-out hover:grayscale-0"
+                    className="aspect-[3/4] w-full object-cover lg:grayscale lg:transition-[filter] lg:duration-500 lg:ease-out lg:hover:grayscale-0"
                   />
                 </div>
                 <h3 className="mt-5 text-lg font-medium tracking-tight text-primary">
