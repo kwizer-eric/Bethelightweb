@@ -143,16 +143,28 @@ function ChildProfileModal({
             </p>
           </div>
 
-          <button
-            type="button"
-            onClick={() => {
-              onClose()
-              navigate(`/donate?program=${EVERY_KID_PROGRAM_ID}&for=${child.id}`)
-            }}
-            className="mt-8 inline-flex w-full items-center justify-center rounded-lg bg-primary px-6 py-3 text-sm font-semibold tracking-wide text-warm-white uppercase transition-colors hover:bg-ink"
-          >
-            Sponsor
-          </button>
+          <div className="mt-8 flex flex-col gap-3">
+            <button
+              type="button"
+              onClick={() => {
+                onClose()
+                navigate(`/programs/every-kid-deserves-it/children/${child.id}`)
+              }}
+              className="inline-flex w-full items-center justify-center rounded-lg border border-primary px-6 py-3 text-sm font-semibold tracking-wide text-primary uppercase transition-colors hover:bg-primary hover:text-warm-white"
+            >
+              View profile
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                onClose()
+                navigate(`/donate?program=${EVERY_KID_PROGRAM_ID}&for=${child.id}`)
+              }}
+              className="inline-flex w-full items-center justify-center rounded-lg bg-primary px-6 py-3 text-sm font-semibold tracking-wide text-warm-white uppercase transition-colors hover:bg-ink"
+            >
+              Sponsor
+            </button>
+          </div>
         </div>
       </div>
     </div>,
