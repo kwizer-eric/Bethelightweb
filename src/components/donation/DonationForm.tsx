@@ -83,7 +83,7 @@ export function DonationForm() {
               key={f}
               type="button"
               onClick={() => setFrequency(f)}
-              className={`rounded-full px-5 py-2 text-sm font-medium capitalize transition-colors ${
+              className={`rounded-lg px-5 py-2 text-sm font-medium capitalize transition-colors ${
                 frequency === f
                   ? 'bg-primary text-warm-white'
                   : 'bg-ink/10 text-ink hover:bg-accent'
@@ -103,7 +103,7 @@ export function DonationForm() {
               key={preset}
               type="button"
               onClick={() => handlePreset(preset)}
-              className={`rounded-xl border-2 py-3 font-semibold transition-colors ${
+              className={`rounded-lg border-2 py-3 font-semibold transition-colors ${
                 amount === preset && !customAmount
                   ? 'border-primary bg-primary/10 text-primary'
                   : 'border-ink/15 bg-warm-white text-ink hover:border-primary/50'

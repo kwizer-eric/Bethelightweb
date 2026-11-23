@@ -2,21 +2,26 @@ export const site = {
   name: 'Kubwabo Foundation',
   tagline: 'Change the world one act of kindness at a time.',
   email: 'kubwabofoundation@gmail.com',
-  phone: '+1 (555) 123-4567',
-  address: '184 Main Collins Street, Victoria 8007',
+  phone: '+250 788784568',
+  address: 'Musanze, Rwanda',
   whatsappCommunity: 'https://chat.whatsapp.com/',
+  whatsapp: 'https://wa.me/250788784568',
   social: {
     instagram: 'https://www.instagram.com/kubwabo_foundation',
     tiktok: 'https://www.tiktok.com/@kubwabo_foundation',
     linkedin: 'https://www.linkedin.com/company/kubwabo_foundation',
   },
+  /** Supporters/volunteers not shown as profile cards on About */
+  teamAdditionalMembersCount: 120,
   donation: {
     bankName: 'Bank of Kigali',
     accountName: 'Kubwabo Foundation',
     accountNumber: '000XXXXXXXXX',
     momoLabel: 'MTN MoMo',
-    momoCode: '*182*8*1*XXXXXX#',
-    momoPhone: '+250 7XX XXX XXX',
+    momoCode: '1675585',
+    momoCodeAccountName: 'Wivine',
+    momoPhone: '0796185418',
+    momoPhoneAccountName: 'Irakoze Nshuti wivine',
     note: 'Include your name in the transfer reference. If sponsoring a child, add their name too.',
   },
 } as const
@@ -43,8 +48,8 @@ export const aboutSummary =
   'Kubwabo Foundation exists to bring practical help and lasting hope to communities overlooked by traditional aid. Founded by community leaders, we grew from a weekend food drive into an NGO serving 28 communities — with dignity, transparency, and programs in food relief, education, health, and housing.'
 
 export const impactStats = [
-  { value: '30+', label: 'Children\nSupported' },
-  { value: '2', label: 'Families Fully\nSupported' },
+  { value: '35+', label: 'Children\nReached' },
+  { value: '2', label: 'Families\nSupported' },
   { value: '100+', label: 'Dedicated\nVolunteers' },
 ] as const
 

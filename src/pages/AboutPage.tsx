@@ -1,10 +1,15 @@
-import { useRef } from 'react'
+import { useMemo, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 import { siteImages } from '../assets/siteImages'
 import { FadeImage } from '../components/FadeImage'
+import { AboutMissionPathways } from '../components/about/AboutMissionPathways'
+import { AboutTeamMoreCard } from '../components/about/AboutTeamMoreCard'
+import { site } from '../data/site'
+import { ImpactStatsSection } from '../components/home/ImpactStatsSection'
+import { PageHeroIntro } from '../components/layout/PageHeroIntro'
 import { MobileReadMore } from '../components/ui/MobileReadMore'
 import { useCms } from '../cms/CmsContext'
 
@@ -12,6 +17,12 @@ gsap.registerPlugin(ScrollTrigger)
 
 export function AboutPage() {
   const { team } = useCms()
+  const otherMembersCount = useMemo(
+    () =>
+      site.teamAdditionalMembersCount +
+      team.filter((member) => member.isBoard === false).length,
+    [team],
+  )
   const parallaxWrapRef = useRef<HTMLDivElement>(null)
   const parallaxImgRef = useRef<HTMLImageElement>(null)
 
@@ -42,20 +53,17 @@ export function AboutPage() {
 
   return (
     <div className="bg-warm-white text-ink">
-      <section className="flex flex-col justify-between gap-14 bg-warm-white pt-16 pb-16 sm:gap-32 sm:pt-32 sm:pb-32 lg:gap-40 lg:pb-40">
-        <div className="site-container">
-          <h1 className="max-w-xl text-4xl font-medium leading-[1.05] tracking-tight text-primary sm:max-w-2xl sm:text-5xl lg:text-6xl xl:max-w-3xl xl:text-7xl 2xl:text-8xl">
-            For Every Child.
-            <br />
-            For Every Family.
-          </h1>
-        </div>
-
-        <div className="site-container flex justify-end">
-          <p className="max-w-md text-base font-medium leading-snug text-primary sm:max-w-lg sm:text-lg md:text-xl">
-            Born from a single act of care, we are a youth-led community dedicated to showing up with dignity and practical support for children and families.
-          </p>
-        </div>
+      <section className="w-full bg-warm-white">
+        <PageHeroIntro
+          title={
+            <>
+              For Every Child.
+              <br />
+              For Every Family.
+            </>
+          }
+          description="Around the world, millions of children grow up surrounded by conflict, uncertainty, and hardship. For many, access to education disappears, protection systems break down, and opportunities become increasingly limited."
+        />
       </section>
 
       {/* 01 — our story */}
@@ -74,7 +82,7 @@ export function AboutPage() {
           />
         </div>
 
-        <div className="bg-primary text-warm-white">
+        <div className="bg-black text-warm-white">
           <div className="site-container py-12 sm:py-24 lg:py-32">
             <div className="grid gap-8 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] lg:gap-20">
               <div>
@@ -88,32 +96,53 @@ export function AboutPage() {
 
               <div className="max-w-2xl space-y-6">
                 <MobileReadMore
-                  buttonClassName="inline-flex w-fit border border-warm-white bg-warm-white px-6 py-2 text-sm font-medium text-ink"
+                  buttonClassName="inline-flex w-fit rounded-lg border border-warm-white bg-warm-white px-6 py-2 text-sm font-medium text-ink"
                 >
                   <p className="text-xl font-medium leading-snug tracking-tight sm:text-2xl lg:text-3xl lg:leading-snug">
-                    Kubwabo Foundation was born from a simple but powerful belief:{' '}
-                    <span className="italic text-accent">
-                      no child should have to face life&apos;s challenges alone.
-                    </span>
+                    Standing with children. Strengthening families.
                   </p>
 
                   <p className="text-base leading-relaxed text-warm-white/80 sm:text-lg">
-                    Our journey began late one night when our founder encountered a young child in a vulnerable situation and chose to step forward. What began as a single act of care became a lasting reminder that even when we cannot solve every problem, we can make an immediate, meaningful difference in someone&apos;s life.
+                    Every child is born with potential, dreams, and the ability to become something
+                    meaningful. But not every child grows up with the same opportunities. For
+                    children from vulnerable families, poverty can place education, nutritious food,
+                    healthcare, and other basic needs beyond reach. It can also place enormous
+                    pressure on parents and caregivers, making it difficult for them to provide the
+                    support and environment their children need to grow. At Kubwabo Foundation, we
+                    believe a child&apos;s future should not be determined by the circumstances into
+                    which they were born. Every child deserves to be cared for, encouraged, guided,
+                    and given the opportunity to learn, discover their potential, and pursue their
+                    dreams.
                   </p>
 
                   <p className="text-base leading-relaxed text-warm-white/80 sm:text-lg">
-                    That experience sparked a commitment to move beyond sympathy into consistent, personal action. What started with a small group of young people sharing that common desire has steadily grown into a community united by shared responsibility.
+                    But we also understand that supporting a child means looking beyond the child
+                    alone. A child&apos;s well-being is deeply connected to the family and
+                    environment in which they grow. When parents struggle with poverty, unstable
+                    income, and limited access to basic needs and opportunities, their children feel
+                    the effects too. That is why our commitment goes beyond providing immediate
+                    assistance. Through{' '}
+                    <Link
+                      to="/programs/every-kid-deserves-it"
+                      className="font-semibold text-warm-white underline decoration-warm-white/30 underline-offset-4 transition-colors hover:decoration-warm-white"
+                    >
+                      Every Child Deserves It
+                    </Link>{' '}
+                    and{' '}
+                    <Link
+                      to="/programs/for-the-parents"
+                      className="font-semibold text-warm-white underline decoration-warm-white/30 underline-offset-4 transition-colors hover:decoration-warm-white"
+                    >
+                      For Their Family
+                    </Link>
+                    , we work to support children&apos;s development while helping vulnerable
+                    families move toward greater stability and self-reliance. We believe lasting
+                    change takes more than a single donation or a moment of kindness. It takes people
+                    who care, continued support, practical opportunities, and a commitment to walking
+                    alongside children and families as they build a better future. Because when
+                    families become stronger, children have a stronger foundation on which to build
+                    their dreams.
                   </p>
-
-                  <p className="text-base leading-relaxed text-warm-white/80 sm:text-lg">
-                    As our work continues to grow, our core posture remains unchanged: to show up, listen closely, and act with quiet dignity wherever need is greatest.
-                  </p>
-
-                  <div className="border-t border-warm-white/20 pt-6">
-                    <p className="text-base italic leading-relaxed text-accent sm:text-lg">
-                      Kubwabo means &ldquo;for them.&rdquo; That single principle guides every step we take, keeping our focus centered on the people we serve and ensuring no child or family is forgotten.
-                    </p>
-                  </div>
                 </MobileReadMore>
               </div>
             </div>
@@ -121,64 +150,23 @@ export function AboutPage() {
         </div>
       </section>
 
-      {/* 02 — who we are */}
-      <section className="border-t border-primary/15 bg-warm-white text-primary">
-        <div className="site-container py-12 sm:py-24 lg:py-32">
-          <div className="grid gap-8 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] lg:gap-20">
-            <div>
-              <h2 className="text-3xl font-medium tracking-tight text-primary sm:mt-4 sm:text-4xl lg:text-5xl">
-                Who We Are
-              </h2>
-            </div>
+      <ImpactStatsSection />
 
-            <div className="max-w-2xl space-y-6">
-              <p className="text-base leading-relaxed text-primary sm:text-lg">
-                Kubwabo Foundation is a youth-led, community-focused organization working alongside underserved children and families to bridge immediate relief with long-term stability.
-              </p>
-
-              <p className="text-base leading-relaxed text-primary/80 sm:text-lg">
-                We believe that hardship should never define a person's worth or potential. Rather than applying detached, one-size-fits-all aid, we meet children and caregivers where they are, recognizing their inherent dignity and creating safe, encouraging spaces where young people can learn and discover their talents.
-              </p>
-
-              <p className="text-base leading-relaxed text-primary/80 sm:text-lg">
-                Through our{' '}
-                <Link
-                  to="/programs/every-kid-deserves-it"
-                  className="font-semibold text-primary underline decoration-primary/40 underline-offset-4 transition-colors hover:decoration-primary"
-                >
-                  Every Child Deserves It
-                </Link>{' '}
-                initiative and{' '}
-                <Link
-                  to="/programs/for-the-parents"
-                  className="font-semibold text-primary underline decoration-primary/40 underline-offset-4 transition-colors hover:decoration-primary"
-                >
-                  For Their Family
-                </Link>
-                , we pair essential daily assistance with ongoing mentorship, educational resources, and caregiver empowerment.
-              </p>
-
-              <p className="text-base leading-relaxed text-primary/80 sm:text-lg">
-                Lasting progress happens when a community takes ownership of its own future. By uniting local youth volunteers, mentors, and grassroots partners, we ensure our support is personal, accountable, and deeply rooted in the neighborhoods we serve.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <AboutMissionPathways />
 
       {/* Mission & Vision */}
       <section className="bg-warm-white py-10 sm:py-16 lg:py-20">
         <div className="site-container grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8">
           {/* 1st: Our Mission (no background) */}
-          <div className="relative flex w-full flex-col justify-start gap-8 p-8 text-left text-primary sm:min-h-[36rem] sm:justify-between sm:gap-0 sm:p-10 lg:min-h-[40rem]">
-            <h3 className="text-3xl leading-tight text-primary sm:text-4xl lg:text-5xl">
+          <div className="relative flex w-full flex-col justify-start gap-8 p-8 text-left text-ink sm:min-h-[36rem] sm:justify-between sm:gap-0 sm:p-10 lg:min-h-[40rem]">
+            <h3 className="text-3xl font-bold leading-tight tracking-tight text-ink sm:text-4xl lg:text-5xl">
               Our
               <br />
               <span className="font-normal italic">Mission</span>
             </h3>
 
             <div className="max-w-md sm:mb-16">
-              <p className="text-sm leading-relaxed text-primary/80 sm:text-base">
+              <p className="text-sm leading-relaxed text-body sm:text-base">
                 To improve the well-being and future opportunities of vulnerable children and families through practical support, education, mentorship, community engagement, and family strengthening.
               </p>
             </div>
@@ -187,7 +175,7 @@ export function AboutPage() {
           {/* 2nd: Image only */}
           <div className="relative min-h-[24rem] w-full overflow-hidden sm:min-h-[30rem] lg:min-h-[40rem]">
             <FadeImage
-              src={siteImages.aboutCommunity}
+              src={siteImages.aboutMission}
               alt="Children smiling together"
               referrerPolicy="no-referrer"
               className="absolute inset-0 h-full w-full object-cover"
@@ -196,8 +184,8 @@ export function AboutPage() {
           </div>
 
           {/* 3rd: Our Vision (as it is with blue background) */}
-          <div className="relative flex w-full flex-col justify-start gap-8 overflow-hidden bg-primary p-8 pb-20 text-left text-warm-white sm:min-h-[36rem] sm:justify-between sm:gap-0 sm:p-10 sm:pb-10 lg:min-h-[40rem]">
-            <h3 className="relative z-10 max-w-[15rem] text-3xl leading-tight text-warm-white sm:text-4xl lg:text-5xl">
+          <div className="relative flex w-full flex-col justify-start gap-8 overflow-hidden bg-black p-8 pb-20 text-left text-warm-white sm:min-h-[36rem] sm:justify-between sm:gap-0 sm:p-10 sm:pb-10 lg:min-h-[40rem]">
+            <h3 className="relative z-10 max-w-[15rem] text-3xl font-bold leading-tight tracking-tight text-warm-white sm:text-4xl lg:text-5xl">
               Our
               <br />
               <span className="font-normal italic">Vision</span>
@@ -219,12 +207,16 @@ export function AboutPage() {
       </section>
 
       {/* 03 — the team */}
-      <section className="bg-warm-white text-primary">
+      <section className="bg-warm-white text-ink">
         <div className="site-container py-12 sm:py-24 lg:py-32">
-          <div>
-            <h2 className="text-3xl font-medium tracking-tight text-primary sm:mt-4 sm:text-4xl lg:text-5xl">
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-start lg:gap-12 xl:gap-20">
+            <h2 className="text-3xl font-medium tracking-tight text-ink sm:mt-4 sm:text-4xl lg:text-5xl xl:text-6xl">
               The Team
             </h2>
+            <p className="max-w-md text-base leading-relaxed text-body sm:text-lg lg:max-w-sm lg:pt-8 xl:max-w-md xl:pt-10">
+              Our leadership brings decades of experience in humanitarian response, child
+              protection, education, and long-term development.
+            </p>
           </div>
 
           <div className="mt-8 grid gap-x-6 gap-y-8 sm:mt-16 sm:grid-cols-2 sm:gap-y-12 lg:mt-20 lg:grid-cols-4">
@@ -238,12 +230,14 @@ export function AboutPage() {
                     className="aspect-[3/4] w-full object-cover lg:grayscale lg:transition-[filter] lg:duration-500 lg:ease-out lg:hover:grayscale-0"
                   />
                 </div>
-                <h3 className="mt-5 text-lg font-medium tracking-tight text-primary">
+                <h3 className="mt-5 text-lg font-medium tracking-tight text-ink">
                   {member.name}
                 </h3>
-                <p className="mt-1 text-sm text-primary/55">{member.role}</p>
+                <p className="mt-1 text-sm text-body">{member.role}</p>
               </article>
             ))}
+
+            <AboutTeamMoreCard count={otherMembersCount} />
           </div>
         </div>
       </section>

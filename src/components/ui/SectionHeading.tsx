@@ -17,7 +17,7 @@ export function SectionHeading({
     <div className={`mb-12 max-w-2xl ${align === 'center' ? 'mx-auto text-center' : ''}`}>
       {eyebrow && (
         <p
-          className={`mb-2 text-sm font-semibold uppercase tracking-widest ${light ? 'text-warm-white/80' : 'text-primary'}`}
+          className={`mb-2 text-sm font-semibold uppercase tracking-widest ${light ? 'text-warm-white/80' : 'text-body'}`}
         >
           {eyebrow}
         </p>
@@ -28,7 +28,7 @@ export function SectionHeading({
         {title}
       </h2>
       {subtitle && (
-        <p className={`mt-4 text-lg ${light ? 'text-warm-white/90' : 'text-ink/70'}`}>
+        <p className={`mt-4 text-lg ${light ? 'text-warm-white/90' : 'text-body'}`}>
           {subtitle}
         </p>
       )}

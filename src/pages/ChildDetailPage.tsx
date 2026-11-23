@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import { useCms } from '../cms/CmsContext'
+import { EVERY_KID_PROGRAM_ID } from '../data/donatePage'
 
 function toEmbedUrl(raw: string): string | null {
   try {
@@ -64,7 +65,7 @@ export function ChildDetailPage() {
   const hasVideo = Boolean(embed || direct)
 
   return (
-    <div className="bg-warm-white text-primary">
+    <div className="bg-warm-white text-ink">
       <div className="site-container max-w-3xl py-10 sm:py-14 lg:py-16">
         <Link
           to="/programs/every-kid-deserves-it#children"
@@ -85,11 +86,11 @@ export function ChildDetailPage() {
                 </span>
               ) : null}
             </div>
-            <p className="mt-1 text-sm text-primary/60">{child.dream}</p>
+            <p className="mt-1 text-sm text-body">{child.dream}</p>
           </div>
           <Link
-            to={`/donate?for=${child.id}`}
-            className="inline-flex items-center justify-center bg-primary px-5 py-2 text-sm font-medium text-warm-white"
+            to={`/donate?program=${EVERY_KID_PROGRAM_ID}&for=${child.id}`}
+            className="inline-flex items-center justify-center rounded-lg bg-primary px-5 py-2 text-sm font-medium text-warm-white"
           >
             Sponsor · ${child.monthlyNeed}/mo
           </Link>
@@ -178,24 +179,24 @@ export function ChildDetailPage() {
         </div>
 
         {/* Tiny meta row */}
-        <p className="mt-6 text-xs tracking-wide text-primary/50 uppercase">
+        <p className="mt-6 text-xs tracking-wide text-body uppercase">
           {child.age} yrs · {child.grade} · {child.school} · {child.location}
         </p>
 
-        <p className="mt-5 text-base leading-relaxed text-primary/85 sm:text-lg">
+        <p className="mt-5 text-base leading-relaxed text-body sm:text-lg">
           {child.story}
         </p>
 
         <div className="mt-10 flex flex-wrap gap-3 border-t border-primary/10 pt-8">
           <Link
-            to={`/donate?for=${child.id}`}
-            className="inline-flex items-center justify-center bg-primary px-6 py-2.5 text-sm font-medium text-warm-white"
+            to={`/donate?program=${EVERY_KID_PROGRAM_ID}&for=${child.id}`}
+            className="inline-flex items-center justify-center rounded-lg bg-primary px-6 py-2.5 text-sm font-medium text-warm-white"
           >
             Sponsor {child.name}
           </Link>
           <Link
             to="/programs/every-kid-deserves-it#children"
-            className="inline-flex items-center justify-center border border-primary/25 px-6 py-2.5 text-sm font-medium text-primary"
+            className="inline-flex items-center justify-center rounded-lg border border-primary/25 px-6 py-2.5 text-sm font-medium text-ink"
           >
             See other children
           </Link>

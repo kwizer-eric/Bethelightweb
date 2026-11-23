@@ -1,9 +1,9 @@
 import { HeroSection } from '../components/home/HeroSection'
 import { AboutProgramsSection } from '../components/home/AboutProgramsSection'
 import { ImpactStatsSection } from '../components/home/ImpactStatsSection'
+import { HomeProgramsSection } from '../components/home/HomeProgramsSection'
+import { MakeADifferenceSection } from '../components/home/MakeADifferenceSection'
 import { HomeNewsSection } from '../components/home/HomeNewsSection'
-import { HomeCtaSection } from '../components/home/HomeCtaSection'
-import { HomeNewsletterSection } from '../components/home/HomeNewsletterSection'
 
 export function HomePage() {
   return (
@@ -13,11 +13,11 @@ export function HomePage() {
 
       <ImpactStatsSection />
 
-      <HomeCtaSection />
+      <HomeProgramsSection />
+
+      <MakeADifferenceSection />
 
       <HomeNewsSection />
-
-      <HomeNewsletterSection />
     </>
   )
 }

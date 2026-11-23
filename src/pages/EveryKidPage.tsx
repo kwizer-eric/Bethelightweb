@@ -4,12 +4,13 @@ import { useNavigate } from 'react-router-dom'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
-import { siteImages } from '../assets/siteImages'
+import { siteImages, siteVideos } from '../assets/siteImages'
 import { FadeImage } from '../components/FadeImage'
-import { HomeCtaSection } from '../components/home/HomeCtaSection'
-import { MobileReadMore } from '../components/ui/MobileReadMore'
+import { PageHeroIntro } from '../components/layout/PageHeroIntro'
+import { ProgramChallengeSection } from '../components/programs/ProgramChallengeSection'
 import { useCms } from '../cms/CmsContext'
 import type { ProgramChild } from '../cms/types'
+import { EVERY_KID_PROGRAM_ID } from '../data/donatePage'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -102,7 +103,7 @@ function ChildProfileModal({
 
           <h3
             id={titleId}
-            className="pr-8 text-3xl font-semibold tracking-tight text-primary sm:text-4xl"
+            className="pr-8 text-3xl font-semibold tracking-tight text-ink sm:text-4xl"
           >
             {child.name}
           </h3>
@@ -137,7 +138,7 @@ function ChildProfileModal({
             <p className="text-xs font-semibold tracking-[0.14em] text-primary/55 uppercase">
               About {child.name}
             </p>
-            <p className="mt-3 text-base leading-relaxed text-primary">
+            <p className="mt-3 text-base leading-relaxed text-body">
               {child.story}
             </p>
           </div>
@@ -146,9 +147,9 @@ function ChildProfileModal({
             type="button"
             onClick={() => {
               onClose()
-              navigate(`/programs/every-kid-deserves-it/children/${child.id}`)
+              navigate(`/donate?program=${EVERY_KID_PROGRAM_ID}&for=${child.id}`)
             }}
-            className="mt-8 inline-flex w-full items-center justify-center bg-primary px-6 py-3 text-sm font-semibold tracking-wide text-warm-white uppercase transition-colors hover:bg-ink"
+            className="mt-8 inline-flex w-full items-center justify-center rounded-lg bg-primary px-6 py-3 text-sm font-semibold tracking-wide text-warm-white uppercase transition-colors hover:bg-ink"
           >
             Sponsor
           </button>
@@ -163,17 +164,27 @@ export function EveryKidPage() {
   const { children } = useCms()
   const [selectedChild, setSelectedChild] = useState<ProgramChild | null>(null)
   const parallaxWrapRef = useRef<HTMLDivElement>(null)
+  const parallaxVideoRef = useRef<HTMLVideoElement>(null)
   const parallaxImgRef = useRef<HTMLImageElement>(null)
+  const [reduceMotion, setReduceMotion] = useState(false)
+
+  useEffect(() => {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const update = () => setReduceMotion(mq.matches)
+    update()
+    mq.addEventListener('change', update)
+    return () => mq.removeEventListener('change', update)
+  }, [])
 
   useGSAP(
     () => {
       const wrap = parallaxWrapRef.current
-      const img = parallaxImgRef.current
-      if (!wrap || !img) return
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+      const media = reduceMotion ? parallaxImgRef.current : parallaxVideoRef.current
+      if (!wrap || !media) return
+      if (reduceMotion) return
 
       gsap.fromTo(
-        img,
+        media,
         { yPercent: -15 },
         {
           yPercent: 15,
@@ -187,86 +198,103 @@ export function EveryKidPage() {
         },
       )
     },
-    { scope: parallaxWrapRef },
+    { scope: parallaxWrapRef, dependencies: [reduceMotion] },
   )
 
   return (
-    <div className="bg-warm-white text-primary">
+    <div className="bg-warm-white text-ink">
       {/* 1. Hero Section — matching home page hero with full-bleed image below */}
       <section className="w-full bg-warm-white">
-        <div className="site-container pt-28 pb-20 sm:pt-32 sm:pb-24 lg:pt-36 lg:pb-28">
-          <div className="grid gap-12 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] lg:gap-20">
-            <div>
-              <h1 className="text-3xl font-medium tracking-tight text-primary sm:text-4xl lg:text-5xl">
-                Every Child
-                <br />
-                Deserves It.
-              </h1>
-            </div>
-
-            <div className="w-full space-y-6">
-              <MobileReadMore
-                buttonClassName="inline-flex w-fit border border-primary bg-primary px-6 py-2 text-sm font-medium text-warm-white"
-              >
-                <p className="text-base leading-relaxed text-primary sm:text-lg">
-                  Every Child Deserves It is a program of Kubwabo Foundation dedicated to walking alongside children from vulnerable families, helping them access opportunities, discover their potential, and work toward their dreams.
-                </p>
-                <p className="text-base leading-relaxed text-primary/80 sm:text-lg">
-                  Just as many of us have been supported by our parents and others who believed in us, we believe every child deserves someone who cares, encourages them, and helps them move forward. Through educational support, mentorship, guidance, and continued encouragement, we aim to help children overcome barriers and build a brighter future.
-                </p>
-              </MobileReadMore>
-            </div>
-          </div>
-        </div>
+        <PageHeroIntro
+          titleAtTop
+          wideDescription
+          nudgeDescription
+          title={
+            <>
+              Every Child
+              <br />
+              Deserves It.
+            </>
+          }
+          description="Every child deserves the opportunity to learn, grow, and pursue their dreams. Yet poverty can make these opportunities difficult to reach. We believe no child's future should be defined by the circumstances into which they were born. Through care, education, mentorship, and encouragement, we walk alongside children as they build their future."
+        />
 
         <div
           ref={parallaxWrapRef}
           className="relative h-[22rem] overflow-hidden sm:h-[32rem] lg:h-dvh"
         >
-          <FadeImage
-            ref={parallaxImgRef}
-            src={siteImages.everyKidHero}
-            alt="Children in the program smiling together"
-            referrerPolicy="no-referrer"
-            className="absolute inset-x-0 top-0 h-[130%] w-full object-cover will-change-transform"
-            style={{ objectPosition: 'center 54%' }}
-          />
-          <div
-            className="pointer-events-none absolute inset-0 bg-gradient-to-t from-primary/30 via-primary/5 to-transparent"
-            aria-hidden
-          />
+          {reduceMotion ? (
+            <FadeImage
+              ref={parallaxImgRef}
+              src={siteImages.everyKidHero}
+              alt="Children in the program smiling together"
+              referrerPolicy="no-referrer"
+              className="absolute inset-x-0 top-0 h-[130%] w-full object-cover will-change-transform"
+              style={{ objectPosition: 'center 54%' }}
+            />
+          ) : (
+            <video
+              ref={parallaxVideoRef}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              poster={siteImages.everyKidHero}
+              className="absolute inset-x-0 top-0 h-[130%] w-full object-cover will-change-transform"
+              style={{ objectPosition: 'center 54%' }}
+              aria-label="Children in the program smiling together"
+            >
+              <source src={siteVideos.everyKidHero} type="video/webm" />
+            </video>
+          )}
         </div>
       </section>
+
+      <ProgramChallengeSection
+        headline={
+          <>
+            Lack of opportunity should never define childhood, dignity, or future
+          </>
+        }
+        intro="For children in vulnerable families—whether facing poverty, displacement, or interrupted schooling—insecurity shapes every day. School fees, missing materials, unsafe environments, and little encouragement can keep bright students from returning to class or believing in what comes next."
+        callout="Reaching children across growing communities, our education and mentorship work is becoming a critical priority as needs intensify and families look for partners they can trust."
+        outro="We work flexibly with local schools, caregivers, and community leaders. Educational materials, tutoring support, safe learning spaces, and consistent mentoring are a few of the ways we show up—so children can stay in school, feel protected, and move forward with hope."
+      />
 
       {/* Program Details & Pillars */}
       <section className="border-b border-primary/15 bg-white py-20 sm:py-24 lg:py-28">
         <div className="site-container">
           <div className="max-w-3xl lg:max-w-4xl">
-            <h2 className="mt-3 text-3xl font-medium tracking-tight text-primary sm:text-4xl">
-              A Community That Cares
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary sm:text-sm">
+              How we help
+            </p>
+            <h2 className="mt-4 text-3xl font-medium tracking-tight text-ink sm:text-4xl lg:text-5xl">
+              More than giving notebooks, we also
             </h2>
-            <p className="mt-4 text-base leading-relaxed text-primary/80 sm:text-lg">
-              Through consistent support, compassionate guidance, and access to educational opportunities, we create a supportive environment where children feel valued, develop their strengths, and build hope for the future.
+            <p className="mt-4 max-w-2xl text-base leading-relaxed text-body sm:text-lg">
+              Education opens doors—but children need mentorship, safe spaces, and steady
+              encouragement to keep moving forward.
             </p>
           </div>
 
-          <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+          <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:mt-16 lg:gap-8">
             {PROGRAM_PILLARS.map((pillar) => (
               <div
                 key={pillar.number}
                 className="flex flex-col justify-between border border-primary/15 bg-white p-7 text-left sm:p-8 lg:p-9 min-h-[300px] sm:min-h-[340px] lg:min-h-[360px]"
               >
                 <div>
-                  <span className="text-lg font-semibold tracking-tight text-primary sm:text-xl">
+                  <span className="text-lg font-semibold tracking-tight text-ink sm:text-xl">
                     {pillar.number}
                   </span>
                 </div>
 
                 <div className="mt-12 sm:mt-16">
-                  <h3 className="text-xl font-semibold tracking-tight text-primary sm:text-2xl">
+                  <h3 className="text-xl font-semibold tracking-tight text-ink sm:text-2xl">
                     {pillar.title}
                   </h3>
-                  <p className="mt-2.5 text-sm leading-relaxed text-primary/80 sm:text-base">
+                  <p className="mt-2.5 text-sm leading-relaxed text-body sm:text-base">
                     {pillar.description}
                   </p>
                 </div>
@@ -291,8 +319,8 @@ export function EveryKidPage() {
           </div>
 
           {/* Children Grid — 4 cards matching the blog cards architecture */}
-          <div className="mt-14 grid grid-cols-1 items-stretch sm:grid-cols-2 lg:grid-cols-4 sm:mt-16 lg:mt-20">
-            {children.slice(0, 4).map((child, index) => (
+          <div className="mt-14 grid grid-cols-1 items-stretch gap-4 sm:mt-16 sm:grid-cols-2 sm:gap-6 lg:mt-20 lg:grid-cols-4">
+            {children.slice(0, 4).map((child) => (
               <article
                 key={child.id}
                 onClick={() => setSelectedChild(child)}
@@ -304,13 +332,9 @@ export function EveryKidPage() {
                 }}
                 role="button"
                 tabIndex={0}
-                className={`flex h-full flex-col border-white/15 text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
-                  index > 0 ? 'border-t sm:border-t-0' : ''
-                } ${index % 2 !== 0 ? 'sm:border-l' : ''} ${
-                  index >= 2 ? 'sm:border-t lg:border-t-0' : ''
-                } ${index > 0 ? 'lg:border-l' : ''}`}
+                className="flex h-full cursor-pointer flex-col overflow-hidden bg-white text-left text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary"
               >
-                <div className="aspect-[4/3] w-full overflow-hidden bg-white/5">
+                <div className="aspect-square w-full overflow-hidden bg-warm-white">
                   <FadeImage
                     src={child.image}
                     alt={child.name}
@@ -319,29 +343,29 @@ export function EveryKidPage() {
                   />
                 </div>
 
-                <div className="flex flex-1 flex-col border-t border-white/15 px-6 py-8 sm:px-6 sm:py-8 lg:px-6 lg:py-8 xl:px-8 xl:py-10">
-                  <p className="text-xs font-medium tracking-[0.12em] text-warm-white/70 uppercase">
+                <div className="flex flex-1 flex-col border-t border-ink/10 bg-white px-6 py-8 sm:px-6 sm:py-8 lg:px-6 lg:py-8 xl:px-8 xl:py-10">
+                  <p className="text-xs font-medium tracking-[0.12em] text-body uppercase">
                     {child.grade} &bull; {child.age} yrs{' '}
-                    <span className="text-warm-white/35" aria-hidden>
+                    <span className="text-ink/25" aria-hidden>
                       |
                     </span>{' '}
                     {child.location}
                   </p>
 
-                  <h3 className="mt-6 text-xl leading-snug font-medium tracking-tight text-warm-white sm:text-2xl lg:text-3xl">
+                  <h3 className="mt-6 text-xl font-medium leading-snug tracking-tight text-ink sm:text-2xl lg:text-3xl">
                     {child.name}
                   </h3>
 
-                  <p className="mt-2 text-sm leading-relaxed text-warm-white/80">
+                  <p className="mt-2 text-sm leading-relaxed text-body">
                     {child.dream}
                   </p>
 
-                  <p className="mt-1 text-xs text-warm-white/50">
+                  <p className="mt-1 text-xs text-body">
                     {child.school}
                   </p>
 
                   <div className="mt-auto pt-8">
-                    <span className="inline-flex min-w-[7.5rem] items-center justify-center border border-accent bg-accent px-6 py-2 text-sm font-medium leading-normal text-ink sm:border-warm-white sm:bg-transparent sm:text-warm-white sm:transition-colors sm:hover:border-accent sm:hover:bg-accent sm:hover:text-ink">
+                    <span className="inline-flex min-w-[7.5rem] items-center justify-center rounded-lg border border-accent bg-accent px-6 py-2 text-sm font-medium leading-normal text-ink transition-colors hover:bg-accent/90">
                       Read more
                     </span>
                   </div>
@@ -351,9 +375,6 @@ export function EveryKidPage() {
           </div>
         </div>
       </section>
-
-      {/* Call to Action Section */}
-      <HomeCtaSection />
 
       {/* Donation Modal Component */}
       {selectedChild && (

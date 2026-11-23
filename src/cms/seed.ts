@@ -32,17 +32,47 @@ export const seedTeam: TeamMember[] = [
   },
 ]
 
-export const seedStories: CmsStory[] = siteStories.map((story) => ({
-  id: story.id,
-  slug: story.slug,
-  title: story.title,
-  excerpt: story.excerpt,
-  date: story.date,
-  category: story.category,
-  image: story.image,
-  gallery: [],
-  body: [...story.body],
-}))
+const seedCardBySlug: Record<
+  string,
+  { badge: string; cardTitle: string; cardDescription: string }
+> = {
+  'a-meal-that-changed-everything': {
+    badge: '4,500 FAMILIES REACHED',
+    cardTitle: 'Rebuilding Hope Together',
+    cardDescription:
+      'Local partnerships helped restore safe spaces for children and families.',
+  },
+  'back-to-school-back-to-hope': {
+    badge: '9,200 FAMILIES SUPPORTED',
+    cardTitle: 'Small Steps Toward Recovery',
+    cardDescription:
+      'Consistent support helped families regain stability after prolonged displacement and hardship.',
+  },
+  'mobile-clinic-reaches-remote-village': {
+    badge: '6,800 CHILDREN PROTECTED',
+    cardTitle: 'Safe Spaces Restored',
+    cardDescription:
+      'Child-friendly spaces provided safety, support, and stability for vulnerable children.',
+  },
+}
+
+export const seedStories: CmsStory[] = siteStories.map((story) => {
+  const card = seedCardBySlug[story.slug]
+  return {
+    id: story.id,
+    slug: story.slug,
+    title: story.title,
+    excerpt: story.excerpt,
+    date: story.date,
+    category: story.category,
+    badge: card?.badge ?? '',
+    cardTitle: card?.cardTitle ?? '',
+    cardDescription: card?.cardDescription ?? '',
+    image: story.image,
+    gallery: [],
+    body: [...story.body],
+  }
+})
 
 export const seedChildren: ProgramChild[] = [
   {
@@ -168,4 +198,6 @@ export const cmsSeed: CmsState = {
   team: seedTeam,
   stories: seedStories,
   children: seedChildren,
+  homePrograms: [],
+  impactStats: [],
 }

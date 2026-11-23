@@ -1,99 +1,11 @@
-import { useEffect, useId, useRef, useState, type FormEvent, type ReactNode } from 'react'
+import { useEffect, useId, useRef, useState, type FormEvent } from 'react'
 import { createPortal } from 'react-dom'
 import { Link } from 'react-router-dom'
-import { FadeImage } from '../FadeImage'
 import { siteImages } from '../../assets/siteImages'
-
-const volunteerCard = {
-  title: (
-    <>
-      Volunteer
-      <br />
-      <span className="italic font-normal">with</span> us
-    </>
-  ),
-  description:
-    'Your time and compassion can make a lasting difference. Join our volunteers in supporting families, empowering children, and bringing essential services to communities in need.',
-  image: siteImages.homeVolunteer,
-  imageClassName: 'object-[40%_center]',
-} as const
-
-const supportCard = {
-  title: (
-    <>
-      Support
-      <br />
-      <span className="italic font-normal">the</span> Mission
-    </>
-  ),
-  description:
-    'Every donation helps connect families with essential resources, support, and life-changing opportunities.',
-  image: siteImages.homeSupport,
-  imageClassName: 'object-[18%_center]',
-} as const
-
-const cardClass =
-  'group relative flex min-h-[22rem] w-full flex-col justify-between overflow-hidden p-6 text-left sm:min-h-[28rem] sm:p-8 lg:min-h-[36rem] lg:p-10'
+import { OutreachCtaSection, outreachCtaButtonClass } from './OutreachCtaSection'
 
 const fieldClass =
   'w-full border border-ink/15 bg-warm-white px-4 py-2.5 text-sm text-ink placeholder:text-ink/45 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20'
-
-function CardVisual({
-  image,
-  title,
-  description,
-  imageClassName,
-  activeOnMobile,
-}: {
-  image: string
-  title: ReactNode
-  description: string
-  imageClassName?: string
-  /** Always show blue overlay + copy on mobile (no hover needed) */
-  activeOnMobile?: boolean
-}) {
-  return (
-    <>
-      <FadeImage
-        src={image}
-        alt=""
-        referrerPolicy="no-referrer"
-        className={`absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03] ${imageClassName ?? 'object-center'}`}
-      />
-      <div
-        className={`absolute inset-0 bg-ink/45 transition-opacity duration-300 group-hover:opacity-0 ${
-          activeOnMobile ? 'opacity-0 sm:opacity-100' : ''
-        }`}
-      />
-      <div
-        className={`absolute inset-0 bg-primary transition-opacity duration-300 group-hover:opacity-100 ${
-          activeOnMobile ? 'opacity-100 sm:opacity-0' : 'opacity-0'
-        }`}
-      />
-
-      <h2 className="relative z-10 max-w-[15rem] text-3xl leading-tight text-warm-white sm:text-5xl">
-        {title}
-      </h2>
-      <p
-        className={`relative z-10 mb-14 max-w-md text-sm leading-relaxed text-warm-white/90 transition duration-300 group-hover:translate-y-0 group-hover:opacity-100 sm:mb-16 sm:text-base ${
-          activeOnMobile
-            ? 'translate-y-0 opacity-100 sm:translate-y-4 sm:opacity-0'
-            : 'translate-y-4 opacity-0'
-        }`}
-      >
-        {description}
-      </p>
-
-      <div
-        aria-hidden
-        className={`pointer-events-none absolute inset-x-0 bottom-0 z-10 h-[60px] bg-[length:300px_60px] bg-repeat-x bg-bottom transition-opacity duration-300 group-hover:opacity-100 ${
-          activeOnMobile ? 'opacity-100 sm:opacity-0' : 'opacity-0'
-        }`}
-        style={{ backgroundImage: 'url(/pattern1.svg)' }}
-      />
-    </>
-  )
-}
 
 function VolunteerModal({
   open,
@@ -151,13 +63,8 @@ function VolunteerModal({
       >
         <div className="flex items-start justify-between gap-4">
           <div>
-            <p className="text-xs font-medium tracking-[0.12em] text-ink/55 uppercase">
-              Volunteer
-            </p>
-            <h3
-              id={titleId}
-              className="mt-2 text-2xl font-semibold tracking-tight text-ink"
-            >
+            <p className="text-xs font-medium tracking-[0.12em] text-ink/55 uppercase">Volunteer</p>
+            <h3 id={titleId} className="mt-2 text-2xl font-semibold tracking-tight text-ink">
               Join our volunteer list
             </h3>
           </div>
@@ -174,14 +81,13 @@ function VolunteerModal({
 
         {submitted ? (
           <div className="mt-8">
-            <p className="text-base leading-relaxed text-ink/80">
-              Thanks — you&apos;re on the list. We&apos;ll reach out on WhatsApp
-              soon.
+            <p className="text-base leading-relaxed text-body">
+              Thanks — you&apos;re on the list. We&apos;ll reach out on WhatsApp soon.
             </p>
             <button
               type="button"
               onClick={onClose}
-              className="mt-6 inline-flex min-w-[7.5rem] items-center justify-center bg-primary px-6 py-2 text-sm font-medium text-warm-white transition-colors hover:bg-ink"
+              className="mt-6 inline-flex min-w-[7.5rem] items-center justify-center rounded-lg bg-primary px-6 py-2 text-sm font-medium text-warm-white transition-colors hover:bg-ink"
             >
               Close
             </button>
@@ -241,7 +147,7 @@ function VolunteerModal({
 
             <button
               type="submit"
-              className="mt-2 inline-flex min-w-[7.5rem] items-center justify-center self-start bg-primary px-6 py-2 text-sm font-medium text-warm-white transition-colors hover:bg-ink"
+              className="mt-2 inline-flex min-w-[7.5rem] items-center justify-center self-start rounded-lg bg-primary px-6 py-2 text-sm font-medium text-warm-white transition-colors hover:bg-ink"
             >
               Submit
             </button>
@@ -257,30 +163,35 @@ export function HomeCtaSection() {
   const [volunteerOpen, setVolunteerOpen] = useState(false)
 
   return (
-    <section className="bg-warm-white py-16 lg:py-20">
-      <div className="site-container grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8">
-        <button
-          id="volunteer"
-          type="button"
-          className={cardClass}
-          aria-haspopup="dialog"
-          aria-expanded={volunteerOpen}
-          onClick={() => setVolunteerOpen(true)}
-        >
-          <CardVisual {...volunteerCard} />
-        </button>
-
-        <Link
-          id="support"
-          to="/donate"
-          className={cardClass}
-          aria-label="Support the Mission"
-        >
-          <CardVisual {...supportCard} activeOnMobile />
-        </Link>
-      </div>
+    <>
+      <OutreachCtaSection
+        eyebrow="Be part of their future"
+        title="Every child needs a safe place to grow their own"
+        description="Kubwabo Foundation partners with local organizations to build child protection and support networks that last. These partners don't wait for help. They lead it."
+        primaryImage={siteImages.homeOurStory}
+        primaryImageAlt="A caregiver and child supported by Kubwabo Foundation"
+        cta={
+          <div className="flex flex-wrap items-center gap-4">
+            <button
+              type="button"
+              className={outreachCtaButtonClass}
+              aria-haspopup="dialog"
+              aria-expanded={volunteerOpen}
+              onClick={() => setVolunteerOpen(true)}
+            >
+              Become a Volunteer
+            </button>
+            <Link
+              to="/donate"
+              className="text-sm font-medium text-ink underline decoration-ink/30 underline-offset-4 transition-colors hover:text-primary"
+            >
+              Support the mission
+            </Link>
+          </div>
+        }
+      />
 
       <VolunteerModal open={volunteerOpen} onClose={() => setVolunteerOpen(false)} />
-    </section>
+    </>
   )
 }

@@ -22,36 +22,31 @@ export function AboutProgramsSection() {
       <div className="site-container relative z-10 grid grid-cols-1 lg:min-h-[91vh] lg:max-h-dvh lg:grid-cols-2 lg:items-stretch lg:gap-14">
         <div className="relative flex flex-col justify-center gap-6 py-14 pb-20 sm:py-16 sm:pb-24 lg:py-20 lg:pb-24">
           <div>
-            <span className="inline-flex bg-accent px-4 py-1.5 text-sm font-semibold text-ink">
-              Our Story
-            </span>
+            <span className="text-sm font-semibold text-primary">Our Story</span>
           </div>
 
           {/* Mobile: image directly under the badge */}
           <StoryImage className="relative z-10 min-h-[18rem] w-full overflow-hidden sm:min-h-[22rem] lg:hidden" />
 
-          <h2 className="max-w-md text-3xl font-bold leading-[1.15] tracking-tight text-warm-white sm:text-4xl lg:text-5xl">
-            Born from a Single Act of Care.
+          <h2 className="max-w-lg text-2xl font-semibold leading-[1.2] tracking-tight text-warm-white sm:max-w-xl sm:text-3xl lg:text-4xl">
+            Standing with children whose futures are quietly slipping away
           </h2>
 
-          <div className="max-w-md space-y-6 sm:max-w-lg">
+          <div className="max-w-md sm:max-w-lg">
             <p className="text-base leading-relaxed text-warm-white/75 sm:text-lg">
-              {site.name} began late one night when our founder met a young child
-              facing hardship and chose to step forward. That moment sparked a
-              youth-led movement guided by one conviction.
-            </p>
-            <p className="hidden text-base leading-relaxed text-warm-white/75 sm:block sm:text-lg">
-              <span className="italic text-warm-white">
-                Kubwabo means &ldquo;for them.&rdquo;
-              </span>{' '}
-              That single principle guides every step we take, keeping our focus
-              centered on the people we serve and ensuring no child or family is
-              forgotten.
+              Behind every child is a story, a family, and a future worth believing in.
+              Yet poverty can make even the simplest things, such as education, food,
+              healthcare, and a safe environment, difficult to access. At {site.name}, we
+              believe no child&apos;s dreams should be limited by the circumstances into
+              which they were born. That is why we stand alongside vulnerable children and
+              families, addressing immediate needs while working toward lasting
+              opportunities, stronger families, and brighter futures. Because when we
+              support a child, we must also care about the world in which that child grows.
             </p>
           </div>
           <Link
             to="/about"
-            className="inline-flex min-w-[7.5rem] w-fit items-center justify-center border border-warm-white bg-warm-white px-6 py-2 text-sm font-medium leading-normal text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-warm-white focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+            className="inline-flex w-fit items-center justify-center rounded-lg bg-accent px-7 py-3.5 text-sm font-medium text-ink transition-colors hover:bg-accent/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-black"
           >
             Read The Full Story
           </Link>

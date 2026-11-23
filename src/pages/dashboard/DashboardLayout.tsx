@@ -7,12 +7,15 @@ const nav: {
   to: string
   label: string
   end?: boolean
-  icon: 'overview' | 'team' | 'stories' | 'children'
+  icon: 'overview' | 'team' | 'stories' | 'children' | 'programs' | 'stats' | 'newsletter'
 }[] = [
   { to: '/dashboard', label: 'Overview', end: true, icon: 'overview' },
   { to: '/dashboard/team', label: 'Team', icon: 'team' },
   { to: '/dashboard/stories', label: 'Impact Stories', icon: 'stories' },
   { to: '/dashboard/children', label: 'Children', icon: 'children' },
+  { to: '/dashboard/programs', label: 'Programs', icon: 'programs' },
+  { to: '/dashboard/impact-stats', label: 'Impact Stats', icon: 'stats' },
+  { to: '/dashboard/newsletter', label: 'Newsletter', icon: 'newsletter' },
 ]
 
 function NavIcon({ name }: { name: (typeof nav)[number]['icon'] }) {
@@ -67,6 +70,61 @@ function NavIcon({ name }: { name: (typeof nav)[number]['icon'] }) {
             stroke="currentColor"
             strokeWidth="1.6"
             strokeLinecap="round"
+          />
+        </svg>
+      )
+    case 'programs':
+      return (
+        <svg className={common} viewBox="0 0 24 24" fill="none" aria-hidden>
+          <rect
+            x="4"
+            y="5"
+            width="7"
+            height="14"
+            rx="1.5"
+            stroke="currentColor"
+            strokeWidth="1.6"
+          />
+          <rect
+            x="13"
+            y="5"
+            width="7"
+            height="14"
+            rx="1.5"
+            stroke="currentColor"
+            strokeWidth="1.6"
+          />
+        </svg>
+      )
+    case 'stats':
+      return (
+        <svg className={common} viewBox="0 0 24 24" fill="none" aria-hidden>
+          <path
+            d="M5 19V11M12 19V5M19 19v-7"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+          />
+        </svg>
+      )
+    case 'newsletter':
+      return (
+        <svg className={common} viewBox="0 0 24 24" fill="none" aria-hidden>
+          <rect
+            x="3.5"
+            y="5.5"
+            width="17"
+            height="13"
+            rx="1.5"
+            stroke="currentColor"
+            strokeWidth="1.6"
+          />
+          <path
+            d="M4 7.5 12 13l8-5.5"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </svg>
       )

@@ -6,7 +6,14 @@ export interface DonationPayload {
   firstName: string
   lastName: string
   email: string
+  phone?: string
+  purpose?: string
+  country?: string
+  message?: string
   programId?: string
+  childId?: string
+  childName?: string
+  currency?: string
 }
 
 export interface DonationResult {
@@ -22,17 +29,19 @@ export interface DonationProvider {
 
 const mockDonationProvider: DonationProvider = {
   async submit(payload) {
-    await new Promise((r) => setTimeout(r, 1200))
+    await new Promise((r) => setTimeout(r, 400))
     if (payload.amount < 1) {
       return { success: false, message: 'Amount must be at least $1.' }
     }
     if (!payload.email.includes('@')) {
       return { success: false, message: 'Please enter a valid email.' }
     }
+    if (payload.phone && payload.phone.replace(/\D/g, '').length < 8) {
+      return { success: false, message: 'Please enter a valid phone number.' }
+    }
     return {
       success: true,
-      transactionId: `MOCK-${Date.now()}`,
-      message: `Thank you! Your ${payload.frequency === 'monthly' ? 'monthly' : 'one-time'} donation of $${payload.amount} has been recorded. (Test mode — no payment processed.)`,
+      message: 'Use the payment instructions to complete your gift.',
     }
   },
 }

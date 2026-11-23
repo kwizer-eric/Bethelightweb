@@ -103,7 +103,7 @@ export function LoginPage() {
         <button
           type="submit"
           disabled={!supabase || pending}
-          className="mt-6 w-full bg-primary px-4 py-2 text-sm font-medium text-warm-white disabled:opacity-60"
+          className="mt-6 w-full rounded-lg bg-primary px-4 py-2 text-sm font-medium text-warm-white disabled:opacity-60"
         >
           {pending ? 'Signing in…' : 'Sign in'}
         </button>

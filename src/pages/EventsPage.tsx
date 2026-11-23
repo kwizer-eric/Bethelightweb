@@ -29,19 +29,19 @@ export function EventsPage() {
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {events.map((event) => (
               <Card key={event.id}>
-                <time className="text-sm font-semibold text-primary" dateTime={event.date}>
+                <time className="text-sm font-semibold text-ink" dateTime={event.date}>
                   {formatDate(event.date)}
                 </time>
                 <h3 className="mt-2 text-xl font-bold text-ink">{event.title}</h3>
-                <p className="mt-1 text-sm text-ink/70">{event.location}</p>
-                <p className="mt-3 text-ink/70">{event.description}</p>
+                <p className="mt-1 text-sm text-body">{event.location}</p>
+                <p className="mt-3 text-body">{event.description}</p>
                 <Button variant="outline" size="sm" className="mt-4" onClick={() => {}}>
                   Register interest
                 </Button>
               </Card>
             ))}
           </div>
-          <p className="mt-12 text-center text-sm text-ink/70">
+          <p className="mt-12 text-center text-sm text-body">
             Phase 2: interactive event calendar with registration and reminders.
           </p>
         </div>

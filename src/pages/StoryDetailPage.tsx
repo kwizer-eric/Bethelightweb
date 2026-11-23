@@ -19,7 +19,7 @@ function StoryBody({ blocks }: { blocks: readonly StoryBlock[] }) {
           return (
             <p
               key={i}
-              className="text-base leading-relaxed text-primary/80 sm:text-lg"
+              className="text-base leading-relaxed text-body sm:text-lg"
             >
               {block.text}
             </p>
@@ -29,7 +29,7 @@ function StoryBody({ blocks }: { blocks: readonly StoryBlock[] }) {
           return (
             <h2
               key={i}
-              className="pt-4 text-xl font-semibold tracking-tight text-primary sm:text-2xl"
+              className="pt-4 text-xl font-semibold tracking-tight text-ink sm:text-2xl"
             >
               {block.text}
             </h2>
@@ -38,7 +38,7 @@ function StoryBody({ blocks }: { blocks: readonly StoryBlock[] }) {
         return (
           <ul
             key={i}
-            className="list-disc space-y-2 pl-5 text-base text-primary/80 sm:text-lg"
+            className="list-disc space-y-2 pl-5 text-base text-body sm:text-lg"
           >
             {block.items.map((item) => (
               <li key={item} className="leading-relaxed">
@@ -57,7 +57,7 @@ function StoryGallery({ images }: { images: readonly string[] }) {
 
   return (
     <div className="mt-12">
-      <h2 className="text-xl font-semibold tracking-tight text-primary sm:text-2xl">
+      <h2 className="text-xl font-semibold tracking-tight text-ink sm:text-2xl">
         Gallery
       </h2>
       <div className="mt-6 grid grid-cols-2 gap-2 sm:gap-3 md:grid-cols-3">
@@ -99,21 +99,21 @@ export function StoryDetailPage() {
 
   return (
     <>
-      <article className="bg-warm-white pt-16 pb-16 text-primary sm:pt-20 lg:pt-24 lg:pb-20">
+      <article className="bg-warm-white pt-16 pb-16 text-ink sm:pt-20 lg:pt-24 lg:pb-20">
         <div className="site-container">
           <div className="mx-auto max-w-3xl">
             <p className="text-xs font-medium tracking-[0.12em] text-primary/70 uppercase">
               {story.category}
             </p>
-            <p className="mt-2 text-sm text-primary/55">
+            <p className="mt-2 text-sm text-body">
               {formatStoryDate(story.date)}
             </p>
 
-            <h1 className="mt-6 text-3xl font-bold leading-[1.15] tracking-tight text-primary sm:text-4xl lg:text-5xl">
+            <h1 className="mt-6 text-3xl font-bold leading-[1.15] tracking-tight text-ink sm:text-4xl lg:text-5xl">
               {story.title}
             </h1>
 
-            <p className="mt-6 text-lg leading-relaxed text-primary/75 sm:text-xl">
+            <p className="mt-6 text-lg leading-relaxed text-body sm:text-xl">
               {story.excerpt}
             </p>
           </div>
@@ -134,7 +134,7 @@ export function StoryDetailPage() {
             <div className="mt-14 flex justify-center pt-8">
               <Link
                 to="/news"
-                className="inline-flex min-w-[7.5rem] items-center justify-center border border-primary px-6 py-2 text-sm font-medium text-primary transition-colors hover:bg-primary hover:text-warm-white"
+                className="inline-flex min-w-[7.5rem] items-center justify-center rounded-lg border border-primary px-6 py-2 text-sm font-medium text-ink transition-colors hover:bg-primary hover:text-warm-white"
               >
                 Back to Impact Stories
               </Link>
@@ -143,9 +143,9 @@ export function StoryDetailPage() {
         </div>
       </article>
 
-      <section className="border-t border-b border-primary/15 bg-warm-white pt-16 text-primary lg:pt-20">
+      <section className="border-t border-b border-primary/15 bg-warm-white pt-16 text-ink lg:pt-20">
         <div className="site-container">
-          <h2 className="text-2xl font-bold tracking-tight text-primary sm:text-3xl">
+          <h2 className="text-2xl font-bold tracking-tight text-ink sm:text-3xl">
             You may be interested in...
           </h2>
 
@@ -176,13 +176,13 @@ export function StoryDetailPage() {
                     </span>{' '}
                     {item.category}
                   </p>
-                  <h3 className="mt-4 text-xl font-medium tracking-tight text-primary sm:text-2xl">
+                  <h3 className="mt-4 text-xl font-medium tracking-tight text-ink sm:text-2xl">
                     <Link to={`/news/${item.slug}`}>{item.title}</Link>
                   </h3>
                   <div className="mt-auto pt-8 lg:pt-14">
                     <Link
                       to={`/news/${item.slug}`}
-                      className="inline-flex min-w-[7.5rem] items-center justify-center border border-primary px-6 py-2 text-sm font-medium text-primary transition-colors hover:bg-primary hover:text-warm-white"
+                      className="inline-flex min-w-[7.5rem] items-center justify-center rounded-lg border border-primary px-6 py-2 text-sm font-medium text-ink transition-colors hover:bg-primary hover:text-warm-white"
                     >
                       Read more
                     </Link>

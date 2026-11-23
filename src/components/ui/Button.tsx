@@ -8,12 +8,12 @@ const variants: Record<Variant, string> = {
   primary:
     'bg-primary text-warm-white hover:bg-ink focus-visible:ring-primary',
   secondary:
-    'bg-warm-white text-primary hover:bg-accent focus-visible:ring-primary',
+    'bg-warm-white text-ink hover:bg-accent hover:text-ink focus-visible:ring-primary',
   accent:
     'bg-accent text-ink hover:bg-accent focus-visible:ring-accent',
   outline:
-    'border-2 border-primary text-primary hover:bg-primary hover:text-warm-white focus-visible:ring-primary',
-  ghost: 'text-primary hover:bg-primary/10 focus-visible:ring-primary',
+    'border-2 border-primary text-ink hover:bg-primary hover:text-warm-white focus-visible:ring-primary',
+  ghost: 'text-ink hover:bg-primary/10 focus-visible:ring-primary',
 }
 
 const sizes: Record<Size, string> = {
@@ -48,7 +48,7 @@ export function Button(props: ButtonAsButton | ButtonAsLink) {
     ...rest
   } = props
 
-  const classes = `inline-flex items-center justify-center rounded-full font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-warm-white disabled:opacity-50 ${variants[variant]} ${sizes[size]} ${className}`
+  const classes = `inline-flex items-center justify-center rounded-lg font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-warm-white disabled:opacity-50 ${variants[variant]} ${sizes[size]} ${className}`
 
   if ('to' in rest && rest.to) {
     const { to, ...linkRest } = rest

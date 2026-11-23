@@ -11,11 +11,13 @@ export function ImageSourceField({
   value,
   onChange,
   onBusy,
+  uploadFolder = 'stories',
 }: {
   label: string
   value: string
   onChange: (value: string) => void
   onBusy?: (busy: boolean) => void
+  uploadFolder?: 'stories' | 'children' | 'programs'
 }) {
   const [mode, setMode] = useState<Mode>('link')
   const [busy, setBusy] = useState(false)
@@ -32,7 +34,7 @@ export function ImageSourceField({
     onBusy?.(true)
     setError(null)
     try {
-      onChange(await uploadCmsImage(file))
+      onChange(await uploadCmsImage(file, uploadFolder))
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Upload failed.')
     } finally {

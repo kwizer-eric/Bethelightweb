@@ -12,6 +12,9 @@ type StoryForm = {
   excerpt: string
   date: string
   category: string
+  badge: string
+  cardTitle: string
+  cardDescription: string
   image: string
   gallery: string[]
   bodyText: string
@@ -23,6 +26,9 @@ const empty: StoryForm = {
   excerpt: '',
   date: new Date().toISOString().slice(0, 10),
   category: 'Impact',
+  badge: '',
+  cardTitle: '',
+  cardDescription: '',
   image: '',
   gallery: [],
   bodyText: '',
@@ -52,6 +58,9 @@ export function DashboardStories() {
       excerpt: story.excerpt,
       date: story.date,
       category: story.category,
+      badge: story.badge,
+      cardTitle: story.cardTitle,
+      cardDescription: story.cardDescription,
       image: story.image,
       gallery: [...story.gallery],
       bodyText: bodyToText(story.body),
@@ -71,6 +80,9 @@ export function DashboardStories() {
       excerpt: form.excerpt,
       date: form.date,
       category: form.category,
+      badge: form.badge,
+      cardTitle: form.cardTitle,
+      cardDescription: form.cardDescription,
       image: form.image,
       gallery: form.gallery,
       body: textToBody(form.bodyText),
@@ -99,6 +111,10 @@ export function DashboardStories() {
           <h2 className="text-2xl font-semibold tracking-tight text-ink">
             Impact Stories
           </h2>
+          <p className="mt-1 text-sm text-ink/55">
+            Full articles on /news, plus badge / card title / blurb for Home and
+            listing cards.
+          </p>
         </div>
         <button
           type="button"
@@ -219,6 +235,45 @@ export function DashboardStories() {
                   value={form.category}
                   onChange={(e) =>
                     setForm((prev) => ({ ...prev, category: e.target.value }))
+                  }
+                  className="mt-1 w-full border border-ink/15 bg-white px-3 py-2 text-sm outline-none focus:border-primary"
+                />
+              </label>
+              <label className="block text-sm sm:col-span-2">
+                <span className="text-ink/70">Card badge (metric)</span>
+                <input
+                  value={form.badge}
+                  placeholder="35+ CHILDREN REACHED"
+                  onChange={(e) =>
+                    setForm((prev) => ({ ...prev, badge: e.target.value }))
+                  }
+                  className="mt-1 w-full border border-ink/15 bg-white px-3 py-2 text-sm outline-none focus:border-primary"
+                />
+                <span className="mt-1 block text-xs text-ink/45">
+                  Shown on Home and /news cards. Falls back to category if empty.
+                </span>
+              </label>
+              <label className="block text-sm">
+                <span className="text-ink/70">Card title (optional)</span>
+                <input
+                  value={form.cardTitle}
+                  placeholder="Short title for cards"
+                  onChange={(e) =>
+                    setForm((prev) => ({ ...prev, cardTitle: e.target.value }))
+                  }
+                  className="mt-1 w-full border border-ink/15 bg-white px-3 py-2 text-sm outline-none focus:border-primary"
+                />
+              </label>
+              <label className="block text-sm">
+                <span className="text-ink/70">Card description (optional)</span>
+                <input
+                  value={form.cardDescription}
+                  placeholder="One-line card blurb"
+                  onChange={(e) =>
+                    setForm((prev) => ({
+                      ...prev,
+                      cardDescription: e.target.value,
+                    }))
                   }
                   className="mt-1 w-full border border-ink/15 bg-white px-3 py-2 text-sm outline-none focus:border-primary"
                 />

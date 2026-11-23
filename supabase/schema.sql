@@ -8,8 +8,12 @@ create table if not exists public.team (
   role text not null,
   image text not null default '',
   sort_order int not null default 0,
+  is_board boolean not null default true,
   created_at timestamptz not null default now()
 );
+
+alter table public.team
+  add column if not exists is_board boolean not null default true;
 
 create table if not exists public.children (
   id uuid primary key default gen_random_uuid(),
@@ -151,6 +155,163 @@ where not exists (select 1 from public.stories);
 alter table public.children add column if not exists gallery jsonb not null default '[]'::jsonb;
 alter table public.children add column if not exists video text;
 alter table public.stories add column if not exists gallery jsonb not null default '[]'::jsonb;
+alter table public.stories add column if not exists badge text not null default '';
+alter table public.stories add column if not exists card_title text not null default '';
+alter table public.stories add column if not exists card_description text not null default '';
+
+-- Seed home-card fields for known stories (safe to re-run)
+update public.stories set
+  badge = '4,500 FAMILIES REACHED',
+  card_title = 'Rebuilding Hope Together',
+  card_description = 'Local partnerships helped restore safe spaces for children and families.'
+where slug = 'a-meal-that-changed-everything'
+  and (badge = '' or card_title = '');
+
+update public.stories set
+  badge = '9,200 FAMILIES SUPPORTED',
+  card_title = 'Small Steps Toward Recovery',
+  card_description = 'Consistent support helped families regain stability after prolonged displacement and hardship.'
+where slug = 'back-to-school-back-to-hope'
+  and (badge = '' or card_title = '');
+
+update public.stories set
+  badge = '6,800 CHILDREN PROTECTED',
+  card_title = 'Safe Spaces Restored',
+  card_description = 'Child-friendly spaces provided safety, support, and stability for vulnerable children.'
+where slug = 'mobile-clinic-reaches-remote-village'
+  and (badge = '' or card_title = '');
+
+create table if not exists public.home_programs (
+  id uuid primary key default gen_random_uuid(),
+  title text not null,
+  description text not null default '',
+  metric text not null default '',
+  image text not null default '',
+  image_alt text not null default '',
+  href text not null,
+  sort_order int not null default 0,
+  created_at timestamptz not null default now()
+);
+
+create table if not exists public.impact_stats (
+  id uuid primary key default gen_random_uuid(),
+  value text not null,
+  label text not null,
+  sort_order int not null default 0,
+  created_at timestamptz not null default now()
+);
+
+alter table public.home_programs enable row level security;
+alter table public.impact_stats enable row level security;
+
+grant select on public.home_programs, public.impact_stats to anon, authenticated;
+grant insert, update, delete on public.home_programs, public.impact_stats to authenticated;
+
+drop policy if exists home_programs_select on public.home_programs;
+drop policy if exists home_programs_insert on public.home_programs;
+drop policy if exists home_programs_update on public.home_programs;
+drop policy if exists home_programs_delete on public.home_programs;
+drop policy if exists impact_stats_select on public.impact_stats;
+drop policy if exists impact_stats_insert on public.impact_stats;
+drop policy if exists impact_stats_update on public.impact_stats;
+drop policy if exists impact_stats_delete on public.impact_stats;
+
+create policy home_programs_select on public.home_programs
+  for select to anon, authenticated
+  using (true);
+create policy home_programs_insert on public.home_programs
+  for insert to authenticated
+  with check (auth.role() = 'authenticated');
+create policy home_programs_update on public.home_programs
+  for update to authenticated
+  using (auth.role() = 'authenticated')
+  with check (auth.role() = 'authenticated');
+create policy home_programs_delete on public.home_programs
+  for delete to authenticated
+  using (auth.role() = 'authenticated');
+
+create policy impact_stats_select on public.impact_stats
+  for select to anon, authenticated
+  using (true);
+create policy impact_stats_insert on public.impact_stats
+  for insert to authenticated
+  with check (auth.role() = 'authenticated');
+create policy impact_stats_update on public.impact_stats
+  for update to authenticated
+  using (auth.role() = 'authenticated')
+  with check (auth.role() = 'authenticated');
+create policy impact_stats_delete on public.impact_stats
+  for delete to authenticated
+  using (auth.role() = 'authenticated');
+
+insert into public.home_programs (title, description, metric, image, image_alt, href, sort_order)
+select title, description, metric, image, image_alt, href, sort_order
+from (
+  values
+  (
+    $t$Every Child Deserves It$t$,
+    $d$Walking alongside children through education, mentorship, guidance, and encouragement so financial hardship does not define their future.$d$,
+    $m$35+ CHILDREN REACHED$m$,
+    $i$/images/_DSC8396.jpg$i$,
+    $a$Children in the Every Child Deserves It program$a$,
+    $h$/programs/every-kid-deserves-it$h$,
+    1
+  ),
+  (
+    $t$For Their Family$t$,
+    $d$Helping vulnerable families build stability through essential support, livelihood opportunities, business guidance, and mentorship.$d$,
+    $m$2 FAMILIES SUPPORTED$m$,
+    $i$/images/_DSC8033.jpg$i$,
+    $a$Families in the For Their Family program$a$,
+    $h$/programs/for-the-parents$h$,
+    2
+  )
+) as seed(title, description, metric, image, image_alt, href, sort_order)
+where not exists (select 1 from public.home_programs);
+
+insert into public.impact_stats (value, label, sort_order)
+select value, label, sort_order
+from (
+  values
+  ($v$35+$v$, $l$Children Reached$l$, 1),
+  ($v$2$v$, $l$Families Supported$l$, 2),
+  ($v$100+$v$, $l$Dedicated Volunteers$l$, 3)
+) as seed(value, label, sort_order)
+where not exists (select 1 from public.impact_stats);
+
+-- Align legacy seed copy with Featured Programs card wording
+update public.impact_stats
+set value = '35+', label = 'Children Reached'
+where lower(replace(label, E'\n', ' ')) = 'children supported';
+update public.impact_stats
+set label = 'Families Supported'
+where lower(replace(label, E'\n', ' ')) = 'families fully supported';
+
+create table if not exists public.newsletter_subscribers (
+  id uuid primary key default gen_random_uuid(),
+  email text not null,
+  created_at timestamptz not null default now(),
+  constraint newsletter_subscribers_email_unique unique (email)
+);
+
+alter table public.newsletter_subscribers enable row level security;
+
+grant select, delete on public.newsletter_subscribers to authenticated;
+grant insert on public.newsletter_subscribers to anon, authenticated;
+
+drop policy if exists newsletter_subscribers_select on public.newsletter_subscribers;
+drop policy if exists newsletter_subscribers_insert on public.newsletter_subscribers;
+drop policy if exists newsletter_subscribers_delete on public.newsletter_subscribers;
+
+create policy newsletter_subscribers_select on public.newsletter_subscribers
+  for select to authenticated
+  using (auth.role() = 'authenticated');
+create policy newsletter_subscribers_insert on public.newsletter_subscribers
+  for insert to anon, authenticated
+  with check (true);
+create policy newsletter_subscribers_delete on public.newsletter_subscribers
+  for delete to authenticated
+  using (auth.role() = 'authenticated');
 
 insert into storage.buckets (id, name, public)
 values ('cms-images', 'cms-images', true)

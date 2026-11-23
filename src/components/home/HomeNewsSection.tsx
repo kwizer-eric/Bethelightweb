@@ -1,84 +1,119 @@
-import { Link } from 'react-router-dom'
-import { FadeImage } from '../FadeImage'
+import { useMemo, useState } from 'react'
 import { useCms } from '../../cms/CmsContext'
+import { storyToCard } from '../../cms/storyCard'
+import {
+  ImpactShowcaseGrid,
+  fallbackShowcaseCards,
+} from './ImpactShowcaseGrid'
 
-function formatStoryDate(iso: string) {
-  const d = new Date(`${iso}T00:00:00`)
-  const day = String(d.getDate()).padStart(2, '0')
-  const month = String(d.getMonth() + 1).padStart(2, '0')
-  const year = d.getFullYear()
-  return `${day}/${month}/${year}`
+const STORIES_PER_PAGE = 3
+
+function ChevronLeft() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M15 18l-6-6 6-6" />
+    </svg>
+  )
+}
+
+function ChevronRight() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9 18l6-6-6-6" />
+    </svg>
+  )
+}
+
+function StoryCarouselNav({
+  onPrev,
+  onNext,
+  canPrev,
+  canNext,
+}: {
+  onPrev: () => void
+  onNext: () => void
+  canPrev: boolean
+  canNext: boolean
+}) {
+  const btnClass =
+    'inline-flex h-12 w-12 items-center justify-center rounded-full border border-ink bg-white text-ink transition-colors hover:bg-ink/5 disabled:pointer-events-none disabled:opacity-35'
+
+  return (
+    <div className="flex justify-center gap-3">
+      <button
+        type="button"
+        aria-label="Previous stories"
+        className={btnClass}
+        disabled={!canPrev}
+        onClick={onPrev}
+      >
+        <ChevronLeft />
+      </button>
+      <button
+        type="button"
+        aria-label="Next stories"
+        className={btnClass}
+        disabled={!canNext}
+        onClick={onNext}
+      >
+        <ChevronRight />
+      </button>
+    </div>
+  )
 }
 
 export function HomeNewsSection() {
   const { stories } = useCms()
-  const featured = stories.slice(0, 3)
+  const [page, setPage] = useState(0)
+
+  const allCards = useMemo(() => {
+    if (stories.length === 0) return fallbackShowcaseCards
+    return stories.map(storyToCard)
+  }, [stories])
+
+  const pageCount = useMemo(() => {
+    if (allCards.length <= STORIES_PER_PAGE) return 1
+    return Math.ceil(allCards.length / STORIES_PER_PAGE)
+  }, [allCards.length])
+
+  const canPrev = page > 0
+  const canNext = page < pageCount - 1
+
+  const pageCards = useMemo(() => {
+    const start = page * STORIES_PER_PAGE
+    return allCards.slice(start, start + STORIES_PER_PAGE)
+  }, [allCards, page])
 
   return (
-    <section className="border-b border-primary/15 bg-warm-white pt-20 lg:pt-24 xl:pt-28">
+    <section className="border-b border-primary/15 bg-white py-20 lg:py-24">
       <div className="site-container">
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-[1fr_auto] sm:items-center lg:gap-12">
-          <h2 className="text-4xl font-bold tracking-tight text-primary sm:text-5xl xl:text-6xl">
-            Impact Stories
+        <div className="mx-auto max-w-[1280px] text-center">
+          <p className="text-xs font-semibold tracking-[0.2em] text-primary uppercase sm:text-sm">
+            Real stories
+          </p>
+          <h2 className="mt-6 text-4xl font-bold tracking-tight text-ink sm:mt-8 sm:text-5xl xl:text-6xl xl:leading-[1.08]">
+            Stories behind
+            <br />
+            impact
           </h2>
-          <Link
-            to="/news"
-            className="hidden min-w-[7.5rem] items-center justify-center border border-primary bg-transparent px-6 py-2 text-sm font-medium leading-normal text-primary transition-colors hover:bg-primary hover:text-warm-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-warm-white sm:inline-flex"
-          >
-            View All
-          </Link>
         </div>
 
-        <div className="mt-16 grid grid-cols-1 items-stretch lg:mt-20 lg:grid-cols-3 xl:mt-24">
-          {featured.map((story, index) => (
-            <article
-              key={story.id}
-              className={`flex h-full flex-col border-primary/15 ${
-                index > 0 ? 'border-t lg:border-t-0 lg:border-l' : ''
-              }`}
-            >
-              <div className="aspect-[4/3] w-full overflow-hidden">
-                <FadeImage
-                  src={story.image}
-                  alt=""
-                  referrerPolicy="no-referrer"
-                  className="h-full w-full object-cover"
-                />
-              </div>
-
-              <div className="flex flex-1 flex-col border-t border-primary/15 bg-warm-white px-6 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12">
-                <p className="text-xs font-medium tracking-[0.12em] text-primary/70 uppercase">
-                  {formatStoryDate(story.date)}{' '}
-                  <span className="text-primary/35" aria-hidden>
-                    |
-                  </span>{' '}
-                  {story.category}
-                </p>
-
-                <h3 className="mt-6 max-w-md text-xl leading-snug font-medium tracking-tight text-primary sm:text-2xl lg:text-3xl">
-                  {story.title}
-                </h3>
-
-                <div className="mt-auto pt-8">
-                  <Link
-                    to={`/news/${story.slug}`}
-                    className="inline-flex min-w-[7.5rem] items-center justify-center border border-primary bg-primary px-6 py-2 text-sm font-medium leading-normal text-warm-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-warm-white sm:bg-transparent sm:text-primary sm:transition-colors sm:hover:bg-primary sm:hover:text-warm-white"
-                  >
-                    Read more
-                  </Link>
-                </div>
-              </div>
-            </article>
-          ))}
+        <div className="mt-12 md:hidden lg:mt-16">
+          <ImpactShowcaseGrid cards={allCards} />
         </div>
 
-        <div className="mt-10 pb-4 sm:hidden">
-          <Link
-            to="/news"
-            className="inline-flex min-w-[7.5rem] w-full items-center justify-center border border-primary bg-primary px-6 py-2 text-sm font-medium leading-normal text-warm-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-warm-white"
-          >
-            View All
-          </Link>
+        <div className="mt-12 hidden md:block lg:mt-16">
+          <ImpactShowcaseGrid key={page} cards={pageCards} />
+          {pageCount > 1 ? (
+            <div className="mt-10 flex justify-center sm:mt-12">
+              <StoryCarouselNav
+                canPrev={canPrev}
+                canNext={canNext}
+                onPrev={() => setPage((p) => Math.max(0, p - 1))}
+                onNext={() => setPage((p) => Math.min(pageCount - 1, p + 1))}
+              />
+            </div>
+          ) : null}
         </div>
       </div>
     </section>

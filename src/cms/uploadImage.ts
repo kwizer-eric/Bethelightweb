@@ -32,12 +32,15 @@ async function compressImage(file: File) {
 }
 
 /** Shrink the file, then store it in the public cms-images bucket. */
-export async function uploadCmsImage(file: File) {
+export async function uploadCmsImage(
+  file: File,
+  folder: 'stories' | 'children' | 'programs' = 'stories',
+) {
   if (!supabase) throw new Error('Supabase is not configured.')
   if (!file.type.startsWith('image/')) throw new Error('Choose an image file.')
 
   const { blob, type, ext } = await compressImage(file)
-  const path = `stories/${Date.now()}-${crypto.randomUUID()}.${ext}`
+  const path = `${folder}/${Date.now()}-${crypto.randomUUID()}.${ext}`
   const { error } = await supabase.storage.from('cms-images').upload(path, blob, {
     contentType: type,
     cacheControl: '31536000',

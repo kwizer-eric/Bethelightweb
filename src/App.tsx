@@ -11,11 +11,15 @@ import { EveryKidPage } from './pages/EveryKidPage'
 import { ChildDetailPage } from './pages/ChildDetailPage'
 import { ForTheParentsPage } from './pages/ForTheParentsPage'
 import { DonatePage } from './pages/DonatePage'
+import { DonateThankYouPage } from './pages/DonateThankYouPage'
 import { DashboardLayout } from './pages/dashboard/DashboardLayout'
 import { DashboardHome } from './pages/dashboard/DashboardHome'
 import { DashboardTeam } from './pages/dashboard/DashboardTeam'
 import { DashboardStories } from './pages/dashboard/DashboardStories'
 import { DashboardChildren } from './pages/dashboard/DashboardChildren'
+import { DashboardPrograms } from './pages/dashboard/DashboardPrograms'
+import { DashboardImpactStats } from './pages/dashboard/DashboardImpactStats'
+import { DashboardNewsletter } from './pages/dashboard/DashboardNewsletter'
 import { LoginPage } from './pages/LoginPage'
 import { RequireAuth } from './components/RequireAuth'
 
@@ -45,6 +49,7 @@ export default function App() {
           <Route path="about" element={<AboutPage />} />
           <Route path="contact" element={<ContactPage />} />
           <Route path="donate" element={<DonatePage />} />
+          <Route path="donate/thank-you" element={<DonateThankYouPage />} />
           <Route path="volunteer" element={<Navigate to="/" replace />} />
           <Route path="stories" element={<Navigate to="/news" replace />} />
           <Route path="events" element={<Navigate to="/news" replace />} />
@@ -58,6 +63,9 @@ export default function App() {
             <Route path="team" element={<DashboardTeam />} />
             <Route path="stories" element={<DashboardStories />} />
             <Route path="children" element={<DashboardChildren />} />
+            <Route path="programs" element={<DashboardPrograms />} />
+            <Route path="impact-stats" element={<DashboardImpactStats />} />
+            <Route path="newsletter" element={<DashboardNewsletter />} />
           </Route>
         </Route>
       </Routes>

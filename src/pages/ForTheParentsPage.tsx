@@ -1,11 +1,15 @@
 import { useRef } from 'react'
+import { Link } from 'react-router-dom'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 import { siteImages } from '../assets/siteImages'
 import { FadeImage } from '../components/FadeImage'
-import { HomeCtaSection } from '../components/home/HomeCtaSection'
-import { MobileReadMore } from '../components/ui/MobileReadMore'
+import { PageHeroIntro } from '../components/layout/PageHeroIntro'
+import { ProgramAfterHeroSection } from '../components/programs/ProgramAfterHeroSection'
+import { ProgramChallengeSection } from '../components/programs/ProgramChallengeSection'
+import { ProgramStoryImage } from '../components/programs/ProgramStoryImage'
+import { FOR_THE_PARENTS_PROGRAM_ID } from '../data/donatePage'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -75,47 +79,22 @@ export function ForTheParentsPage() {
   )
 
   return (
-    <div className="bg-warm-white text-primary">
+    <div className="bg-warm-white text-ink">
       {/* Hero */}
       <section className="w-full bg-warm-white">
-        <div className="site-container pt-28 pb-20 sm:pt-32 sm:pb-24 lg:pt-36 lg:pb-28">
-          <div className="grid gap-12 lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] lg:gap-20">
-            <div>
-              <h1 className="text-3xl font-medium tracking-tight text-primary sm:text-4xl lg:text-5xl">
-                For Their Family
-              </h1>
-            </div>
-
-            <div className="w-full space-y-6 text-primary">
-              <MobileReadMore
-                buttonClassName="inline-flex w-fit border border-primary bg-primary px-6 py-2 text-sm font-medium text-warm-white"
-              >
-                <p className="text-base leading-relaxed sm:text-lg">
-                  For Their Family is a Kubwabo Foundation program dedicated to
-                  walking alongside vulnerable families, supporting them through
-                  everyday challenges, strengthening their livelihoods, and
-                  helping them build a more secure future for their children.
-                </p>
-                <p className="text-base leading-relaxed sm:text-lg">
-                  We believe every child deserves the opportunity to grow, learn,
-                  and pursue their dreams. But behind every child is a family
-                  whose well-being shapes the opportunities they have and the
-                  future they can build.
-                </p>
-                <p className="text-base leading-relaxed sm:text-lg">
-                  When families struggle to access nutritious food, healthcare,
-                  stable income, and other basic needs, creating a safe and
-                  supportive environment for children becomes more difficult.
-                </p>
-                <p className="text-base leading-relaxed sm:text-lg">
-                  That is why we believe investing in children also means
-                  empowering the families raising them, because stronger families
-                  create stronger foundations for children to thrive.
-                </p>
-              </MobileReadMore>
-            </div>
-          </div>
-        </div>
+        <PageHeroIntro
+          titleAtTop
+          wideDescription
+          nudgeDescription
+          title={
+            <>
+              For Their
+              <br />
+              Family
+            </>
+          }
+          description="Every family deserves the opportunity to live with dignity, stability, and hope. Yet poverty can make it difficult for parents to provide for their children and plan for the future. We believe stronger families create stronger foundations for children to thrive. Through practical support, livelihood opportunities, and mentorship, we walk alongside families toward greater stability and independence."
+        />
 
         <div ref={parallaxWrapRef} className="relative h-[22rem] overflow-hidden sm:h-[32rem] lg:h-dvh">
           <FadeImage
@@ -133,25 +112,37 @@ export function ForTheParentsPage() {
         </div>
       </section>
 
+      <ProgramAfterHeroSection
+        eyebrow="For their family"
+        title="Strength when families need it most"
+        lead="Supporting vulnerable households through everyday challenges so parents can build stability—and children can grow in a safer, stronger home."
+        body="When families struggle to access nutritious food, healthcare, stable income, or safe housing, creating a supportive environment for children becomes harder. Behind every child is a family whose well-being shapes the opportunities they have and the future they can build. For Their Family walks alongside parents through skills training, livelihood support, and long-term guidance—not a single donation, but steady partnership. By investing in families today, we help break cycles of hardship and give children room to learn, heal, and thrive."
+      />
+
+      <ProgramStoryImage
+        src={siteImages.forTheirFamilyStory}
+        alt="Families and children together in the community"
+      />
+
+      <ProgramChallengeSection
+        headline={
+          <>
+            Lack of stability should never define a family&apos;s dignity, home, or future
+          </>
+        }
+        intro="For households facing conflict, displacement, or extreme poverty, meeting basic needs is a daily struggle. Whether it is food, healthcare, safe housing, or reliable income, parents carry stress that shapes the environment their children grow up in."
+        callout="Walking alongside families in multiple communities, livelihood and household support is becoming a critical priority as populations grow and protection risks intensify."
+        outro="Our team adapts to each family’s situation—skills training, business guidance, referrals for essentials, and long-term follow-up. When parents gain stability, children gain room to learn, heal, and dream again."
+      />
+
       {/* How we support */}
       <section className="border-b border-primary/15 bg-warm-white py-20 sm:py-24 lg:py-28">
         <div className="site-container">
-          <div className="max-w-3xl lg:max-w-4xl">
-            <h2 className="text-3xl font-medium tracking-tight text-primary sm:text-4xl">
-              How We Support Families
-            </h2>
-            <p className="mt-4 text-base leading-relaxed text-primary sm:text-lg">
-              We focus on helping families meet their essential needs, build
-              sustainable livelihoods, and create supportive homes where
-              children can thrive.
-            </p>
-          </div>
-
-          <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
             {SUPPORT_PILLARS.map((pillar) => (
               <div
                 key={pillar.number}
-                className="flex min-h-[300px] flex-col justify-between border border-primary/15 bg-white p-6 text-left text-primary sm:min-h-[340px] sm:p-7 lg:min-h-[360px] lg:p-8"
+                className="flex min-h-[300px] flex-col justify-between border border-primary/15 bg-white p-6 text-left text-ink sm:min-h-[340px] sm:p-7 lg:min-h-[360px] lg:p-8"
               >
                 <div>
                   <span className="text-lg font-semibold tracking-tight sm:text-xl">
@@ -163,7 +154,7 @@ export function ForTheParentsPage() {
                   <h3 className="whitespace-nowrap text-base font-semibold tracking-tight sm:text-lg lg:text-xl">
                     {pillar.title}
                   </h3>
-                  <p className="mt-2.5 text-sm leading-relaxed sm:text-base">
+                  <p className="mt-2.5 text-sm leading-relaxed text-body sm:text-base">
                     {pillar.description}
                   </p>
                 </div>
@@ -177,7 +168,7 @@ export function ForTheParentsPage() {
       <section className="border-b border-white/10 bg-black pt-12 sm:pt-24 lg:pt-28">
         <div className="site-container">
           <div className="max-w-3xl pb-8 sm:pb-16 lg:pb-20">
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">
               Why This Matters
             </p>
             <h2 className="mt-2 text-3xl font-medium tracking-tight text-warm-white sm:text-4xl lg:text-5xl">
@@ -187,6 +178,12 @@ export function ForTheParentsPage() {
               When families become stronger, children gain better opportunities
               to grow, learn, and pursue their dreams.
             </p>
+            <Link
+              to={`/donate?program=${FOR_THE_PARENTS_PROGRAM_ID}`}
+              className="mt-6 inline-flex items-center justify-center rounded-lg bg-accent px-7 py-3.5 text-sm font-medium text-ink transition-colors hover:bg-accent/90 sm:mt-8"
+            >
+              Donate to this program
+            </Link>
           </div>
         </div>
 
@@ -212,7 +209,6 @@ export function ForTheParentsPage() {
         </div>
       </section>
 
-      <HomeCtaSection />
     </div>
   )
 }

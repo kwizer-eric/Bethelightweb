@@ -11,7 +11,7 @@ function formatDate(iso: string) {
 }
 
 export function DashboardHome() {
-  const { team, stories, children } = useCms()
+  const { team, stories, children, homePrograms, impactStats } = useCms()
 
   const urgentCount = children.filter((c) => c.urgent).length
   const latestStories = [...stories]
@@ -40,6 +40,20 @@ export function DashboardHome() {
       dark: false,
       href: '/dashboard/children',
     },
+    {
+      label: 'Program cards',
+      value: String(homePrograms.length),
+      hint: 'Home featured programs',
+      dark: false,
+      href: '/dashboard/programs',
+    },
+    {
+      label: 'Impact stats',
+      value: String(impactStats.length),
+      hint: 'Measured impact numbers',
+      dark: false,
+      href: '/dashboard/impact-stats',
+    },
   ]
 
   return (
@@ -54,7 +68,7 @@ export function DashboardHome() {
       </div>
 
       {/* Metric cards */}
-      <div className="grid gap-4 sm:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
         {metrics.map((metric) => (
           <Link
             key={metric.href}

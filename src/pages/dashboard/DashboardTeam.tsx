@@ -6,6 +6,7 @@ const empty: Omit<TeamMember, 'id'> = {
   name: '',
   role: '',
   image: '',
+  isBoard: true,
 }
 
 export function DashboardTeam() {
@@ -29,6 +30,7 @@ export function DashboardTeam() {
       name: member.name,
       role: member.role,
       image: member.image,
+      isBoard: member.isBoard !== false,
     })
     setError(null)
     setOpen(true)
@@ -148,6 +150,17 @@ export function DashboardTeam() {
                   />
                 </label>
               ))}
+              <label className="flex cursor-pointer items-center gap-2 pt-2 text-sm text-ink">
+                <input
+                  type="checkbox"
+                  checked={form.isBoard !== false}
+                  onChange={(e) =>
+                    setForm((prev) => ({ ...prev, isBoard: e.target.checked }))
+                  }
+                  className="h-4 w-4 rounded border-ink/25"
+                />
+                Board member (show on About leadership grid)
+              </label>
             </div>
             {error ? <p className="mt-4 text-sm text-red-600">{error}</p> : null}
             <div className="mt-6 flex justify-end gap-2">

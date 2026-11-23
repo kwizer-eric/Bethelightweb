@@ -5,7 +5,7 @@ import { Logo } from '../ui/Logo'
 
 const mainLinks = navLinks.filter((link) => link.href !== '/contact')
 
-const supportClass = 'bg-accent text-primary hover:bg-accent'
+const supportClass = 'rounded-lg bg-accent text-ink hover:bg-accent'
 
 export function Header() {
   const [open, setOpen] = useState(false)
@@ -15,7 +15,7 @@ export function Header() {
   const programsMenuId = useId()
   const location = useLocation()
 
-  const linkClass = 'text-primary'
+  const linkClass = 'text-ink hover:text-primary'
 
   useEffect(() => {
     setOpen(false)
@@ -52,7 +52,7 @@ export function Header() {
           onClick={() => setOpen(false)}
           aria-label={site.name}
         >
-          <Logo tone="primary" />
+          <Logo tone="ink" />
         </Link>
 
         <nav
@@ -107,8 +107,8 @@ export function Header() {
                         className={({ isActive }) =>
                           `block px-4 py-2.5 text-sm font-medium transition-colors ${
                             isActive
-                              ? 'bg-primary/5 text-primary'
-                              : 'text-primary hover:bg-primary/5'
+                              ? 'bg-primary/5 text-ink'
+                              : 'text-ink hover:bg-primary/5'
                           }`
                         }
                         onClick={() => setProgramsOpen(false)}
@@ -142,7 +142,7 @@ export function Header() {
 
           <button
             type="button"
-            className="rounded-lg p-2 text-primary sm:hidden"
+            className="rounded-lg p-2 text-ink sm:hidden"
             aria-expanded={open}
             aria-label="Toggle menu"
             onClick={() => setOpen(!open)}

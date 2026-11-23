@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react'
 import { useCms } from '../../cms/CmsContext'
 import type { ProgramChild } from '../../cms/types'
+import { ImageSourceField } from '../../components/dashboard/ImageSourceField'
 
 type ChildForm = {
   name: string
@@ -10,7 +11,7 @@ type ChildForm = {
   dream: string
   location: string
   image: string
-  gallery: string
+  gallery: string[]
   video: string
   story: string
   monthlyNeed: string
@@ -26,7 +27,7 @@ const empty: ChildForm = {
   dream: '',
   location: '',
   image: '',
-  gallery: '',
+  gallery: [],
   video: '',
   story: '',
   monthlyNeed: '35',
@@ -34,12 +35,16 @@ const empty: ChildForm = {
   urgent: false,
 }
 
-function parseGallery(value: string) {
-  return value
-    .split(/[\n,]+/)
-    .map((s) => s.trim())
-    .filter(Boolean)
-}
+const textFields = [
+  ['name', 'Name', 'text'],
+  ['age', 'Age', 'number'],
+  ['grade', 'Grade', 'text'],
+  ['school', 'School', 'text'],
+  ['dream', 'Dream', 'text'],
+  ['location', 'Location', 'text'],
+  ['monthlyNeed', 'Monthly need ($)', 'number'],
+  ['fundedPercent', 'Funded %', 'number'],
+] as const
 
 export function DashboardChildren() {
   const { children, upsertChild, removeChild } = useCms()
@@ -47,6 +52,7 @@ export function DashboardChildren() {
   const [form, setForm] = useState<ChildForm>(empty)
   const [open, setOpen] = useState(false)
   const [saving, setSaving] = useState(false)
+  const [uploadBusy, setUploadBusy] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
   function startCreate() {
@@ -66,7 +72,7 @@ export function DashboardChildren() {
       dream: child.dream,
       location: child.location,
       image: child.image,
-      gallery: (child.gallery ?? []).join('\n'),
+      gallery: [...(child.gallery ?? [])],
       video: child.video ?? '',
       story: child.story,
       monthlyNeed: String(child.monthlyNeed),
@@ -90,7 +96,7 @@ export function DashboardChildren() {
       dream: form.dream,
       location: form.location,
       image: form.image,
-      gallery: parseGallery(form.gallery),
+      gallery: form.gallery.map((item) => item.trim()).filter(Boolean),
       video: form.video.trim() || undefined,
       story: form.story,
       monthlyNeed: Number(form.monthlyNeed) || 0,
@@ -199,19 +205,7 @@ export function DashboardChildren() {
               {editingId ? 'Edit child' : 'Add child'}
             </h3>
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
-              {(
-                [
-                  ['name', 'Name', 'text'],
-                  ['age', 'Age', 'number'],
-                  ['grade', 'Grade', 'text'],
-                  ['school', 'School', 'text'],
-                  ['dream', 'Dream', 'text'],
-                  ['location', 'Location', 'text'],
-                  ['monthlyNeed', 'Monthly need ($)', 'number'],
-                  ['fundedPercent', 'Funded %', 'number'],
-                  ['image', 'Image URL', 'text'],
-                ] as const
-              ).map(([key, label, type]) => (
+              {textFields.map(([key, label, type]) => (
                 <label key={key} className="block text-sm">
                   <span className="text-ink/70">{label}</span>
                   <input
@@ -225,6 +219,15 @@ export function DashboardChildren() {
                   />
                 </label>
               ))}
+              <div className="sm:col-span-2">
+                <ImageSourceField
+                  label="Profile photo"
+                  value={form.image}
+                  onChange={(image) => setForm((prev) => ({ ...prev, image }))}
+                  onBusy={setUploadBusy}
+                  uploadFolder="children"
+                />
+              </div>
               <label className="flex items-center gap-2 text-sm sm:col-span-2">
                 <input
                   type="checkbox"
@@ -235,20 +238,69 @@ export function DashboardChildren() {
                 />
                 <span className="text-ink/70">Mark as urgent</span>
               </label>
-              <label className="block text-sm sm:col-span-2">
-                <span className="text-ink/70">
-                  Gallery image URLs (one per line or comma-separated)
-                </span>
-                <textarea
-                  value={form.gallery}
-                  onChange={(e) =>
-                    setForm((prev) => ({ ...prev, gallery: e.target.value }))
-                  }
-                  rows={3}
-                  placeholder="https://…"
-                  className="mt-1 w-full border border-ink/15 bg-white px-3 py-2 text-sm outline-none focus:border-primary"
-                />
-              </label>
+              <div className="sm:col-span-2">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <span className="text-sm text-ink/70">More photos (gallery)</span>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setForm((prev) => ({
+                        ...prev,
+                        gallery: [...prev.gallery, ''],
+                      }))
+                    }
+                    className="border border-ink/20 px-3 py-1 text-xs font-medium text-ink/70 hover:border-primary hover:text-primary"
+                  >
+                    Add photo
+                  </button>
+                </div>
+                {form.gallery.length === 0 ? (
+                  <p className="mt-2 text-xs text-ink/50">
+                    Optional. Link or upload; uploads are compressed automatically.
+                  </p>
+                ) : (
+                  <div className="mt-3 space-y-4">
+                    {form.gallery.map((url, index) => (
+                      <div
+                        key={index}
+                        className="rounded border border-ink/10 bg-white/80 p-3"
+                      >
+                        <div className="mb-2 flex items-center justify-between gap-2">
+                          <span className="text-xs font-medium text-ink/55">
+                            Photo {index + 1}
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() =>
+                              setForm((prev) => ({
+                                ...prev,
+                                gallery: prev.gallery.filter((_, i) => i !== index),
+                              }))
+                            }
+                            className="text-xs text-red-600 hover:underline"
+                          >
+                            Remove
+                          </button>
+                        </div>
+                        <ImageSourceField
+                          label=""
+                          value={url}
+                          onChange={(value) =>
+                            setForm((prev) => ({
+                              ...prev,
+                              gallery: prev.gallery.map((item, i) =>
+                                i === index ? value : item,
+                              ),
+                            }))
+                          }
+                          onBusy={setUploadBusy}
+                          uploadFolder="children"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
               <label className="block text-sm sm:col-span-2">
                 <span className="text-ink/70">Video URL (YouTube / Vimeo / mp4)</span>
                 <input
@@ -284,7 +336,7 @@ export function DashboardChildren() {
               </button>
               <button
                 type="submit"
-                disabled={saving}
+                disabled={saving || uploadBusy}
                 className="bg-primary px-4 py-2 text-sm font-medium text-warm-white disabled:opacity-60"
               >
                 {saving ? 'Saving…' : 'Save'}
