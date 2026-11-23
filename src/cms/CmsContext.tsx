@@ -9,6 +9,7 @@ import {
 } from 'react'
 import { supabase, supabaseConfigError } from '../lib/supabase'
 import { normalizeImpactStat } from '../lib/impactMetric'
+import { readCmsCache, writeCmsCache } from './cmsCache'
 import { slugify } from './storage'
 import type {
   CmsState,
@@ -19,6 +20,14 @@ import type {
   TeamMember,
 } from './types'
 import type { StoryBlock } from '../data/site'
+
+const emptyCmsState: CmsState = {
+  team: [],
+  stories: [],
+  children: [],
+  homePrograms: [],
+  impactStats: [],
+}
 
 type TeamRow = {
   id: string
@@ -183,15 +192,21 @@ function bySortOrder<T extends { sortOrder: number }>(a: T, b: T) {
 }
 
 export function CmsProvider({ children }: { children: ReactNode }) {
-  const [state, setState] = useState<CmsState>({
-    team: [],
-    stories: [],
-    children: [],
-    homePrograms: [],
-    impactStats: [],
+  const [boot] = useState(() => {
+    const cached = readCmsCache()
+    return { state: cached ?? emptyCmsState, ready: cached !== null }
   })
-  const [ready, setReady] = useState(false)
+  const [state, setState] = useState<CmsState>(boot.state)
+  const [ready, setReady] = useState(boot.ready)
   const [error, setError] = useState<string | null>(null)
+
+  const commitState = useCallback((updater: (prev: CmsState) => CmsState) => {
+    setState((prev) => {
+      const next = updater(prev)
+      writeCmsCache(next)
+      return next
+    })
+  }, [])
 
   useEffect(() => {
     let cancelled = false
@@ -229,6 +244,7 @@ export function CmsProvider({ children }: { children: ReactNode }) {
 
       const failed = teamRes.error ?? storiesRes.error ?? childrenRes.error
       if (failed) {
+        // Keep stale cache on screen if we already have it.
         setError(failed.message)
         setReady(true)
         return
@@ -242,13 +258,15 @@ export function CmsProvider({ children }: { children: ReactNode }) {
         ? []
         : ((statsRes.data ?? []) as ImpactStatRow[]).map(toImpactStat).sort(bySortOrder)
 
-      setState({
+      const next: CmsState = {
         team: ((teamRes.data ?? []) as TeamRow[]).map(toTeam),
         stories: ((storiesRes.data ?? []) as StoryRow[]).map(toStory),
         children: ((childrenRes.data ?? []) as ChildRow[]).map(toChild),
         homePrograms,
         impactStats,
-      })
+      }
+      setState(next)
+      writeCmsCache(next)
       setError(null)
       setReady(true)
     }
@@ -278,7 +296,7 @@ export function CmsProvider({ children }: { children: ReactNode }) {
           .single()
         if (writeError) return writeError.message
         const next = toTeam(data as TeamRow)
-        setState((prev) => ({
+        commitState((prev) => ({
           ...prev,
           team: prev.team.map((item) => (item.id === next.id ? next : item)),
         }))
@@ -299,22 +317,22 @@ export function CmsProvider({ children }: { children: ReactNode }) {
         .single()
       if (writeError) return writeError.message
       const next = toTeam(data as TeamRow)
-      setState((prev) => ({ ...prev, team: [...prev.team, next] }))
+      commitState((prev) => ({ ...prev, team: [...prev.team, next] }))
       return null
     },
-    [],
+    [commitState],
   )
 
   const removeTeam = useCallback(async (id: string) => {
     if (!supabase) return supabaseConfigError
     const { error: writeError } = await supabase.from('team').delete().eq('id', id)
     if (writeError) return writeError.message
-    setState((prev) => ({
+    commitState((prev) => ({
       ...prev,
       team: prev.team.filter((item) => item.id !== id),
     }))
     return null
-  }, [])
+  }, [commitState])
 
   const upsertStory = useCallback(
     async (story: Omit<CmsStory, 'id'> & { id?: string }) => {
@@ -342,7 +360,7 @@ export function CmsProvider({ children }: { children: ReactNode }) {
           .single()
         if (writeError) return writeError.message
         const next = toStory(data as StoryRow)
-        setState((prev) => ({
+        commitState((prev) => ({
           ...prev,
           stories: prev.stories
             .map((item) => (item.id === next.id ? next : item))
@@ -358,25 +376,25 @@ export function CmsProvider({ children }: { children: ReactNode }) {
         .single()
       if (writeError) return writeError.message
       const next = toStory(data as StoryRow)
-      setState((prev) => ({
+      commitState((prev) => ({
         ...prev,
         stories: [next, ...prev.stories].sort(byDateDesc),
       }))
       return null
     },
-    [],
+    [commitState],
   )
 
   const removeStory = useCallback(async (id: string) => {
     if (!supabase) return supabaseConfigError
     const { error: writeError } = await supabase.from('stories').delete().eq('id', id)
     if (writeError) return writeError.message
-    setState((prev) => ({
+    commitState((prev) => ({
       ...prev,
       stories: prev.stories.filter((item) => item.id !== id),
     }))
     return null
-  }, [])
+  }, [commitState])
 
   const upsertChild = useCallback(
     async (child: Omit<ProgramChild, 'id'> & { id?: string }) => {
@@ -406,7 +424,7 @@ export function CmsProvider({ children }: { children: ReactNode }) {
           .single()
         if (writeError) return writeError.message
         const next = toChild(data as ChildRow)
-        setState((prev) => ({
+        commitState((prev) => ({
           ...prev,
           children: prev.children.map((item) => (item.id === next.id ? next : item)),
         }))
@@ -420,22 +438,22 @@ export function CmsProvider({ children }: { children: ReactNode }) {
         .single()
       if (writeError) return writeError.message
       const next = toChild(data as ChildRow)
-      setState((prev) => ({ ...prev, children: [...prev.children, next] }))
+      commitState((prev) => ({ ...prev, children: [...prev.children, next] }))
       return null
     },
-    [],
+    [commitState],
   )
 
   const removeChild = useCallback(async (id: string) => {
     if (!supabase) return supabaseConfigError
     const { error: writeError } = await supabase.from('children').delete().eq('id', id)
     if (writeError) return writeError.message
-    setState((prev) => ({
+    commitState((prev) => ({
       ...prev,
       children: prev.children.filter((item) => item.id !== id),
     }))
     return null
-  }, [])
+  }, [commitState])
 
   const upsertHomeProgram = useCallback(
     async (program: Omit<HomeProgram, 'id'> & { id?: string }) => {
@@ -459,7 +477,7 @@ export function CmsProvider({ children }: { children: ReactNode }) {
           .single()
         if (writeError) return writeError.message
         const next = toHomeProgram(data as HomeProgramRow)
-        setState((prev) => ({
+        commitState((prev) => ({
           ...prev,
           homePrograms: prev.homePrograms
             .map((item) => (item.id === next.id ? next : item))
@@ -484,25 +502,25 @@ export function CmsProvider({ children }: { children: ReactNode }) {
         .single()
       if (writeError) return writeError.message
       const next = toHomeProgram(data as HomeProgramRow)
-      setState((prev) => ({
+      commitState((prev) => ({
         ...prev,
         homePrograms: [...prev.homePrograms, next].sort(bySortOrder),
       }))
       return null
     },
-    [],
+    [commitState],
   )
 
   const removeHomeProgram = useCallback(async (id: string) => {
     if (!supabase) return supabaseConfigError
     const { error: writeError } = await supabase.from('home_programs').delete().eq('id', id)
     if (writeError) return writeError.message
-    setState((prev) => ({
+    commitState((prev) => ({
       ...prev,
       homePrograms: prev.homePrograms.filter((item) => item.id !== id),
     }))
     return null
-  }, [])
+  }, [commitState])
 
   const upsertImpactStat = useCallback(
     async (stat: Omit<ImpactStat, 'id'> & { id?: string }) => {
@@ -522,7 +540,7 @@ export function CmsProvider({ children }: { children: ReactNode }) {
           .single()
         if (writeError) return writeError.message
         const next = toImpactStat(data as ImpactStatRow)
-        setState((prev) => ({
+        commitState((prev) => ({
           ...prev,
           impactStats: prev.impactStats
             .map((item) => (item.id === next.id ? next : item))
@@ -546,25 +564,25 @@ export function CmsProvider({ children }: { children: ReactNode }) {
         .single()
       if (writeError) return writeError.message
       const next = toImpactStat(data as ImpactStatRow)
-      setState((prev) => ({
+      commitState((prev) => ({
         ...prev,
         impactStats: [...prev.impactStats, next].sort(bySortOrder),
       }))
       return null
     },
-    [],
+    [commitState],
   )
 
   const removeImpactStat = useCallback(async (id: string) => {
     if (!supabase) return supabaseConfigError
     const { error: writeError } = await supabase.from('impact_stats').delete().eq('id', id)
     if (writeError) return writeError.message
-    setState((prev) => ({
+    commitState((prev) => ({
       ...prev,
       impactStats: prev.impactStats.filter((item) => item.id !== id),
     }))
     return null
-  }, [])
+  }, [commitState])
 
   const getStoryBySlug = useCallback(
     (slug: string) => state.stories.find((story) => story.slug === slug),
