@@ -6,6 +6,8 @@ export const site = {
   address: 'Musanze, Rwanda',
   whatsappCommunity: 'https://chat.whatsapp.com/',
   whatsapp: 'https://wa.me/250788784568',
+  /** Member / volunteer application (Google Form) */
+  memberApplicationForm: 'https://forms.gle/k18ZBbYE2zGRCuSk7',
   social: {
     instagram: 'https://www.instagram.com/kubwabo_foundation',
     tiktok: 'https://www.tiktok.com/@kubwabo_foundation',
@@ -15,14 +17,14 @@ export const site = {
   teamAdditionalMembersCount: 120,
   donation: {
     bankName: 'Bank of Kigali',
-    accountName: 'Kubwabo Foundation',
-    accountNumber: '000XXXXXXXXX',
+    accountName: 'Kwizera Eric (Founder)',
+    accountNumber: '100140162072',
     momoLabel: 'MTN MoMo',
     momoCode: '1675585',
     momoCodeAccountName: 'Wivine',
     momoPhone: '0796185418',
     momoPhoneAccountName: 'Irakoze Nshuti wivine',
-    note: 'Include your name in the transfer reference. If sponsoring a child, add their name too.',
+    note: 'Bank transfers are received in the founder\'s name for accountability while we complete registration. Include your name in the transfer reference. If sponsoring a child, add their name too.',
   },
 } as const
 
@@ -30,7 +32,6 @@ export const navLinks = [
   { label: 'About', href: '/about' },
   { label: 'Programs', href: '/programs' },
   { label: 'Impact Stories', href: '/news' },
-  { label: 'Contact', href: '/contact' },
 ] as const
 
 export const programLinks = [

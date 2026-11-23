@@ -160,6 +160,11 @@ export const DONATE_FAQS = [
       'Kubwabo means "For Them." We are a youth-led foundation in Rwanda that walks alongside vulnerable children and families so hardship does not define their future. Through Every Child Deserves It, we support education, mentorship, guidance, and encouragement so children can stay in school and grow with confidence. Through For Their Family, we help households build greater stability with essential support, livelihood opportunities, and mentorship. Our focus is practical care that lasts—not a single moment of help, but continued partnership.',
   },
   {
+    question: 'Is Kubwabo Foundation registered?',
+    answer:
+      'Not yet. We are a youth-led foundation, one year old, and we are working toward registration with the Rwanda Governance Board. We work closely with local governance and community partners as we complete that process—so support stays transparent, accountable, and rooted where it matters most.',
+  },
+  {
     question: 'Where does Kubwabo Foundation operate?',
     answer:
       'We work in Rwanda with children and families in vulnerable communities. Our approach is rooted locally: we listen closely, partner with people on the ground, and design support around real needs so help is personal, accountable, and lasting.',

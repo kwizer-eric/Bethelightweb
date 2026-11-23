@@ -1,5 +1,6 @@
 import { Link, useLocation, Navigate } from 'react-router-dom'
 import { formatDonateAmount, DEFAULT_DONATE_CURRENCY } from '../data/donatePage'
+import { site } from '../data/site'
 import type { DonatePaymentSummary } from '../components/donation/DonatePaymentInstructionsModal'
 
 export function DonateThankYouPage() {
@@ -43,7 +44,11 @@ export function DonateThankYouPage() {
         </p>
 
         <p className="mt-4 max-w-md text-sm text-body">
-          Questions? Reply to your confirmation email or reach us on the contact page.
+          Questions? Reply to your confirmation email or reach us at{' '}
+          <a href={`mailto:${site.email}`} className="font-medium text-primary hover:underline">
+            {site.email}
+          </a>
+          .
         </p>
 
         <div className="mt-10 flex w-full max-w-sm flex-col gap-3 sm:flex-row sm:justify-center">

@@ -1,4 +1,4 @@
-import { values } from '../data/site'
+import { site, values } from '../data/site'
 import { PageHero } from '../components/layout/PageHero'
 import { Card } from '../components/ui/Card'
 import { SectionHeading } from '../components/ui/SectionHeading'
@@ -12,7 +12,7 @@ export function MissionPage() {
         title="Our mission & vision"
         subtitle="Delivering relief and long-term opportunity with transparency and dignity."
         cta={{ label: 'See our programs', to: '/about' }}
-        secondaryCta={{ label: 'Contact us', to: '/contact' }}
+        secondaryCta={{ label: 'Join us', href: site.memberApplicationForm }}
       />
 
       <section className="py-20">
@@ -49,8 +49,8 @@ export function MissionPage() {
             ))}
           </div>
           <div className="mt-12 text-center">
-            <Button to="/contact" size="lg">
-              Get in touch
+            <Button href={site.memberApplicationForm} size="lg">
+              Join us
             </Button>
           </div>
         </div>

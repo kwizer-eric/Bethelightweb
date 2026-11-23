@@ -5,7 +5,7 @@ export function DonateFaqAccordion() {
   const [openIndex, setOpenIndex] = useState<number | null>(0)
 
   return (
-    <section className="site-container max-w-4xl py-20 md:py-24">
+    <section id="faq" className="site-container max-w-4xl scroll-mt-24 py-20 md:py-24">
       <h2 className="text-center text-3xl font-bold tracking-tight text-ink md:text-4xl">
         Frequently asked questions
       </h2>

@@ -1,6 +1,6 @@
 import { useId, useRef } from 'react'
-import { Link } from 'react-router-dom'
 import { gsap } from 'gsap'
+import { site } from '../../data/site'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 
@@ -59,12 +59,14 @@ function HeaderBlock({
         Your support helps children access opportunities and families build stronger foundations for a
         better future.
       </p>
-      <Link
-        to="/contact"
+      <a
+        href={site.memberApplicationForm}
+        target="_blank"
+        rel="noreferrer"
         className="mt-8 inline-flex items-center justify-center rounded-lg bg-accent px-7 py-3.5 text-sm font-medium text-ink transition-colors hover:bg-accent/90"
       >
-        Contact Us
-      </Link>
+        Join us
+      </a>
     </div>
   )
 }

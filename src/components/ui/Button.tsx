@@ -1,5 +1,5 @@
 import { Link, type LinkProps as RouterLinkProps } from 'react-router-dom'
-import type { ButtonHTMLAttributes, ReactNode } from 'react'
+import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from 'react'
 
 type Variant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'accent'
 type Size = 'sm' | 'md' | 'lg'
@@ -32,14 +32,22 @@ type BaseProps = {
 type ButtonAsButton = BaseProps &
   ButtonHTMLAttributes<HTMLButtonElement> & {
     to?: undefined
+    href?: undefined
   }
 
 type ButtonAsLink = BaseProps &
   Omit<RouterLinkProps, 'className' | 'children'> & {
     to: string
+    href?: undefined
   }
 
-export function Button(props: ButtonAsButton | ButtonAsLink) {
+type ButtonAsExternal = BaseProps &
+  Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'className' | 'children'> & {
+    href: string
+    to?: undefined
+  }
+
+export function Button(props: ButtonAsButton | ButtonAsLink | ButtonAsExternal) {
   const {
     variant = 'primary',
     size = 'md',
@@ -49,6 +57,21 @@ export function Button(props: ButtonAsButton | ButtonAsLink) {
   } = props
 
   const classes = `inline-flex items-center justify-center rounded-lg font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-warm-white disabled:opacity-50 ${variants[variant]} ${sizes[size]} ${className}`
+
+  if ('href' in rest && rest.href) {
+    const { href, ...anchorRest } = rest
+    return (
+      <a
+        href={href}
+        className={classes}
+        target="_blank"
+        rel="noreferrer"
+        {...anchorRest}
+      >
+        {children}
+      </a>
+    )
+  }
 
   if ('to' in rest && rest.to) {
     const { to, ...linkRest } = rest

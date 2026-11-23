@@ -1,4 +1,4 @@
-import { events } from '../data/site'
+import { events, site } from '../data/site'
 import { PageHero } from '../components/layout/PageHero'
 import { Button } from '../components/ui/Button'
 import { Card } from '../components/ui/Card'
@@ -20,7 +20,7 @@ export function EventsPage() {
         eyebrow="Events"
         title="Show up. Stand up. Give back."
         subtitle="Join us at walks, galas, and community gatherings."
-        cta={{ label: 'Contact us', to: '/contact' }}
+        cta={{ label: 'Join us', href: site.memberApplicationForm }}
       />
 
       <section className="py-20">

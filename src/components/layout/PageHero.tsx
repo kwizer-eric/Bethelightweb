@@ -1,14 +1,39 @@
 import type { ReactNode } from 'react'
 import { Button } from '../ui/Button'
 
+type HeroCta = { label: string; to?: string; href?: string }
+
 type Props = {
   title: string
   subtitle?: string
   eyebrow?: string
-  cta?: { label: string; to: string }
-  secondaryCta?: { label: string; to: string }
+  cta?: HeroCta
+  secondaryCta?: HeroCta
   children?: ReactNode
   compact?: boolean
+}
+
+function HeroButton({
+  cta,
+  variant,
+  className,
+}: {
+  cta: HeroCta
+  variant: 'secondary' | 'outline'
+  className?: string
+}) {
+  if (cta.href) {
+    return (
+      <Button href={cta.href} variant={variant} size="lg" className={className}>
+        {cta.label}
+      </Button>
+    )
+  }
+  return (
+    <Button to={cta.to ?? '/'} variant={variant} size="lg" className={className}>
+      {cta.label}
+    </Button>
+  )
 }
 
 export function PageHero({
@@ -39,16 +64,14 @@ export function PageHero({
         )}
         {(cta || secondaryCta) && (
           <div className="mt-8 flex flex-wrap gap-4">
-            {cta && (
-              <Button to={cta.to} variant="secondary" size="lg">
-                {cta.label}
-              </Button>
-            )}
-            {secondaryCta && (
-              <Button to={secondaryCta.to} variant="outline" size="lg" className="border-warm-white text-warm-white hover:bg-warm-white hover:text-primary">
-                {secondaryCta.label}
-              </Button>
-            )}
+            {cta ? <HeroButton cta={cta} variant="secondary" /> : null}
+            {secondaryCta ? (
+              <HeroButton
+                cta={secondaryCta}
+                variant="outline"
+                className="border-warm-white text-warm-white hover:bg-warm-white hover:text-primary"
+              />
+            ) : null}
           </div>
         )}
         {children}

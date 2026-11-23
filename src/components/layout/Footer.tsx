@@ -252,6 +252,21 @@ export function Footer() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link to="/donate#faq" className="transition-colors hover:text-accent">
+                  FAQ
+                </Link>
+              </li>
+              <li>
+                <a
+                  href={site.memberApplicationForm}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="transition-colors hover:text-accent"
+                >
+                  Join us
+                </a>
+              </li>
             </ul>
           </div>
 

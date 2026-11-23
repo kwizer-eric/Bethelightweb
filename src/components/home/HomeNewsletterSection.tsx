@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom'
 import { siteImages } from '../../assets/siteImages'
+import { site } from '../../data/site'
 import { OutreachCtaSection, outreachCtaButtonClass } from './OutreachCtaSection'
 
 export function HomeNewsletterSection() {
@@ -11,9 +11,14 @@ export function HomeNewsletterSection() {
       primaryImage={siteImages.homeOurStory}
       primaryImageAlt="A caregiver and child supported by Kubwabo Foundation"
       cta={
-        <Link to="/contact" className={outreachCtaButtonClass}>
+        <a
+          href={site.memberApplicationForm}
+          target="_blank"
+          rel="noreferrer"
+          className={outreachCtaButtonClass}
+        >
           Become a Volunteer
-        </Link>
+        </a>
       }
     />
   )

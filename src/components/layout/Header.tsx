@@ -3,7 +3,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom'
 import { site, navLinks, programLinks } from '../../data/site'
 import { Logo } from '../ui/Logo'
 
-const mainLinks = navLinks.filter((link) => link.href !== '/contact')
+const mainLinks = navLinks
 
 const supportClass = 'rounded-lg bg-accent text-ink hover:bg-accent'
 
