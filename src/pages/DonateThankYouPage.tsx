@@ -37,7 +37,7 @@ export function DonateThankYouPage() {
           {programLine ? (
             <>
               {' '}
-              — <span className="font-medium text-ink">{programLine}</span>
+              for <span className="font-medium text-ink">{programLine}</span>
             </>
           ) : null}
           . We&apos;ll confirm by email when your transfer is matched.

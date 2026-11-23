@@ -8,40 +8,40 @@
  */
 
 const local = {
-  /** Home — full-bleed hero */
+  /** Home, full-bleed hero */
   homeHero: '/images/home-hero.jpg',
-  /** Home — Our Story panel */
+  /** Home, Our Story panel */
   homeOurStory: '/images/_DSC8026.avif',
-  /** Home — Volunteer CTA card */
+  /** Home, Volunteer CTA card */
   homeVolunteer: '/images/_DSC8416.avif',
-  /** Home — Support / donate CTA card */
+  /** Home, Support / donate CTA card */
   homeSupport: '/images/_DSC8061.avif',
-  /** About — parallax foundation image */
+  /** About, parallax foundation image */
   aboutFoundation: '/images/IMG_3313.avif',
-  /** About — secondary story / community image */
+  /** About, secondary story / community image */
   aboutCommunity:
     'https://res.cloudinary.com/efzpryhb/image/upload/v1795222430/_DSC8052_tqinaa.avif',
-  /** About — Mission / Vision middle column */
+  /** About, Mission / Vision middle column */
   aboutMission:
     'https://res.cloudinary.com/efzpryhb/image/upload/v1795222408/_DSC8398_converted_vmnkwf.avif',
-  /** About — mission pathways photo */
+  /** About, mission pathways photo */
   aboutPathways:
     'https://res.cloudinary.com/efzpryhb/image/upload/v1795222412/_DSC8413_converted_k9f7nc.avif',
-  /** About — donate CTA band */
+  /** About, donate CTA band */
   aboutDonateCta:
     'https://res.cloudinary.com/efzpryhb/image/upload/v1795311264/_DSC8022_Edited_Edited_ru40ue.jpg',
-  /** Every Kid — program hero */
+  /** Every Kid, program hero */
   everyKidHero: '/images/_DSC8421.avif',
-  /** Home — Every Child Deserves It featured program card */
+  /** Home, Every Child Deserves It featured program card */
   everyKidProgram: '/images/_DSC8396.jpg',
-  /** Every Kid — mid-page story band */
+  /** Every Kid, mid-page story band */
   everyKidStory:
     'https://res.cloudinary.com/efzpryhb/image/upload/v1795222431/_DSC8061_qsfdws.avif',
-  /** For Their Family — program hero */
+  /** For Their Family, program hero */
   forTheirFamilyHero: '/images/_DSC8437.avif',
-  /** Home — For Their Family featured program card */
+  /** Home, For Their Family featured program card */
   forTheirFamilyProgram: '/images/_DSC8033.jpg',
-  /** For Their Family — mid-page story band */
+  /** For Their Family, mid-page story band */
   forTheirFamilyStory:
     'https://res.cloudinary.com/efzpryhb/image/upload/v1795222428/IMG_E3142_c6kjot.avif',
 } as const
@@ -107,7 +107,7 @@ export const siteImages = (
   {} as Record<keyof typeof local, string>,
 )
 
-/** Local paths only — useful when swapping one image at a time */
+/** Local paths only, useful when swapping one image at a time */
 export const localSiteImages = local
 
 export const siteVideos = {

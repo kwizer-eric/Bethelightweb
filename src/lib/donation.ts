@@ -22,7 +22,7 @@ export interface DonationResult {
   message: string
 }
 
-/** Provider adapter boundary — swap mockDonationProvider for Stripe/Donorbox later */
+/** Provider adapter boundary, swap mockDonationProvider for Stripe/Donorbox later */
 export interface DonationProvider {
   submit(payload: DonationPayload): Promise<DonationResult>
 }

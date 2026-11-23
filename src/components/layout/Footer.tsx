@@ -89,7 +89,7 @@ function FooterTopBar() {
           </p>
           {submitted ? (
             <p className="mt-4 text-sm text-warm-white/70">
-              Thanks — you&apos;re on the list. We&apos;ll keep you updated.
+              Thanks, you&apos;re on the list. We&apos;ll keep you updated.
             </p>
           ) : (
             <form

@@ -17,7 +17,7 @@ export function DonatePage() {
 
   return (
     <div className="bg-white text-ink">
-      {/* Hero + donation form — blue band capped at 75dvh; form positioned independently */}
+      {/* Hero + donation form, blue band capped at 75dvh; form positioned independently */}
       <section className="relative overflow-visible bg-ink lg:bg-transparent">
         <div
           className="pointer-events-none absolute inset-x-0 top-0 z-0 h-[75dvh] max-h-[75dvh] overflow-hidden"
@@ -82,7 +82,7 @@ export function DonatePage() {
             </h2>
             <p className="mt-5 text-base leading-relaxed text-body">
               Through Every Child Deserves It and For Their Family, we walk alongside vulnerable
-              children and households in Rwanda—with education, mentorship, essential support, and
+              children and households in Rwanda, with education, mentorship, essential support, and
               livelihood guidance. Hardship should never define a child&apos;s potential or a
               family&apos;s dignity.
             </p>

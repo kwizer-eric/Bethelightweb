@@ -143,7 +143,7 @@ export function DashboardLayout() {
 
   return (
     <div className="min-h-screen bg-[#f4f5f7] text-ink">
-      {/* Fixed sidebar — does not scroll with page */}
+      {/* Fixed sidebar, does not scroll with page */}
       <aside
         className={`fixed inset-y-0 left-0 z-40 flex h-dvh w-[15.5rem] flex-col overflow-hidden border-r border-ink/8 bg-white transition-transform ${
           mobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'

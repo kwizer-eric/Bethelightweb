@@ -53,7 +53,7 @@ export function DonateTestimonialBanner() {
         <div className="flex max-w-lg items-stretch gap-5 px-8 py-10 sm:max-w-xl sm:gap-6 sm:px-10 md:px-12 lg:max-w-2xl lg:px-16 lg:py-14">
           <div className="w-1 shrink-0 rounded-full bg-[#C85A32]" aria-hidden />
           <blockquote className="text-left text-xl font-semibold leading-snug text-white sm:text-2xl lg:text-[1.75rem] lg:leading-relaxed">
-            I give because Kubwabo walks alongside children and families for the long road—not a
+            I give because Kubwabo walks alongside children and families for the long road, not a
             quick fix, but lasting support. Seeing children stay in school and families grow stronger
             keeps me connected to the impact we&apos;re making together.
           </blockquote>

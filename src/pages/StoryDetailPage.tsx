@@ -118,12 +118,12 @@ export function StoryDetailPage() {
             </p>
           </div>
 
-          <div className="mx-auto mt-10 max-w-4xl overflow-hidden lg:mt-12">
+          <div className="mx-auto mt-10 flex max-w-6xl justify-center overflow-hidden lg:mt-12">
             <FadeImage
               src={story.image}
               alt=""
               referrerPolicy="no-referrer"
-              className="aspect-[16/9] w-full object-cover"
+              className="h-auto w-full lg:max-h-[80vh] lg:w-auto lg:max-w-full"
             />
           </div>
 

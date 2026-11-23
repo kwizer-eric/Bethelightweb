@@ -40,7 +40,7 @@ export function ProgramImpactCard({
     <Link
       to={href}
       className="group flex h-full min-h-[28rem] flex-col overflow-hidden rounded-lg bg-black text-left transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-[0_16px_48px_-16px_rgba(0,0,0,0.55)] sm:min-h-[30rem] lg:min-h-[32rem]"
-      aria-label={`${title} — ${metric}`}
+      aria-label={`${title}, ${metric}`}
     >
       <div className="aspect-[4/3] min-h-[13.5rem] w-full shrink-0 overflow-hidden bg-ink/30 sm:min-h-[15rem] lg:min-h-[17rem]">
         <FadeImage

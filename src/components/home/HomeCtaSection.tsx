@@ -82,7 +82,7 @@ function VolunteerModal({
         {submitted ? (
           <div className="mt-8">
             <p className="text-base leading-relaxed text-body">
-              Thanks — you&apos;re on the list. We&apos;ll reach out on WhatsApp soon.
+              Thanks, you&apos;re on the list. We&apos;ll reach out on WhatsApp soon.
             </p>
             <button
               type="button"

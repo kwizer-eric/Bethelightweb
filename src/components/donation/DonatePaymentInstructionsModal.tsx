@@ -78,7 +78,7 @@ export function DonatePaymentInstructionsModal({
   const referenceParts = [gift.firstName, gift.lastName, gift.programLabel, gift.childName].filter(
     Boolean,
   )
-  const reference = referenceParts.join(' — ')
+  const reference = referenceParts.join(', ')
 
   return createPortal(
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">

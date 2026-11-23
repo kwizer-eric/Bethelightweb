@@ -10,7 +10,7 @@ function normalizeEmail(email: string) {
   return email.trim().toLowerCase()
 }
 
-/** Public subscribe — stores email in Supabase for the admin list. */
+/** Public subscribe, stores email in Supabase for the admin list. */
 export async function subscribeNewsletter(email: string): Promise<string | null> {
   if (!supabase) return supabaseConfigError
   const normalized = normalizeEmail(email)
@@ -24,7 +24,7 @@ export async function subscribeNewsletter(email: string): Promise<string | null>
 
   if (!error) return null
 
-  // Already on the list — treat as success for the visitor
+  // Already on the list, treat as success for the visitor
   if (error.code === '23505') return null
 
   return error.message

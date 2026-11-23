@@ -91,7 +91,7 @@ export function DonateNowForm({
 
   const amountLabel = formatDonateAmount(effectiveAmount, currency)
 
-  const submitLabel = `Continue — ${amountLabel}`
+  const submitLabel = `Continue · ${amountLabel}`
 
   const shellClass = featured
     ? 'rounded-2xl border border-ink/8 bg-white p-6 shadow-[0_24px_60px_-16px_rgba(0,0,0,0.35)] md:p-9 lg:p-10'
@@ -294,7 +294,7 @@ export function DonateNowForm({
                 onChange={(e) => setChildId(e.target.value)}
                 className={inputClass}
               >
-                <option value="">General — Every Child Deserves It</option>
+                <option value="">General · Every Child Deserves It</option>
                 {programChildren.map((c) => (
                   <option key={c.id} value={c.id}>
                     {c.name}

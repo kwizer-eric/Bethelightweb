@@ -66,7 +66,7 @@ export function AboutPage() {
         />
       </section>
 
-      {/* 01 — our story */}
+      {/* 01, our story */}
       <section id="our-story" className="bg-warm-white">
         <div
           ref={parallaxWrapRef}
@@ -206,7 +206,7 @@ export function AboutPage() {
         </div>
       </section>
 
-      {/* 03 — the team */}
+      {/* 03, the team */}
       <section className="bg-warm-white text-ink">
         <div className="site-container py-12 sm:py-24 lg:py-32">
           <div className="grid gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-start lg:gap-12 xl:gap-20">

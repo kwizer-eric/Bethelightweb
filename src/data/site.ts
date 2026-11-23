@@ -46,7 +46,7 @@ export const programLinks = [
 ] as const
 
 export const aboutSummary =
-  'Kubwabo Foundation exists to bring practical help and lasting hope to communities overlooked by traditional aid. Founded by community leaders, we grew from a weekend food drive into an NGO serving 28 communities — with dignity, transparency, and programs in food relief, education, health, and housing.'
+  'Kubwabo Foundation exists to bring practical help and lasting hope to communities overlooked by traditional aid. Founded by community leaders, we grew from a weekend food drive into an NGO serving 28 communities, with dignity, transparency, and programs in food relief, education, health, and housing.'
 
 export const impactStats = [
   { value: '35+', label: 'Children\nReached' },
@@ -96,7 +96,7 @@ export const programs = [
 export const testimonials = [
   {
     quote:
-      'Kubwabo Foundation showed up when we had nowhere else to turn. They didn\'t just give us food — they gave us dignity.',
+      'Kubwabo Foundation showed up when we had nowhere else to turn. They didn\'t just give us food, they gave us dignity.',
     name: 'Maria Santos',
     role: 'Community member, São Paulo',
   },
@@ -157,7 +157,7 @@ export const stories = [
     body: [
       {
         type: 'p',
-        text: 'When the Santos family lost their home, a single delivery became the first step back to stability. What began as emergency food relief quickly opened the door to longer-term support — and a path forward.',
+        text: 'When the Santos family lost their home, a single delivery became the first step back to stability. What began as emergency food relief quickly opened the door to longer-term support, and a path forward.',
       },
       {
         type: 'p',
@@ -178,7 +178,7 @@ export const stories = [
       },
       {
         type: 'p',
-        text: 'Today the family is settled again. Maria says the turning point was not only the food — it was knowing someone would come back. That promise is at the heart of how we work.',
+        text: 'Today the family is settled again. Maria says the turning point was not only the food, it was knowing someone would come back. That promise is at the heart of how we work.',
       },
     ] satisfies StoryBlock[],
   },
@@ -195,7 +195,7 @@ export const stories = [
     body: [
       {
         type: 'p',
-        text: '450 students received supplies and tutoring support through our education program this term — giving families one less barrier between their children and the classroom.',
+        text: '450 students received supplies and tutoring support through our education program this term, giving families one less barrier between their children and the classroom.',
       },
       {
         type: 'p',
@@ -216,7 +216,7 @@ export const stories = [
       },
       {
         type: 'p',
-        text: 'Education access is not only about materials. It is about showing up consistently so children know school is a place they belong — and that their future is worth investing in.',
+        text: 'Education access is not only about materials. It is about showing up consistently so children know school is a place they belong, and that their future is worth investing in.',
       },
     ] satisfies StoryBlock[],
   },
@@ -254,7 +254,7 @@ export const stories = [
       },
       {
         type: 'p',
-        text: 'We are already planning the next visit. Sustainable care means returning — and building skills that remain after the ambulance leaves.',
+        text: 'We are already planning the next visit. Sustainable care means returning, and building skills that remain after the ambulance leaves.',
       },
     ] satisfies StoryBlock[],
   },
@@ -263,7 +263,7 @@ export const stories = [
     slug: 'volunteer-spotlight-james',
     title: 'Volunteer spotlight: James',
     excerpt:
-      "From weekend helper to program lead — one volunteer's journey with Kubwabo Foundation.",
+      "From weekend helper to program lead, one volunteer's journey with Kubwabo Foundation.",
     date: '2026-02-10',
     category: 'Volunteers',
     image:
@@ -271,7 +271,7 @@ export const stories = [
     body: [
       {
         type: 'p',
-        text: "From weekend helper to program lead — James's journey with Kubwabo Foundation shows what happens when volunteers are trusted with real responsibility.",
+        text: "From weekend helper to program lead, James's journey with Kubwabo Foundation shows what happens when volunteers are trusted with real responsibility.",
       },
       {
         type: 'p',
@@ -309,7 +309,7 @@ export const stories = [
     body: [
       {
         type: 'p',
-        text: 'Twelve families received emergency housing repairs ahead of the rainy season — reinforcing roofs, sealing walls, and making homes safer before the storms arrived.',
+        text: 'Twelve families received emergency housing repairs ahead of the rainy season, reinforcing roofs, sealing walls, and making homes safer before the storms arrived.',
       },
       {
         type: 'p',
@@ -330,7 +330,7 @@ export const stories = [
       },
       {
         type: 'p',
-        text: 'Shelter is foundational. When the rains came, these families stayed dry — and stayed together.',
+        text: 'Shelter is foundational. When the rains came, these families stayed dry, and stayed together.',
       },
     ] satisfies StoryBlock[],
   },
@@ -351,7 +351,7 @@ export const stories = [
       },
       {
         type: 'p',
-        text: 'Neighbours rotate watering schedules. Children learn where food comes from. Families leave with bags of greens — and a stake in something they helped grow.',
+        text: 'Neighbours rotate watering schedules. Children learn where food comes from. Families leave with bags of greens, and a stake in something they helped grow.',
       },
       {
         type: 'h2',
@@ -385,7 +385,7 @@ export const stories = [
     body: [
       {
         type: 'p',
-        text: 'Twenty students started the school year with fees covered and books in hand — removing the financial cliff that too often ends a promising academic journey.',
+        text: 'Twenty students started the school year with fees covered and books in hand, removing the financial cliff that too often ends a promising academic journey.',
       },
       {
         type: 'p',
@@ -423,7 +423,7 @@ export const stories = [
     body: [
       {
         type: 'p',
-        text: 'New wells and community training mean families in three villages no longer walk miles for safe drinking water — freeing hours each day and lowering water-borne illness risk.',
+        text: 'New wells and community training mean families in three villages no longer walk miles for safe drinking water, freeing hours each day and lowering water-borne illness risk.',
       },
       {
         type: 'p',
@@ -461,7 +461,7 @@ export const stories = [
     body: [
       {
         type: 'p',
-        text: 'A look at how local leaders shape every program we run together. Kubwabo Foundation does not arrive with a fixed script — we arrive ready to listen.',
+        text: 'A look at how local leaders shape every program we run together. Kubwabo Foundation does not arrive with a fixed script, we arrive ready to listen.',
       },
       {
         type: 'p',
@@ -614,7 +614,7 @@ export const team = [
     role: 'Executive Director',
     bio: 'Sarah built Kubwabo Foundation from a weekend food drive into a multi-program NGO. She focuses on partner trust, transparent operations, and making sure every program starts with what communities actually ask for.',
     detail:
-      'Before Kubwabo, Sarah spent a decade in community organizing and nonprofit operations across East and Southern Africa. She believes aid without dignity is incomplete — and that lasting change is designed with local leaders, not delivered to them.',
+      'Before Kubwabo, Sarah spent a decade in community organizing and nonprofit operations across East and Southern Africa. She believes aid without dignity is incomplete, and that lasting change is designed with local leaders, not delivered to them.',
   },
   {
     name: 'David Chen',
@@ -626,7 +626,7 @@ export const team = [
   {
     name: 'Amara Osei',
     role: 'Community Outreach Lead',
-    bio: 'Amara connects families, volunteers, and partner organizations. She is the reason our programs feel personal — and why new volunteers stay.',
+    bio: 'Amara connects families, volunteers, and partner organizations. She is the reason our programs feel personal, and why new volunteers stay.',
     detail:
       'Raised in one of the first communities Kubwabo served, Amara brings lived context to every outreach plan. She leads caregiver circles, school partnerships, and the volunteer onboarding path that turns first-timers into steady contributors.',
   },

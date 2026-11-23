@@ -215,7 +215,7 @@ export function EveryKidPage() {
 
   return (
     <div className="bg-warm-white text-ink">
-      {/* 1. Hero Section — matching home page hero with full-bleed image below */}
+      {/* 1. Hero Section, matching home page hero with full-bleed image below */}
       <section className="w-full bg-warm-white">
         <PageHeroIntro
           titleAtTop
@@ -269,9 +269,9 @@ export function EveryKidPage() {
             Lack of opportunity should never define childhood, dignity, or future
           </>
         }
-        intro="For children in vulnerable families—whether facing poverty, displacement, or interrupted schooling—insecurity shapes every day. School fees, missing materials, unsafe environments, and little encouragement can keep bright students from returning to class or believing in what comes next."
+        intro="For children in vulnerable families, whether facing poverty, displacement, or interrupted schooling, insecurity shapes every day. School fees, missing materials, unsafe environments, and little encouragement can keep bright students from returning to class or believing in what comes next."
         callout="Reaching children across growing communities, our education and mentorship work is becoming a critical priority as needs intensify and families look for partners they can trust."
-        outro="We work flexibly with local schools, caregivers, and community leaders. Educational materials, tutoring support, safe learning spaces, and consistent mentoring are a few of the ways we show up—so children can stay in school, feel protected, and move forward with hope."
+        outro="We work flexibly with local schools, caregivers, and community leaders. Educational materials, tutoring support, safe learning spaces, and consistent mentoring are a few of the ways we show up, so children can stay in school, feel protected, and move forward with hope."
       />
 
       {/* Program Details & Pillars */}
@@ -285,7 +285,7 @@ export function EveryKidPage() {
               More than giving notebooks, we also
             </h2>
             <p className="mt-4 max-w-2xl text-base leading-relaxed text-body sm:text-lg">
-              Education opens doors—but children need mentorship, safe spaces, and steady
+              Education opens doors, but children need mentorship, safe spaces, and steady
               encouragement to keep moving forward.
             </p>
           </div>
@@ -330,7 +330,7 @@ export function EveryKidPage() {
             </div>
           </div>
 
-          {/* Children Grid — 4 cards matching the blog cards architecture */}
+          {/* Children Grid, 4 cards matching the blog cards architecture */}
           <div className="mt-14 grid grid-cols-1 items-stretch gap-4 sm:mt-16 sm:grid-cols-2 sm:gap-6 lg:mt-20 lg:grid-cols-4">
             {children.slice(0, 4).map((child) => (
               <article

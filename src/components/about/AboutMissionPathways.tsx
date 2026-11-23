@@ -7,7 +7,7 @@ const PATHWAYS = [
     id: 'learning',
     title: 'Education that opens doors',
     description:
-      'Helping children stay in school and keep learning—through materials, encouragement, and steady support so financial hardship does not cut short their potential.',
+      'Helping children stay in school and keep learning, through materials, encouragement, and steady support so financial hardship does not cut short their potential.',
   },
   {
     id: 'guidance',
@@ -19,13 +19,13 @@ const PATHWAYS = [
     id: 'support',
     title: 'Essential support with dignity',
     description:
-      'Meeting urgent needs with respect—connecting children and caregivers with practical help that steadies a household when hardship presses hardest.',
+      'Meeting urgent needs with respect, connecting children and caregivers with practical help that steadies a household when hardship presses hardest.',
   },
   {
     id: 'families',
     title: 'Stronger families, lasting change',
     description:
-      'Investing in parents and caregivers through skills, livelihood support, and long-term partnership so families move toward stability—and children build on a stronger foundation.',
+      'Investing in parents and caregivers through skills, livelihood support, and long-term partnership so families move toward stability, and children build on a stronger foundation.',
   },
 ] as const
 

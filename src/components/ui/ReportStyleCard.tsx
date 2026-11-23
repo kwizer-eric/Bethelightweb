@@ -18,7 +18,7 @@ export type ReportStyleCardProps = {
   tone?: 'muted' | 'black'
   /** Text above image (default) or image above text */
   layout?: 'text-first' | 'image-first'
-  /** Card fill — default gray panel or brand yellow */
+  /** Card fill, default gray panel or brand yellow */
   surface?: 'muted' | 'accent'
   cornerClass?: string
 }
@@ -110,7 +110,7 @@ export function ReportStyleCard({
     <Link
       to={href}
       className={`group flex h-full w-full max-w-[380px] flex-col overflow-hidden text-left text-ink transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-[0_12px_40px_-12px_rgba(43,59,48,0.18)] ${cornerClass} ${surfaceClass} ${className}`}
-      aria-label={`${title} — ${badgeText}`}
+      aria-label={`${title}, ${badgeText}`}
     >
       {layout === 'image-first' ? (
         <>

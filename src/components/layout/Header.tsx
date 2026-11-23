@@ -52,7 +52,7 @@ export function Header() {
           onClick={() => setOpen(false)}
           aria-label={site.name}
         >
-          <Logo tone="ink" />
+          <Logo tone="primary" />
         </Link>
 
         <nav

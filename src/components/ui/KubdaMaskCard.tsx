@@ -115,14 +115,14 @@ export function KubdaMaskCard({
 
   if (href.startsWith('http')) {
     return (
-      <a href={href} className={shellClass} aria-label={`${title} — ${badgeText}`}>
+      <a href={href} className={shellClass} aria-label={`${title}, ${badgeText}`}>
         {inner}
       </a>
     )
   }
 
   return (
-    <Link to={href} className={shellClass} aria-label={`${title} — ${badgeText}`}>
+    <Link to={href} className={shellClass} aria-label={`${title}, ${badgeText}`}>
       {inner}
     </Link>
   )

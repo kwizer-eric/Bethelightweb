@@ -115,8 +115,8 @@ export function ForTheParentsPage() {
       <ProgramAfterHeroSection
         eyebrow="For their family"
         title="Strength when families need it most"
-        lead="Supporting vulnerable households through everyday challenges so parents can build stability—and children can grow in a safer, stronger home."
-        body="When families struggle to access nutritious food, healthcare, stable income, or safe housing, creating a supportive environment for children becomes harder. Behind every child is a family whose well-being shapes the opportunities they have and the future they can build. For Their Family walks alongside parents through skills training, livelihood support, and long-term guidance—not a single donation, but steady partnership. By investing in families today, we help break cycles of hardship and give children room to learn, heal, and thrive."
+        lead="Supporting vulnerable households through everyday challenges so parents can build stability, and children can grow in a safer, stronger home."
+        body="When families struggle to access nutritious food, healthcare, stable income, or safe housing, creating a supportive environment for children becomes harder. Behind every child is a family whose well-being shapes the opportunities they have and the future they can build. For Their Family walks alongside parents through skills training, livelihood support, and long-term guidance, not a single donation, but steady partnership. By investing in families today, we help break cycles of hardship and give children room to learn, heal, and thrive."
       />
 
       <ProgramStoryImage
@@ -132,7 +132,7 @@ export function ForTheParentsPage() {
         }
         intro="For households facing conflict, displacement, or extreme poverty, meeting basic needs is a daily struggle. Whether it is food, healthcare, safe housing, or reliable income, parents carry stress that shapes the environment their children grow up in."
         callout="Walking alongside families in multiple communities, livelihood and household support is becoming a critical priority as populations grow and protection risks intensify."
-        outro="Our team adapts to each family’s situation—skills training, business guidance, referrals for essentials, and long-term follow-up. When parents gain stability, children gain room to learn, heal, and dream again."
+        outro="Our team adapts to each family’s situation, skills training, business guidance, referrals for essentials, and long-term follow-up. When parents gain stability, children gain room to learn, heal, and dream again."
       />
 
       {/* How we support */}

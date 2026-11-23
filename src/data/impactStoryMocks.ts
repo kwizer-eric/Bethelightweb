@@ -2,7 +2,7 @@ import type { ImpactStoryCardProps } from '../components/ui/ImpactStoryCard'
 import { siteImages } from '../assets/siteImages'
 
 /** Design-reference cards for previewing the impact story layout on /news */
-/** Fallback cards when CMS has no stories yet — hrefs match seeded story slugs. */
+/** Fallback cards when CMS has no stories yet, hrefs match seeded story slugs. */
 export const impactStoryMockCards: ImpactStoryCardProps[] = [
   {
     badge: '+500 BOOKS DISTRIBUTED',

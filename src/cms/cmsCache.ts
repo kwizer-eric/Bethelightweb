@@ -2,7 +2,7 @@ import type { CmsState } from './types'
 
 const CACHE_KEY = 'kubwabo:cms:v1'
 const CACHE_VERSION = 1
-/** Soft TTL — we still revalidate in the background either way. */
+/** Soft TTL, we still revalidate in the background either way. */
 const MAX_AGE_MS = 1000 * 60 * 60 * 24
 
 type CmsCachePayload = {
@@ -48,6 +48,6 @@ export function writeCmsCache(state: CmsState) {
     }
     window.localStorage.setItem(CACHE_KEY, JSON.stringify(payload))
   } catch {
-    // Quota / private mode — ignore; network fetch still works.
+    // Quota / private mode, ignore; network fetch still works.
   }
 }

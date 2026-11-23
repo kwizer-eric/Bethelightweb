@@ -49,7 +49,7 @@ export function ImpactStoryCard({
     <Link
       to={href}
       className={`group relative block overflow-hidden rounded-2xl ${heightClass} ${className}`}
-      aria-label={`${title} — ${badge}`}
+      aria-label={`${title}, ${badge}`}
     >
       <FadeImage
         src={image}

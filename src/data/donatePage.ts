@@ -139,12 +139,12 @@ export const DONATE_STEPS = [
   {
     number: '1',
     title: 'Your donation',
-    body: '100% of your gift goes toward supporting vulnerable children and families—education, essential needs, mentorship, and family-strengthening initiatives. No hidden fees. Every contribution matters.',
+    body: '100% of your gift goes toward supporting vulnerable children and families, education, essential needs, mentorship, and family-strengthening initiatives. No hidden fees. Every contribution matters.',
   },
   {
     number: '2',
     title: 'Our action',
-    body: 'We turn your generosity into meaningful work on the ground. Through Every Child Deserves It and For Their Family, we respond to real needs and walk alongside those we serve—with care that continues past a single moment.',
+    body: 'We turn your generosity into meaningful work on the ground. Through Every Child Deserves It and For Their Family, we respond to real needs and walk alongside those we serve, with care that continues past a single moment.',
   },
   {
     number: '3',
@@ -157,12 +157,12 @@ export const DONATE_FAQS = [
   {
     question: 'What does Kubwabo Foundation do?',
     answer:
-      'Kubwabo means "For Them." We are a youth-led foundation in Rwanda that walks alongside vulnerable children and families so hardship does not define their future. Through Every Child Deserves It, we support education, mentorship, guidance, and encouragement so children can stay in school and grow with confidence. Through For Their Family, we help households build greater stability with essential support, livelihood opportunities, and mentorship. Our focus is practical care that lasts—not a single moment of help, but continued partnership.',
+      'Kubwabo means "For Them." We are a youth-led foundation in Rwanda that walks alongside vulnerable children and families so hardship does not define their future. Through Every Child Deserves It, we support education, mentorship, guidance, and encouragement so children can stay in school and grow with confidence. Through For Their Family, we help households build greater stability with essential support, livelihood opportunities, and mentorship. Our focus is practical care that lasts, not a single moment of help, but continued partnership.',
   },
   {
     question: 'Is Kubwabo Foundation registered?',
     answer:
-      'Not yet. We are a youth-led foundation, one year old, and we are working toward registration with the Rwanda Governance Board. We work closely with local governance and community partners as we complete that process—so support stays transparent, accountable, and rooted where it matters most.',
+      'Not yet. We are a youth-led foundation, one year old, and we are working toward registration with the Rwanda Governance Board. We work closely with local governance and community partners as we complete that process, so support stays transparent, accountable, and rooted where it matters most.',
   },
   {
     question: 'Where does Kubwabo Foundation operate?',
@@ -172,12 +172,12 @@ export const DONATE_FAQS = [
   {
     question: 'How are donations used?',
     answer:
-      '100% of your donation goes directly toward supporting vulnerable children and families—through education and learning materials, essential needs, mentorship, and family-strengthening initiatives. No hidden fees. Every contribution helps keep children learning, families more stable, and dignity intact.',
+      '100% of your donation goes directly toward supporting vulnerable children and families, through education and learning materials, essential needs, mentorship, and family-strengthening initiatives. No hidden fees. Every contribution helps keep children learning, families more stable, and dignity intact.',
   },
   {
     question: 'Can I choose which program to support?',
     answer:
-      'Yes. On this page you can direct your gift to Every Child Deserves It, For Their Family, or—when available—sponsor a specific child in the Every Child Deserves It program. Either way, your support helps us walk alongside those we serve for the long road.',
+      'Yes. On this page you can direct your gift to Every Child Deserves It, For Their Family, or, when available, sponsor a specific child in the Every Child Deserves It program. Either way, your support helps us walk alongside those we serve for the long road.',
   },
   {
     question: 'How do I complete my donation?',

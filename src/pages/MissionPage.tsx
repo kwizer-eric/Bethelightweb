@@ -22,7 +22,7 @@ export function MissionPage() {
               <h2 className="text-xl font-bold text-ink">Mission</h2>
               <p className="mt-3 leading-relaxed text-body">
                 Deliver immediate relief and long-term opportunity to underserved communities
-                through food, education, health, and shelter programs — with transparency and
+                through food, education, health, and shelter programs, with transparency and
                 dignity at the center.
               </p>
             </Card>
