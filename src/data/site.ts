@@ -30,8 +30,52 @@ export const site = {
 
 export const navLinks = [
   { label: 'About', href: '/about' },
+  { label: 'Mission', href: '/mission' },
   { label: 'Programs', href: '/programs' },
   { label: 'Impact Stories', href: '/news' },
+] as const
+
+/**
+ * Top pages Google may show as sitelinks — keep labels clear and descriptions unique.
+ * Used in JSON-LD and the home-page “Explore” block.
+ */
+export const searchPriorityLinks = [
+  {
+    label: 'Donate',
+    href: '/donate',
+    description:
+      'Give to Every Child Deserves It and For Their Family. Help education, mentorship, and household stability in Musanze, Rwanda.',
+  },
+  {
+    label: 'About Us',
+    href: '/about',
+    description:
+      'Our story, team, and how Kubwabo grew from a weekend food drive into youth-led community aid across Rwanda.',
+  },
+  {
+    label: 'Our Mission',
+    href: '/mission',
+    description:
+      'How we partner with communities to protect children, strengthen families, and deliver practical help with dignity.',
+  },
+  {
+    label: 'Every Child Deserves It',
+    href: '/programs/every-kid-deserves-it',
+    description:
+      'School support, mentorship, and encouragement so vulnerable children stay in school and grow with confidence.',
+  },
+  {
+    label: 'For Their Family',
+    href: '/programs/for-the-parents',
+    description:
+      'Livelihood support and mentorship so parents and caregivers build stability and children thrive.',
+  },
+  {
+    label: 'Impact Stories',
+    href: '/news',
+    description:
+      'News and stories from the field — education, family support, and community partnership.',
+  },
 ] as const
 
 export const programLinks = [

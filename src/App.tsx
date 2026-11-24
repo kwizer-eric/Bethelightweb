@@ -1,4 +1,5 @@
 import { BrowserRouter, Navigate, Routes, Route } from 'react-router-dom'
+import { SeoHead } from './components/SeoHead'
 import { ScrollToTop } from './components/ScrollToTop'
 import { Layout } from './components/layout/Layout'
 import { HomePage } from './pages/HomePage'
@@ -25,6 +26,7 @@ import { RequireAuth } from './components/RequireAuth'
 export default function App() {
   return (
     <BrowserRouter>
+      <SeoHead />
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Layout />}>

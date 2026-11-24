@@ -242,6 +242,11 @@ export function Footer() {
           >
             <ColumnHeading>Pages</ColumnHeading>
             <ul className="space-y-2 text-sm text-warm-white/90 sm:text-base">
+              <li>
+                <Link to="/donate" className="transition-colors hover:text-accent">
+                  Donate
+                </Link>
+              </li>
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <Link

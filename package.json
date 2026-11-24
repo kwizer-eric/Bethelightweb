@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "vite",
     "dev:fresh": "lsof -ti :5173 | xargs kill -9 2>/dev/null; lsof -ti :5174 | xargs kill -9 2>/dev/null; lsof -ti :5175 | xargs kill -9 2>/dev/null; vite",
-    "build": "tsc -b && vite build",
+    "build": "node scripts/generate-sitemap.mjs && tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
